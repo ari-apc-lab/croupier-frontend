@@ -1,0 +1,19 @@
+<h2>My Applications</h2>
+<div>
+  <label
+    >Hero name:
+    <input #appName />
+  </label>
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button (click)="add(appName.value); appName.value = ''">
+    add
+  </button>
+</div>
+<ul class="applications">
+  <li *ngFor="let application of applications">
+    <a routerLink="/detail/{{ application.id }}" routerLinkActive="router-link-active">
+      <span class="badge">{{ application.id }}</span> {{ application.name }}
+    </a>
+    <button class="delete" title="delete app" (click)="delete(application)">x</button>
+  </li>
+</ul>
