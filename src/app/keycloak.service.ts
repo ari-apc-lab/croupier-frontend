@@ -72,8 +72,18 @@ export class KeycloakService {
     return !this.isLogged && !this.keycloakAuth.authenticated;
   }
 
-  login(): void {
-    this.keycloakAuth.login();
+  login(options: Keycloak.KeycloakLoginOptions = {}): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.keycloakAuth
+        .login(options)
+        .success(async () => {
+          // if (this._loadUserProfileAtStartUp) {
+          //   await this.loadUserProfile();
+          // }
+          resolve();
+        })
+        .error(() => reject(`An error happened during the login.`));
+    });
   }
 
   logout(): void {

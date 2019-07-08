@@ -11,22 +11,35 @@ import { KeycloakService } from './keycloak.service';
 export class AppAuthGuard implements CanActivate {
   constructor(private router: Router, private keycloak: KeycloakService) {}
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (this.keycloak.isLoggedIn()) {
-      if (this.isAccessAllowed(route)) {
-        return true;
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      if (this.keycloak.isLoggedIn()) {
+        if (this.isAccessAllowed(route)) {
+          return resolve(true);
+        } else {
+          console.log('User does not have required permissions.');
+          this.router.navigate(['/']);
+          return resolve(false);
+        }
       } else {
-        this.router.navigate(['/']);
-        // Warn about permissions?
-        console.log('User does not have required permissions.');
-        return false;
+        // Try to log in
+        this.keycloak
+          .login({
+            redirectUri: location.origin + state.url
+          }) // FIXME infinite loop
+          .then(_ => {
+            return resolve(true);
+          })
+          .catch(err => {
+            console.log(err);
+            this.router.navigate(['/']);
+            return reject(err);
+          });
       }
-    } else {
-      this.router.navigate(['/']);
-      // TODO: not logged in so redirect to login page with the return url
-      // this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
-      return false;
-    }
+    });
   }
 
   isAccessAllowed(route: ActivatedRouteSnapshot): boolean {
