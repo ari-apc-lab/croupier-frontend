@@ -14,6 +14,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ApplicationSearchComponent } from './application-search/application-search.component';
+import { AuthComponent } from './auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ApplicationSearchComponent } from './application-search/application-sea
     AppDetailComponent,
     MessagesComponent,
     DashboardComponent,
-    ApplicationSearchComponent
+    ApplicationSearchComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-// import { KeycloakProfile } from 'keycloak-js';
-import { KeycloakService } from './keycloak.service';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,17 +8,6 @@ import { KeycloakService } from './keycloak.service';
 })
 export class AppComponent {
   title = 'Hidalgo Frontend';
-  // userDetails: KeycloakProfile;
 
-  constructor(private keycloakService: KeycloakService) {}
-
-  // async ngOnInit() {
-  //   if (await this.keycloakService.isLoggedIn()) {
-  //     this.userDetails = await this.keycloakService.loadUserProfile();
-  //   }
-  // }
-
-  // async doLogout() {
-  //   await this.keycloakService.logout();
-  // }
+  constructor(private authService: AuthService) {}
 }

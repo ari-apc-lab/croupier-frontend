@@ -5,49 +5,39 @@ import {
   ActivatedRouteSnapshot,
   RouterStateSnapshot
 } from '@angular/router';
-import { KeycloakService } from './keycloak.service';
+import { AuthService } from './auth.service';
+import { KeycloakAuthGuard } from 'keycloak-angular';
 
-@Injectable()
-export class AppAuthGuard implements CanActivate {
-  constructor(private router: Router, private keycloak: KeycloakService) {}
+@Injectable({
+  providedIn: 'root'
+})
+export class AppAuthGuard extends KeycloakAuthGuard implements CanActivate {
+  constructor(protected router: Router, protected authService: AuthService) {
+    super(router, authService);
+  }
 
-  canActivate(
+  isAccessAllowed(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      if (this.keycloak.isLoggedIn()) {
-        if (this.isAccessAllowed(route)) {
-          return resolve(true);
-        } else {
-          console.log('User does not have required permissions.');
-          this.router.navigate(['/']);
-          return resolve(false);
-        }
+      if (!this.authenticated) {
+        console.log('User is not authenticated');
+        return resolve(false);
+        // this.keycloakAngular.login()
+        //   .catch(e => console.error(e));
+        // return reject(false);
+      }
+
+      const requiredRoles: string[] = route.data.roles;
+      if (!requiredRoles || requiredRoles.length === 0) {
+        return resolve(true);
       } else {
-        // Try to log in
-        this.keycloak
-          .login({
-            redirectUri: location.origin + state.url
-          }) // FIXME infinite loop
-          .then(_ => {
-            return resolve(true);
-          })
-          .catch(err => {
-            console.log(err);
-            this.router.navigate(['/']);
-            return reject(err);
-          });
+        if (!this.roles || this.roles.length === 0) {
+          resolve(false);
+        }
+        resolve(requiredRoles.every(role => this.roles.indexOf(role) > -1));
       }
     });
-  }
-
-  isAccessAllowed(route: ActivatedRouteSnapshot): boolean {
-    const requiredRoles: string[] = route.data.roles;
-    if (!requiredRoles || requiredRoles.length === 0) {
-      return true;
-    } else {
-      return requiredRoles.every(role => this.keycloak.hasRole(role));
-    }
   }
 }

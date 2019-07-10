@@ -3,27 +3,25 @@
 // `environment.prod.ts`. The list of file replacements can be found in
 // `angular.json`.
 
-import { KeycloakInitOptions } from 'keycloak-js';
+import { KeycloakConfig, KeycloakInitOptions, KeycloakOptions } from 'keycloak-angular';
 
-// keycloak config
-const keycloakConfig: any = {
-  url: 'http://localhost/auth',
-  realm: 'Hidalgo',
-  clientId: 'frontend'
-};
-
-const keycloackInitOptions: KeycloakInitOptions = {
-  responseMode: 'fragment',
-  flow: 'standard'
-  // onLoad: 'login-required
+// keycloak options
+const keycloakSetUp: KeycloakOptions = {
+  config: {
+    url: 'http://localhost/auth',
+    realm: 'Hidalgo',
+    clientId: 'frontend'
+  },
+  initOptions: {
+    responseMode: 'fragment',
+    flow: 'standard'
+    // onLoad: 'login-required
+  }
 };
 
 export const environment = {
   production: false,
-  keycloak: {
-    config: keycloakConfig,
-    init: keycloackInitOptions
-  }
+  keycloak: keycloakSetUp
 };
 
 /*
