@@ -8,7 +8,7 @@ import { ApplicationService } from '../application.service';
   templateUrl: './applications.component.html',
   styleUrls: ['./applications.component.css']
 })
-export class ApplicationsComponent implements OnInit {
+export class AppListComponent implements OnInit {
   applications: Application[];
 
   constructor(private appService: ApplicationService) {}

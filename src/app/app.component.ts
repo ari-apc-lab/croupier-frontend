@@ -1,13 +1,9 @@
 import { Component } from '@angular/core';
-import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  template: `
+    <router-outlet></router-outlet>
+  `
 })
-export class AppComponent {
-  title = 'Hidalgo Frontend';
-
-  constructor(private authService: AuthService) {}
-}
+export class AppComponent {}

@@ -5,7 +5,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { Application } from './application';
 
-import { MessageService } from './message.service';
+import { MessageService } from '../../shared/utils/message.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })

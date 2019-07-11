@@ -3,11 +3,11 @@ import { AuthService } from '../auth.service';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-auth',
-  templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.css']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
-export class AuthComponent implements OnInit {
+export class LoginComponent implements OnInit {
   isLogged$: Observable<boolean>;
 
   constructor(private _authService: AuthService) {}
