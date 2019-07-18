@@ -1,30 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
-  isLogged$: Observable<boolean>;
-
-  constructor(private _authService: AuthService) {}
-
-  ngOnInit(): void {
-    this.isLogged$ = this._authService.isLogged$;
-  }
+export class LoginComponent {
+  constructor(public authService: AuthService) {}
 
   onLogin(): void {
-    this._authService.login();
+    this.authService.login({
+      redirectUri: window.location.href
+    });
   }
 
   onLogout(): void {
-    this._authService.logout();
+    this.authService.logout(window.location.origin);
   }
 
   onRegister(): void {
-    this._authService.register();
+    this.authService.register();
+  }
+
+  getToken(): string {
+    let tok: string;
+    this.authService.getToken().then(token => (tok = token));
+    return tok;
   }
 }

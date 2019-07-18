@@ -1,8 +1,9 @@
-<div *ngIf="isLogged$ | async; else loggedOut">
+<div *ngIf="authService.signedIn; else signedOut">
+  <p>Token: {{ authService.getToken() }}</p>
   <button class="logout" (click)="onLogout()">Sign out</button>
 </div>
 
-<ng-template #loggedOut>
+<ng-template #signedOut>
   <button class="register" (click)="onRegister()">Register</button>
   <button class="login" (click)="onLogin()">Sign in</button>
 </ng-template>

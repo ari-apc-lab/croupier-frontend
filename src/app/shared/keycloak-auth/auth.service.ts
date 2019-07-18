@@ -8,7 +8,7 @@ import { KeycloakEvent, KeycloakEventType } from 'keycloak-angular';
   providedIn: 'root'
 })
 export class AuthService extends KeycloakService {
-  private _logged$ = new Subject<boolean>();
+  signedIn = false;
 
   constructor() {
     // initialize KeycloakSerive
@@ -19,34 +19,37 @@ export class AuthService extends KeycloakService {
     this.keycloakEvents$.subscribe(event => this.keycloakEventTriggered(event));
 
     // init authorized value
-    this.isLoggedIn().then(logged => this._logged$.next(logged));
-  }
-
-  get isLogged$(): Observable<boolean> {
-    return this._logged$.asObservable();
+    this.isLoggedIn().then(logged => (this.signedIn = logged));
   }
 
   private keycloakEventTriggered(event: KeycloakEvent): void {
     switch (event.type) {
       case KeycloakEventType.OnAuthError:
-        this._logged$.next(false);
+        this.signedIn = false;
+        console.log('logged out: OnAuthError');
         break;
       case KeycloakEventType.OnAuthLogout:
-        this._logged$.next(false);
+        this.signedIn = false;
+        console.log('logged out: OnAuthLogout');
         break;
       case KeycloakEventType.OnAuthRefreshError:
-        this._logged$.next(false);
+        this.signedIn = false;
+        console.log('logged out: OnAuthRefreshError');
         break;
       case KeycloakEventType.OnAuthRefreshSuccess:
-        this._logged$.next(true);
+        this.signedIn = true;
+        console.log('logged in: OnAuthRefreshSuccess');
         break;
       case KeycloakEventType.OnAuthSuccess:
-        this._logged$.next(true);
+        this.signedIn = true;
+        console.log('logged in: OnAuthSuccess');
         break;
       case KeycloakEventType.OnReady:
+        console.log('OnReady');
         break;
       case KeycloakEventType.OnTokenExpired:
-        this._logged$.next(false);
+        this.signedIn = false;
+        console.log('logged in: OnAuthSuccess');
         break;
       default:
         break;
