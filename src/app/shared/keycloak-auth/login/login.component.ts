@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -6,8 +6,12 @@ import { AuthService } from '../auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+  token: string;
+
   constructor(public authService: AuthService) {}
+
+  ngOnInit() {}
 
   onLogin(): void {
     this.authService.login({
@@ -21,11 +25,5 @@ export class LoginComponent {
 
   onRegister(): void {
     this.authService.register();
-  }
-
-  getToken(): string {
-    let tok: string;
-    this.authService.getToken().then(token => (tok = token));
-    return tok;
   }
 }

@@ -9,6 +9,7 @@ import { KeycloakEvent, KeycloakEventType } from 'keycloak-angular';
 })
 export class AuthService extends KeycloakService {
   signedIn = false;
+  token: string;
 
   constructor() {
     // initialize KeycloakSerive
@@ -46,10 +47,17 @@ export class AuthService extends KeycloakService {
         break;
       case KeycloakEventType.OnReady:
         console.log('OnReady');
+        this.getToken().then(t => {
+          console.log('Token obtained!');
+          this.token = t;
+        });
         break;
       case KeycloakEventType.OnTokenExpired:
-        this.signedIn = false;
-        console.log('logged in: OnAuthSuccess');
+        console.log('logged in: OnTokenExpired');
+        this.getToken().then(t => {
+          console.log('Token obtained!');
+          this.token = t;
+        });
         break;
       default:
         break;

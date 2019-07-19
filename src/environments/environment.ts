@@ -14,8 +14,8 @@ const keycloakSetUp: KeycloakOptions = {
   },
   initOptions: {
     responseMode: 'fragment',
-    flow: 'standard'
-    // onLoad: 'login-required
+    flow: 'standard',
+    onLoad: 'check-sso'
   }
 };
 
