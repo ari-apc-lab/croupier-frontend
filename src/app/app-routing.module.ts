@@ -6,12 +6,12 @@ import { LayoutComponent } from './shared/utils/layout/layout.component';
 import { AppAuthGuard } from './shared/keycloak-auth/app.authguard';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/app/list', pathMatch: 'full' },
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   {
     path: 'dashboard',
     component: LayoutComponent,
     loadChildren: './features/dashboard/dashboard.module#DashboardModule',
-    canActivate: [AppAuthGuard]
+    // canActivate: [AppAuthGuard]
     // data: { roles: ['Developer']
   },
   {

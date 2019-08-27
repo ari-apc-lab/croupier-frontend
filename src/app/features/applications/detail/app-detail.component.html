@@ -7,7 +7,14 @@
       <input [(ngModel)]="application.name" placeholder="name" />
     </label>
   </div>
+  <div>
+    <label>description:
+      <input [(ngModel)]="application.description" placeholder="description" />
+    </label>
+  </div>
 </div>
 
 <button (click)="goBack()">go back</button>
 <button (click)="save()">save</button>
+
+<app-instance-list></app-instance-list>

@@ -1,0 +1,22 @@
+<h2>My Instances</h2>
+<div>
+  <label
+    >Instance name:
+    <input #appName />
+  </label>
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button (click)="add(appName.value); appName.value = ''">
+    add
+  </button>
+</div>
+<ul class="instances">
+  <li *ngFor="let instance of instances">
+    <a
+      routerLink="/app/instance/detail/{{ instance.id }}"
+      routerLinkActive="router-link-active"
+    >
+      <span class="badge">{{ instance.id }}</span> {{ instance.name }}
+    </a>
+    <button class="delete" title="delete app" (click)="delete(instance)">x</button>
+  </li>
+</ul>

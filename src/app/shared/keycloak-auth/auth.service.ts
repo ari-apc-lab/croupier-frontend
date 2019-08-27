@@ -54,10 +54,14 @@ export class AuthService extends KeycloakService {
         break;
       case KeycloakEventType.OnTokenExpired:
         console.log('logged in: OnTokenExpired');
-        this.getToken().then(t => {
-          console.log('Token obtained!');
-          this.token = t;
-        });
+        // this.getToken().then(t => {
+        //   console.log('Token obtained!');
+        //   this.token = t;
+        // });
+        // FIXME delete, only for testing
+        console.log('updating 3600...');
+        this.updateToken(3600);
+        this.token = this.getKeycloakInstance().token;
         break;
       default:
         break;

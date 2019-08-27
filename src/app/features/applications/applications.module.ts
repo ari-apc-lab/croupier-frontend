@@ -7,6 +7,8 @@ import { ApplicationsRoutingModule } from './applications-routing.module';
 import { UtilsModule } from '../../shared/utils/utils.module';
 import { KeycloakAuthModule } from '../../shared/keycloak-auth/keycloak-auth.module';
 
+import { InstancesModule } from '../instances/instances.module';
+
 import { AppListComponent } from './list/applications.component';
 import { ApplicationSearchComponent } from './search/application-search.component';
 import { AppDetailComponent } from './detail/app-detail.component';
@@ -18,7 +20,8 @@ import { AppDetailComponent } from './detail/app-detail.component';
     FormsModule,
     ApplicationsRoutingModule,
     UtilsModule,
-    KeycloakAuthModule
+    KeycloakAuthModule,
+    InstancesModule
   ],
   exports: [ApplicationSearchComponent]
 })
