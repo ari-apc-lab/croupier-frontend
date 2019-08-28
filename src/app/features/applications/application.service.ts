@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { Application } from './application';
 
 import { MessageService } from '../../shared/utils/message.service';
 
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
 @Injectable({
   providedIn: 'root'
@@ -51,18 +49,26 @@ export class ApplicationService {
 
   /** PUT: update the app on the server */
   updateApplication(app: Application): Observable<any> {
-    return this.http.put(this.applicationsUrl, app, httpOptions).pipe(
+    return this.http.put(this.applicationsUrl, app, { headers }).pipe(
       tap(_ => this.log(`updated app id=${app.id}`)),
       catchError(this.handleError<any>('updateApplication'))
     );
   }
 
   /** POST: add a new application to the server */
-  addApplication(app: Application): Observable<Application> {
-    return this.http.post<Application>(this.applicationsUrl, app, httpOptions).pipe(
-      tap((newApp: Application) => this.log(`added application w/ id=${newApp.id}`)),
-      catchError(this.handleError<Application>('addApplication'))
-    );
+  addApplication(formValue): Observable<HttpResponse<Application>> {
+    const data = toFormData(formValue);
+    return this.http
+      .post(this.applicationsUrl, data, {
+        reportProgress: true,
+        observe: 'events'
+      })
+      .pipe(
+        tap((response: HttpResponse<Application>) =>
+          this.log(`added application w/ id=${response.body.id}`)
+        ),
+        catchError(this.handleError<HttpResponse<Application>>('addApplication'))
+      );
   }
 
   /** DELETE: delete the app from the server */
@@ -70,7 +76,7 @@ export class ApplicationService {
     const id = typeof app === 'number' ? app : app.id;
     const url = `${this.applicationsUrl}/${id}`;
 
-    return this.http.delete<Application>(url, httpOptions).pipe(
+    return this.http.delete<Application>(url, { headers }).pipe(
       tap(_ => this.log(`deleted app id=${id}`)),
       catchError(this.handleError<Application>('deleteApplication'))
     );
@@ -97,4 +103,15 @@ export class ApplicationService {
       return of(result as T);
     };
   }
+}
+
+export function toFormData<T>(formValue: T): FormData {
+  const formData = new FormData();
+
+  for (const key of Object.keys(formValue)) {
+    const value = formValue[key];
+    formData.append(key, value);
+  }
+
+  return formData;
 }

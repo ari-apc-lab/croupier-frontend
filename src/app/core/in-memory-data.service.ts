@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { InMemoryDbService } from 'angular-in-memory-web-api';
+import {
+  InMemoryDbService,
+  ResponseOptions,
+  RequestInfo
+} from 'angular-in-memory-web-api';
 
 import { Application } from '../features/applications/application';
 @Injectable({
@@ -108,13 +112,8 @@ export class InMemoryDataService implements InMemoryDbService {
     return { applications, instances };
   }
 
-  // Overrides the genId method to ensure that an app always has an id. If the
-  // applications array is empty, the method below returns the initial number
-  // (11). if the applictions array is not empty, the method below returns the
-  // highest app id + 1.
-  genId(applications: Application[]): number {
-    return applications.length > 0
-      ? Math.max(...applications.map(hero => hero.id)) + 1
-      : 11;
+  // Overrides id generator and delivers next available `id`, starting with 1001.
+  genId<T extends { id: any }>(collection: T[], collectionName: string): any {
+    return collection.length > 0 ? Math.max(...collection.map(app => app.id)) + 1 : 10;
   }
 }
