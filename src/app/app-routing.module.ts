@@ -10,7 +10,7 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: LayoutComponent,
-    loadChildren: './features/dashboard/dashboard.module#DashboardModule',
+    loadChildren: './features/dashboard/dashboard.module#DashboardModule'
     // canActivate: [AppAuthGuard]
     // data: { roles: ['Developer']
   },
@@ -18,6 +18,11 @@ const routes: Routes = [
     path: 'app',
     component: LayoutComponent,
     loadChildren: './features/applications/applications.module#ApplicationsModule'
+  },
+  {
+    path: 'instance',
+    component: LayoutComponent,
+    loadChildren: './features/instances/instances.module#InstancesModule'
   }
 ];
 
