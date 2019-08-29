@@ -7,22 +7,11 @@ import { HttpEvent, HttpEventType, HttpResponse } from '@angular/common/http';
 import { tap, filter, map } from 'rxjs/operators';
 import { pipe } from 'rxjs';
 
-import { requiredFileType } from '../../../shared/utils/file-upload/update-file-validators';
-
-export function uploadProgress<T>(cb: (progress: number) => void) {
-  return tap((event: HttpEvent<T>) => {
-    if (event.type === HttpEventType.UploadProgress) {
-      cb(Math.round((100 * event.loaded) / event.total));
-    }
-  });
-}
-
-export function toResponseBody<T>() {
-  return pipe(
-    filter((event: HttpEvent<T>) => event.type === HttpEventType.Response),
-    map((res: HttpResponse<T>) => res.body)
-  );
-}
+import { requiredFileType } from 'src/app/shared/utils/file-upload/update-file-validators';
+import {
+  uploadProgress,
+  toResponseBody
+} from 'src/app/shared/utils/file-upload/file-upload.component';
 
 @Component({
   selector: 'app-applications',
@@ -50,7 +39,6 @@ export class AppListComponent implements OnInit {
     this.appService.getApplications().subscribe(apps => (this.applications = apps));
   }
 
-  //////////////////////////
   add() {
     this.success = false;
     if (!this.addForm.valid) {
@@ -76,7 +64,6 @@ export class AppListComponent implements OnInit {
     const control = this.addForm.get(field);
     return control.dirty && control.hasError(error);
   }
-  //////////////////////////
 
   delete(app: Application): void {
     this.applications = this.applications.filter(a => a !== app);

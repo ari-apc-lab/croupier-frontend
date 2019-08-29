@@ -58,6 +58,7 @@ export class ApplicationService {
   /** POST: add a new application to the server */
   addApplication(formValue): Observable<HttpResponse<Application>> {
     const data = toFormData(formValue);
+
     return this.http
       .post(this.applicationsUrl, data, {
         reportProgress: true,

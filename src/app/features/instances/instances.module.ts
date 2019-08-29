@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { InstancesRoutingModule } from './instances-routing.module';
 
@@ -15,6 +15,7 @@ import { InstanceDetailComponent } from './detail/detail.component';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     InstancesRoutingModule,
     UtilsModule,
     KeycloakAuthModule

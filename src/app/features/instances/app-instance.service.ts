@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { AppInstance } from './app-instance';
@@ -61,11 +61,20 @@ export class AppInstanceService {
   }
 
   /** POST: add a new instance to the server */
-  addAppInstance(app: AppInstance): Observable<AppInstance> {
-    return this.http.post<AppInstance>(this.instancesUrl, app, httpOptions).pipe(
-      tap((newApp: AppInstance) => this.log(`added instance w/ id=${newApp.id}`)),
-      catchError(this.handleError<AppInstance>('addAppInstance'))
-    );
+  addAppInstance(formValue): Observable<HttpResponse<Application>> {
+    const data = toFormData(formValue);
+
+    return this.http
+      .post(this.instancesUrl, data, {
+        reportProgress: true,
+        observe: 'events'
+      })
+      .pipe(
+        tap((response: HttpResponse<Application>) =>
+          this.log(`added instance w/ id=${response.body.id}`)
+        ),
+        catchError(this.handleError<HttpResponse<Application>>('addAppInstance'))
+      );
   }
 
   /** DELETE: delete the app from the server */
@@ -100,4 +109,15 @@ export class AppInstanceService {
       return of(result as T);
     };
   }
+}
+
+export function toFormData<T>(formValue: T): FormData {
+  const formData = new FormData();
+
+  for (const key of Object.keys(formValue)) {
+    const value = formValue[key];
+    formData.append(key, value);
+  }
+
+  return formData;
 }

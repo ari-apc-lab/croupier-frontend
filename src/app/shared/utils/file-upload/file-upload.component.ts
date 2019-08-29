@@ -1,5 +1,8 @@
 import { Component, ElementRef, HostListener, Input, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { HttpEvent, HttpEventType, HttpResponse } from '@angular/common/http';
+import { tap, filter, map } from 'rxjs/operators';
+import { pipe } from 'rxjs';
 
 @Component({
   selector: 'app-file-upload',
@@ -37,4 +40,19 @@ export class FileUploadComponent implements ControlValueAccessor {
   }
 
   registerOnTouched(fn: Function) {}
+}
+
+export function uploadProgress<T>(cb: (progress: number) => void) {
+  return tap((event: HttpEvent<T>) => {
+    if (event.type === HttpEventType.UploadProgress) {
+      cb(Math.round((100 * event.loaded) / event.total));
+    }
+  });
+}
+
+export function toResponseBody<T>() {
+  return pipe(
+    filter((event: HttpEvent<T>) => event.type === HttpEventType.Response),
+    map((res: HttpResponse<T>) => res.body)
+  );
 }
