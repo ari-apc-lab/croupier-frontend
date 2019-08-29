@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { AppInstance } from '../../instances/app-instance';
 import { AppInstanceService } from '../../instances/app-instance.service';
+import { Application } from '../../applications/application';
 
 @Component({
   selector: 'app-instance-list',
@@ -9,17 +10,29 @@ import { AppInstanceService } from '../../instances/app-instance.service';
   styleUrls: ['./list.component.css']
 })
 export class AppInstanceListComponent implements OnInit {
+  private _app: Application;
+
   instances: AppInstance[];
+
+  @Input()
+  set application(app: Application) {
+    if (app !== undefined) {
+      this._app = app;
+      this.getAppInstances();
+    }
+  }
+
+  get application(): Application {
+    return this._app;
+  }
 
   constructor(private instanceService: AppInstanceService) {}
 
-  ngOnInit() {
-    this.getAppInstances();
-  }
+  ngOnInit() {}
 
   getAppInstances(): void {
     this.instanceService
-      .getAppInstances()
+      .getAppInstances(this.application)
       .subscribe(instances => (this.instances = instances));
   }
 

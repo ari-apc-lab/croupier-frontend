@@ -6,6 +6,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { AppInstance } from './app-instance';
 
 import { MessageService } from '../../shared/utils/message.service';
+import { Application } from '../applications/application';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'instance/json' })
@@ -20,8 +21,10 @@ export class AppInstanceService {
   constructor(private http: HttpClient, private msgService: MessageService) {}
 
   /** GET instances from the server */
-  getAppInstances(): Observable<AppInstance[]> {
-    return this.http.get<AppInstance[]>(this.instancesUrl).pipe(
+  getAppInstances(application: Application): Observable<AppInstance[]> {
+    const url = `${this.instancesUrl}/?app=${application.id}`;
+
+    return this.http.get<AppInstance[]>(url).pipe(
       tap(_ => this.log('fetched instances')),
       catchError(this.handleError<AppInstance[]>('getAppInstances', []))
     );

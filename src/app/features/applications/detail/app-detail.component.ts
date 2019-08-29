@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -12,7 +12,7 @@ import { ApplicationService } from '../application.service';
   styleUrls: ['./app-detail.component.css']
 })
 export class AppDetailComponent implements OnInit {
-  @Input() application: Application;
+  application: Application;
 
   constructor(
     private route: ActivatedRoute,
