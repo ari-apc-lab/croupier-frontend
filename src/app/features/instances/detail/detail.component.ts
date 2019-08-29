@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -12,7 +12,7 @@ import { AppInstanceService } from '../app-instance.service';
   styleUrls: ['./detail.component.css']
 })
 export class InstanceDetailComponent implements OnInit {
-  @Input() instance: AppInstance;
+  instance: AppInstance;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,7 +26,9 @@ export class InstanceDetailComponent implements OnInit {
 
   getApp(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.instanceService.getAppInstance(id).subscribe(app => (this.instance = app));
+    this.instanceService
+      .getAppInstance(id)
+      .subscribe(instance => (this.instance = instance));
   }
 
   goBack(): void {

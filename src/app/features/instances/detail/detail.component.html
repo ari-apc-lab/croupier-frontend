@@ -13,10 +13,9 @@
       <input [(ngModel)]="instance.description" placeholder="description" />
     </label>
   </div>
-  <div>
-    <p>{{ instance.lastExecution }}</p>
-  </div>
 </div>
 
 <button (click)="goBack()">go back</button>
 <button (click)="save()">save</button>
+
+<app-instance-log [instance]="instance"></app-instance-log>

@@ -35,8 +35,17 @@ export class AppInstanceService {
     const url = `${this.instancesUrl}/${id}`;
 
     return this.http.get<AppInstance>(url).pipe(
-      tap(_ => this.log(`fetched app id=${id}`)),
+      tap(_ => this.log(`fetched instance id=${id}`)),
       catchError(this.handleError<AppInstance>(`getAppInstance id=${id}`))
+    );
+  }
+
+  getAppInstanceEvents(id: number): Observable<HttpResponse<string>> {
+    const url = `${this.instancesUrl}/${id}/events`;
+
+    return this.http.get<HttpResponse<string>>(url).pipe(
+      tap(_ => this.log(`fetched events of instance w/ id=${id}`)),
+      catchError(this.handleError<HttpResponse<string>>(`getAppInstance id=${id}`))
     );
   }
 
@@ -55,14 +64,14 @@ export class AppInstanceService {
   /** PUT: update the app on the server */
   updateAppInstance(app: AppInstance): Observable<any> {
     return this.http.put(this.instancesUrl, app, httpOptions).pipe(
-      tap(_ => this.log(`updated app id=${app.id}`)),
+      tap(_ => this.log(`updated instance w/ id=${app.id}`)),
       catchError(this.handleError<any>('updateAppInstance'))
     );
   }
 
   /** POST: add a new instance to the server */
   addAppInstance(formValue): Observable<HttpResponse<Application>> {
-    const data = toFormData(formValue);
+    const data = toFormData(formValue); // TODO add owner
 
     return this.http
       .post(this.instancesUrl, data, {
@@ -83,7 +92,7 @@ export class AppInstanceService {
     const url = `${this.instancesUrl}/${id}`;
 
     return this.http.delete<AppInstance>(url, httpOptions).pipe(
-      tap(_ => this.log(`deleted app id=${id}`)),
+      tap(_ => this.log(`deleted instance w/ id=${id}`)),
       catchError(this.handleError<AppInstance>('deleteAppInstance'))
     );
   }

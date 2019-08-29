@@ -1,0 +1,11 @@
+<div *ngIf="instance; else notInstance">
+  <textarea>
+    {{ logs }}
+  </textarea>
+</div>
+
+<ng-template #notInstance>
+  <textarea>
+    ...
+  </textarea>
+</ng-template>

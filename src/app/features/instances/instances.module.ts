@@ -9,9 +9,14 @@ import { KeycloakAuthModule } from '../../shared/keycloak-auth/keycloak-auth.mod
 
 import { AppInstanceListComponent } from './list/list.component';
 import { InstanceDetailComponent } from './detail/detail.component';
+import { InstanceLogComponent } from './text-log/log.component';
 
 @NgModule({
-  declarations: [AppInstanceListComponent, InstanceDetailComponent],
+  declarations: [
+    AppInstanceListComponent,
+    InstanceDetailComponent,
+    InstanceLogComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
