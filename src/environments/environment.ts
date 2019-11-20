@@ -18,7 +18,6 @@ const keycloakSetUp: KeycloakOptions = {
     onLoad: 'check-sso'
   },
   enableBearerInterceptor: true,
-  bearerExcludedUrls: [],
 };
 
 export const environment = {
