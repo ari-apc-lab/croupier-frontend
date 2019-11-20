@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 
 import { AppInstance } from './app-instance';
 
@@ -16,7 +17,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AppInstanceService {
-  private instancesUrl = 'api/instances'; // URL to web api
+  private instancesUrl = environment.apiUrl +'instances'; // URL to web api
 
   constructor(private http: HttpClient, private msgService: MessageService) {}
 

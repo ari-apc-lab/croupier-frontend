@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 
 import { Application } from './application';
 
@@ -13,7 +14,7 @@ const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   providedIn: 'root'
 })
 export class ApplicationService {
-  private applicationsUrl = 'api/applications'; // URL to web api
+  private applicationsUrl = environment.apiUrl+'apps'; // URL to web api
 
   constructor(private http: HttpClient, private msgService: MessageService) {}
 

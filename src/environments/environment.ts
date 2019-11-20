@@ -8,20 +8,23 @@ import { KeycloakConfig, KeycloakInitOptions, KeycloakOptions } from 'keycloak-a
 // keycloak options
 const keycloakSetUp: KeycloakOptions = {
   config: {
-    url: 'http://localhost/auth',
+    url: 'https://hidalgo-idm.hlrs.de/auth/',
     realm: 'Hidalgo',
-    clientId: 'frontend'
+    clientId: 'frontend',
   },
   initOptions: {
     responseMode: 'fragment',
     flow: 'standard',
     onLoad: 'check-sso'
-  }
+  },
+  enableBearerInterceptor: true,
+  bearerExcludedUrls: [],
 };
 
 export const environment = {
   production: false,
-  keycloak: keycloakSetUp
+  keycloak: keycloakSetUp,
+  apiUrl: 'http://141.58.0.230/'
 };
 
 /*
