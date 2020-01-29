@@ -17,13 +17,13 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AppInstanceService {
-  private instancesUrl = environment.apiUrl +'instances'; // URL to web api
+  private instancesUrl = environment.apiUrl +'instances/'; // URL to web api
 
   constructor(private http: HttpClient, private msgService: MessageService) {}
 
   /** GET instances from the server */
   getAppInstances(application: Application): Observable<AppInstance[]> {
-    const url = `${this.instancesUrl}/?app=${application.id}`;
+    const url = `${this.instancesUrl}?app=${application.id}`;
 
     return this.http.get<AppInstance[]>(url).pipe(
       tap(_ => this.log('fetched instances')),
@@ -33,7 +33,7 @@ export class AppInstanceService {
 
   /** GET app by id. Will 404 if id not found */
   getAppInstance(id: number): Observable<AppInstance> {
-    const url = `${this.instancesUrl}/${id}`;
+    const url = `${this.instancesUrl}${id}`;
 
     return this.http.get<AppInstance>(url).pipe(
       tap(_ => this.log(`fetched instance id=${id}`)),
@@ -42,7 +42,7 @@ export class AppInstanceService {
   }
 
   getAppInstanceEvents(id: number): Observable<HttpResponse<string>> {
-    const url = `${this.instancesUrl}/${id}/events`;
+    const url = `${this.instancesUrl}${id}/events`;
 
     return this.http.get<HttpResponse<string>>(url).pipe(
       tap(_ => this.log(`fetched events of instance w/ id=${id}`)),
@@ -56,7 +56,7 @@ export class AppInstanceService {
       // if not search term, return empty hero array.
       return of([]);
     }
-    return this.http.get<AppInstance[]>(`${this.instancesUrl}/?name=${term}`).pipe(
+    return this.http.get<AppInstance[]>(`${this.instancesUrl}?name=${term}`).pipe(
       tap(_ => this.log(`found instances matching "${term}"`)),
       catchError(this.handleError<AppInstance[]>('searchAppInstances', []))
     );
@@ -73,7 +73,6 @@ export class AppInstanceService {
   /** POST: add a new instance to the server */
   addAppInstance(formValue): Observable<HttpResponse<Application>> {
     const data = toFormData(formValue); // TODO add owner
-
     return this.http
       .post(this.instancesUrl, data, {
         reportProgress: true,
@@ -81,7 +80,7 @@ export class AppInstanceService {
       })
       .pipe(
         tap((response: HttpResponse<Application>) =>
-          this.log(`added instance w/ id=${response.body.id}`)
+          this.log(`added instance w/ id=${response}`)
         ),
         catchError(this.handleError<HttpResponse<Application>>('addAppInstance'))
       );
@@ -90,7 +89,7 @@ export class AppInstanceService {
   /** DELETE: delete the app from the server */
   deleteAppInstance(app: AppInstance | number): Observable<AppInstance> {
     const id = typeof app === 'number' ? app : app.id;
-    const url = `${this.instancesUrl}/${id}`;
+    const url = `${this.instancesUrl}${id}`;
 
     return this.http.delete<AppInstance>(url, httpOptions).pipe(
       tap(_ => this.log(`deleted instance w/ id=${id}`)),

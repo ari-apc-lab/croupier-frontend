@@ -14,9 +14,11 @@ const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   providedIn: 'root'
 })
 export class ApplicationService {
-  private applicationsUrl = environment.apiUrl+'apps'; // URL to web api
+  private applicationsUrl = environment.apiUrl+'apps/'; // URL to web api
 
-  constructor(private http: HttpClient, private msgService: MessageService) {}
+  constructor(private http: HttpClient, private msgService: MessageService) {
+    
+  }
 
   /** GET applications from the server */
   getApplications(): Observable<Application[]> {
@@ -28,7 +30,7 @@ export class ApplicationService {
 
   /** GET app by id. Will 404 if id not found */
   getApplication(id: number): Observable<Application> {
-    const url = `${this.applicationsUrl}/${id}`;
+    const url = `${this.applicationsUrl}${id}`;
 
     return this.http.get<Application>(url).pipe(
       tap(_ => this.log(`fetched app id=${id}`)),
@@ -42,7 +44,7 @@ export class ApplicationService {
       // if not search term, return empty hero array.
       return of([]);
     }
-    return this.http.get<Application[]>(`${this.applicationsUrl}/?name=${term}`).pipe(
+    return this.http.get<Application[]>(`${this.applicationsUrl}?name=${term}`).pipe(
       tap(_ => this.log(`found applications matching "${term}"`)),
       catchError(this.handleError<Application[]>('searchApplications', []))
     );
@@ -59,7 +61,6 @@ export class ApplicationService {
   /** POST: add a new application to the server */
   addApplication(formValue): Observable<HttpResponse<Application>> {
     const data = toFormData(formValue); // TODO add owner
-
     return this.http
       .post(this.applicationsUrl, data, {
         reportProgress: true,
@@ -67,7 +68,7 @@ export class ApplicationService {
       })
       .pipe(
         tap((response: HttpResponse<Application>) =>
-          this.log(`added application w/ id=${response.body.id}`)
+          this.log(`added application w/ id=${response}`)
         ),
         catchError(this.handleError<HttpResponse<Application>>('addApplication'))
       );
@@ -76,7 +77,7 @@ export class ApplicationService {
   /** DELETE: delete the app from the server */
   deleteApplication(app: Application | number): Observable<Application> {
     const id = typeof app === 'number' ? app : app.id;
-    const url = `${this.applicationsUrl}/${id}`;
+    const url = `${this.applicationsUrl}${id}`;
 
     return this.http.delete<Application>(url, { headers }).pipe(
       tap(_ => this.log(`deleted app id=${id}`)),
@@ -114,6 +115,5 @@ export function toFormData<T>(formValue: T): FormData {
     const value = formValue[key];
     formData.append(key, value);
   }
-
   return formData;
 }

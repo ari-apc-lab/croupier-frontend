@@ -39,6 +39,8 @@ export class AuthService extends KeycloakService {
         break;
       case KeycloakEventType.OnAuthRefreshSuccess:
         this.signedIn = true;
+        this.token = this.getKeycloakInstance().token;
+        localStorage.setItem('token', this.token);
         console.log('logged in: OnAuthRefreshSuccess');
         break;
       case KeycloakEventType.OnAuthSuccess:
@@ -50,18 +52,12 @@ export class AuthService extends KeycloakService {
         this.getToken().then(t => {
           console.log('Token obtained!');
           this.token = t;
+          localStorage.setItem('token', t);
         });
         break;
       case KeycloakEventType.OnTokenExpired:
         console.log('logged in: OnTokenExpired');
-        // this.getToken().then(t => {
-        //   console.log('Token obtained!');
-        //   this.token = t;
-        // });
-        // FIXME delete, only for testing
-        console.log('updating 3600...');
         this.updateToken(3600);
-        this.token = this.getKeycloakInstance().token;
         break;
       default:
         break;

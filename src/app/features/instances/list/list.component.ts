@@ -58,6 +58,8 @@ export class AppInstanceListComponent implements OnInit {
       return;
     }
 
+    this.addForm.value['app'] = this._app.name
+
     this.instanceService
       .addAppInstance(this.addForm.value)
       .pipe(

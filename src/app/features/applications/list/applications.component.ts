@@ -46,6 +46,8 @@ export class AppListComponent implements OnInit {
       return;
     }
 
+    //console.log(this.addForm.value);
+
     this.appService
       .addApplication(this.addForm.value)
       .pipe(
