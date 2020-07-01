@@ -1,33 +1,46 @@
-import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DefaultModule } from './features/layouts/default/default.module';
+import { KeycloakAngularModule } from 'keycloak-angular';
 
-import { CoreModule } from './core/core.module';
-import { UtilsModule } from './shared/utils/utils.module';
-import { KeycloakAuthModule } from './shared/keycloak-auth/keycloak-auth.module';
-import {KeycloakAngularModule} from 'keycloak-angular';
+import { CoreModule } from './features/core/core.module';
+import { TokenInterceptor } from './features/shared/keycloak-auth/interceptor';
+
 import { AppComponent } from './app.component';
-import { TokenInterceptor } from './shared/keycloak-auth/interceptor';
+
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { KeycloakAuthModule } from './features/shared/keycloak-auth/keycloak-auth.module';
+import { MoodleComponent } from './features/modules/moodle/moodle.component';
+import { AskbotComponent } from './features/modules/askbot/askbot.component';
+import { MatchmakingComponent } from './features/modules/matchmaking/matchmaking.component';
+
+// Import utils components
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    MoodleComponent,
+    AskbotComponent,
+    MatchmakingComponent
+  ],
   imports: [
     KeycloakAngularModule,
     BrowserModule,
+    BrowserAnimationsModule,
+    DefaultModule,
     CoreModule,
-    UtilsModule.forRoot(),
     KeycloakAuthModule.forRoot(),
     AppRoutingModule
   ],
-  bootstrap: [AppComponent],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
     }
-  ]
+  ],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

@@ -1,0 +1,45 @@
+<mat-nav-list>
+    <div class="profile-card">
+        <div class="header">
+            <h4>user</h4>
+        </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <h2 matSubheader>Pages</h2>
+
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/">Dashboard</a>
+    <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['/apps']">Applications</a>
+    
+    <mat-divider></mat-divider>
+    
+    <h2 matSubheader>Tools</h2>
+
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/module/moodle">
+        <mat-icon>article</mat-icon>
+        Moodle
+    </a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/module/askbot">
+        <mat-icon>article</mat-icon>
+        Askbot
+    </a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/module/matchmaking">
+        <mat-icon>article</mat-icon>
+        MatchMaking
+    </a>
+    <!--
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/modules/zammad">
+        <mat-icon>article</mat-icon>
+        Zammad
+    </a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/modules/ckan">
+        <mat-icon>article</mat-icon>
+        CKAN
+    </a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/modules/jupyter">
+        <mat-icon>article</mat-icon>
+        Jupyter
+    </a>-->
+
+</mat-nav-list>

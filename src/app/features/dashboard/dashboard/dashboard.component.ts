@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Application } from '../../applications/application';
-import { ApplicationService } from '../../applications/application.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,17 +6,10 @@ import { ApplicationService } from '../../applications/application.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  applications: Application[] = [];
 
-  constructor(private applicationService: ApplicationService) {}
+  constructor() { }
 
-  ngOnInit() {
-    this.getApplications();
+  ngOnInit(): void {
   }
 
-  getApplications(): void {
-    this.applicationService
-      .getApplications()
-      .subscribe(applications => (this.applications = applications.slice(0, 3)));
-  }
 }
