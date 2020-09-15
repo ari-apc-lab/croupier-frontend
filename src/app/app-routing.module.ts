@@ -5,9 +5,11 @@ import { DefaultComponent } from './features/layouts/default/default.component';
 import { DashboardComponent } from './features/dashboard/dashboard/dashboard.component';
 import { AddappComponent } from './features/dashboard/addapp/addapp.component';
 
+import { CroupierComponent } from './features/modules/croupier/croupier.component';
 import { MoodleComponent } from './features/modules/moodle/moodle.component';
 import { AskbotComponent } from './features/modules/askbot/askbot.component';
 import { MatchmakingComponent } from './features/modules/matchmaking/matchmaking.component';
+import { ZammadComponent } from './features/modules/zammad/zammad.component';
 
 import { AppAuthGuard } from './features/shared/keycloak-auth/app.authguard';
 
@@ -100,6 +102,14 @@ const routes: Routes = [
       {
         path: 'matchmaking',
         component: MatchmakingComponent
+      },
+      {
+        path: 'zammad',
+        component: ZammadComponent
+      },
+      {
+        path: 'croupier',
+        component: CroupierComponent
       }
     ]
   }

@@ -7,14 +7,18 @@
 
     <mat-divider></mat-divider>
 
-    <h2 matSubheader>Pages</h2>
+    <h2 matSubheader>Applications</h2>
 
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/">Dashboard</a>
     <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['/apps']">Applications</a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/module/croupier">
+        <mat-icon>article</mat-icon>
+        Orchestrator
+    </a>
     
     <mat-divider></mat-divider>
     
-    <h2 matSubheader>Tools</h2>
+    <h2 matSubheader>Community and Support</h2>
 
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/module/moodle">
         <mat-icon>article</mat-icon>
@@ -28,6 +32,13 @@
         <mat-icon>article</mat-icon>
         MatchMaking
     </a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/module/zammad">
+        <mat-icon>article</mat-icon>
+        Zammad
+    </a>
+
+    <h2 matSubheader>Data Management</h2>
+
     <!--
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/modules/zammad">
         <mat-icon>article</mat-icon>

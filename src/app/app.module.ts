@@ -15,6 +15,8 @@ import { KeycloakAuthModule } from './features/shared/keycloak-auth/keycloak-aut
 import { MoodleComponent } from './features/modules/moodle/moodle.component';
 import { AskbotComponent } from './features/modules/askbot/askbot.component';
 import { MatchmakingComponent } from './features/modules/matchmaking/matchmaking.component';
+import { CroupierComponent } from './features/modules/croupier/croupier.component';
+import { ZammadComponent } from './features/modules/zammad/zammad.component';
 
 // Import utils components
 
@@ -23,7 +25,9 @@ import { MatchmakingComponent } from './features/modules/matchmaking/matchmaking
     AppComponent,
     MoodleComponent,
     AskbotComponent,
-    MatchmakingComponent
+    MatchmakingComponent,
+    ZammadComponent,
+    CroupierComponent
   ],
   imports: [
     KeycloakAngularModule,
