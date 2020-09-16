@@ -8,6 +8,7 @@ import { KeycloakConfig, KeycloakInitOptions, KeycloakOptions } from 'keycloak-a
 const keycloakSetUp: KeycloakOptions = {
   config: {
     url: 'https://hidalgo-idm.hlrs.de/auth/',
+    // url: 'https://prunus-212.man.poznan.pl/auth/',
     realm: 'Hidalgo',
     clientId: 'frontend',
   },

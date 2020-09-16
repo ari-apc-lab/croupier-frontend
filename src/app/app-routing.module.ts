@@ -10,6 +10,8 @@ import { MoodleComponent } from './features/modules/moodle/moodle.component';
 import { AskbotComponent } from './features/modules/askbot/askbot.component';
 import { MatchmakingComponent } from './features/modules/matchmaking/matchmaking.component';
 import { ZammadComponent } from './features/modules/zammad/zammad.component';
+import { CkanComponent } from './features/modules/ckan/ckan.component';
+import { VisualizerComponent } from './features/modules/visualizer/visualizer.component';
 
 import { AppAuthGuard } from './features/shared/keycloak-auth/app.authguard';
 
@@ -110,6 +112,14 @@ const routes: Routes = [
       {
         path: 'croupier',
         component: CroupierComponent
+      },
+      {
+        path: 'ckan',
+        component: CkanComponent
+      },
+      {
+        path: 'visualizer',
+        component: VisualizerComponent
       }
     ]
   }

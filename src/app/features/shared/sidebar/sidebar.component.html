@@ -1,7 +1,8 @@
 <mat-nav-list>
     <div class="profile-card">
         <div class="header">
-            <h4>user</h4>
+            <h5>{{userName}}</h5>
+            <h6><i>({{email}})</i></h6>
         </div>
     </div>
 
@@ -9,8 +10,12 @@
 
     <h2 matSubheader>Applications</h2>
 
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/">Dashboard</a>
-    <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['/apps']">Applications</a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/">
+        <mat-icon>article</mat-icon>
+        Dashboard</a>
+    <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['/apps']">
+        <mat-icon>article</mat-icon>
+        Applications</a>
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/module/croupier">
         <mat-icon>article</mat-icon>
         Orchestrator
@@ -22,11 +27,11 @@
 
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/module/moodle">
         <mat-icon>article</mat-icon>
-        Moodle
+        Training
     </a>
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/module/askbot">
         <mat-icon>article</mat-icon>
-        Askbot
+        Q&A Forum
     </a>
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/module/matchmaking">
         <mat-icon>article</mat-icon>
@@ -34,20 +39,23 @@
     </a>
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/module/zammad">
         <mat-icon>article</mat-icon>
-        Zammad
+        Ticketing System
     </a>
 
     <h2 matSubheader>Data Management</h2>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/module/ckan">
+        <mat-icon>article</mat-icon>
+        Data Catalogue
+    </a>
+
+    <h2 matSubheader>Visualization</h2>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/module/visualizer">
+        <mat-icon>article</mat-icon>
+        Visualizer
+    </a>
 
     <!--
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/modules/zammad">
-        <mat-icon>article</mat-icon>
-        Zammad
-    </a>
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/modules/ckan">
-        <mat-icon>article</mat-icon>
-        CKAN
-    </a>
+
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/modules/jupyter">
         <mat-icon>article</mat-icon>
         Jupyter

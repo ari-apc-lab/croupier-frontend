@@ -10,6 +10,7 @@ import { environment } from '../../../../environments/environment';
 export class AuthService extends KeycloakService {
   signedIn = false;
   token: string;
+  userName: string;
 
   constructor() {
     // initialize KeycloakSerive
@@ -40,19 +41,31 @@ export class AuthService extends KeycloakService {
       case KeycloakEventType.OnAuthRefreshSuccess:
         this.signedIn = true;
         this.token = this.getKeycloakInstance().token;
+        this.userName = this.getKeycloakInstance().loadUserProfile.name;
         localStorage.setItem('token', this.token);
+        localStorage.setItem('user', this.userName);
         console.log('logged in: OnAuthRefreshSuccess');
         break;
       case KeycloakEventType.OnAuthSuccess:
         this.signedIn = true;
         console.log('logged in: OnAuthSuccess');
+        this.getKeycloakInstance().loadUserProfile().success(profile => {
+          console.log(profile.firstName);
+          console.log(profile.lastName);
+          console.log(profile.username);
+          console.log(profile.email);
+          localStorage.setItem('firstName', profile.firstName);
+          localStorage.setItem('lastName', profile.lastName);
+          localStorage.setItem('username', profile.username);
+          localStorage.setItem('email', profile.email);
+        })        
         break;
       case KeycloakEventType.OnReady:
         console.log('OnReady');
         this.getToken().then(t => {
           console.log('Token obtained!');
-          this.token = t;
-          localStorage.setItem('token', t);
+          this.token = t;          
+          localStorage.setItem('token', t);                  
         });
         break;
       case KeycloakEventType.OnTokenExpired:

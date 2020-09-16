@@ -17,6 +17,8 @@ import { AskbotComponent } from './features/modules/askbot/askbot.component';
 import { MatchmakingComponent } from './features/modules/matchmaking/matchmaking.component';
 import { CroupierComponent } from './features/modules/croupier/croupier.component';
 import { ZammadComponent } from './features/modules/zammad/zammad.component';
+import { CkanComponent } from './features/modules/ckan/ckan.component';
+import { VisualizerComponent } from './features/modules/visualizer/visualizer.component';
 
 // Import utils components
 
@@ -27,7 +29,9 @@ import { ZammadComponent } from './features/modules/zammad/zammad.component';
     AskbotComponent,
     MatchmakingComponent,
     ZammadComponent,
-    CroupierComponent
+    CroupierComponent,
+    CkanComponent,
+    VisualizerComponent
   ],
   imports: [
     KeycloakAngularModule,
