@@ -17,44 +17,44 @@ import { AppAuthGuard } from './features/shared/keycloak-auth/app.authguard';
 
 const routes: Routes = [
 
-  // Routes - 1  
-  /*{ 
-    path: '', 
-    redirectTo: 'dashboard', 
+  // Routes - 1
+  /*{
+    path: '',
+    redirectTo: 'dashboard',
     pathMatch: 'full'
   },
-  { 
-    path: 'dashboard', 
-    component: DefaultComponent, 
-    loadChildren: () => import('./features/shared/services/dashboard/dashboard.module').then(m => m.DashboardModule) 
+  {
+    path: 'dashboard',
+    component: DefaultComponent,
+    loadChildren: () => import('./features/shared/services/dashboard/dashboard.module').then(m => m.DashboardModule)
   },
-  { 
-    path: 'apps', 
-    component: DefaultComponent, 
+  {
+    path: 'apps',
+    component: DefaultComponent,
     loadChildren: () => import('./features/shared/services/applications/applications.module').then(m => m.ApplicationsModule)
   },
-  { 
-    path: 'instances', 
-    component: DefaultComponent, 
-    loadChildren: () => import('./features/shared/services/instances/instances.module').then(m => m.InstancesModule) 
+  {
+    path: 'instances',
+    component: DefaultComponent,
+    loadChildren: () => import('./features/shared/services/instances/instances.module').then(m => m.InstancesModule)
   },
-  { 
-    path: 'module/moodle', 
-    component: MoodleComponent 
+  {
+    path: 'module/moodle',
+    component: MoodleComponent
   },
-  { 
-    path: 'module/askbot', 
-    component: AskbotComponent 
+  {
+    path: 'module/askbot',
+    component: AskbotComponent
   },
-  { 
-    path: 'module/matchmaking', 
-    component: MatchmakingComponent 
+  {
+    path: 'module/matchmaking',
+    component: MatchmakingComponent
   }*/
 
   // Routes
-  { 
-    path: '', 
-    redirectTo: 'dashboard', 
+  {
+    path: '',
+    redirectTo: 'dashboard',
     pathMatch: 'full',
   },
   {
@@ -85,7 +85,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: () => import('./features/shared/services/instances/instances.module').then(m => m.InstancesModule) 
+        loadChildren: () => import('./features/shared/services/instances/instances.module').then(m => m.InstancesModule)
       }
     ]
   },
@@ -124,10 +124,10 @@ const routes: Routes = [
     ]
   }
   // Routes - 3
-  /*{ 
-  path: '', 
+  /*{
+  path: '',
   component: DefaultComponent,
-  children: [{ 
+  children: [{
     path: '', component: DashboardComponent
   },
   {

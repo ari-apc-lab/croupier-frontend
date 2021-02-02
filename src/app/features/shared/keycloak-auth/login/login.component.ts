@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
 
   onLogin(): void {
     this.authService.login({
-      redirectUri: window.location.href
+      // redirectUri: window.location.href
     });
   }
 

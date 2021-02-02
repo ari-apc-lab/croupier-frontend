@@ -23,6 +23,15 @@ import { VisualizerComponent } from './features/modules/visualizer/visualizer.co
 // Import utils components
 
 @NgModule({
+  imports: [
+    KeycloakAngularModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    DefaultModule,
+    CoreModule,
+    KeycloakAuthModule.forRoot(),
+    AppRoutingModule
+  ],
   declarations: [
     AppComponent,
     MoodleComponent,
@@ -32,15 +41,6 @@ import { VisualizerComponent } from './features/modules/visualizer/visualizer.co
     CroupierComponent,
     CkanComponent,
     VisualizerComponent
-  ],
-  imports: [
-    KeycloakAngularModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    DefaultModule,
-    CoreModule,
-    KeycloakAuthModule.forRoot(),
-    AppRoutingModule
   ],
   providers: [
     {

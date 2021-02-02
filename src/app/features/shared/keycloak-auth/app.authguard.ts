@@ -24,6 +24,8 @@ export class AppAuthGuard extends KeycloakAuthGuard implements CanActivate {
         // return reject(false);
       }
 
+      console.log('auth data: ', route.data);
+
       const requiredRoles: string[] = route.data.roles;
       if (!requiredRoles || requiredRoles.length === 0) {
         return resolve(true);

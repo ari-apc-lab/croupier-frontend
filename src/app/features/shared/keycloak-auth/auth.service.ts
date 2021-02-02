@@ -58,14 +58,14 @@ export class AuthService extends KeycloakService {
           localStorage.setItem('lastName', profile.lastName);
           localStorage.setItem('username', profile.username);
           localStorage.setItem('email', profile.email);
-        })        
+        });
         break;
       case KeycloakEventType.OnReady:
         console.log('OnReady');
         this.getToken().then(t => {
           console.log('Token obtained!');
-          this.token = t;          
-          localStorage.setItem('token', t);                  
+          this.token = t;
+          localStorage.setItem('token', t);
         });
         break;
       case KeycloakEventType.OnTokenExpired:

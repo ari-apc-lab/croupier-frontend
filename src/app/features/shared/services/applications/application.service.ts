@@ -14,11 +14,10 @@ const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   providedIn: 'root'
 })
 export class ApplicationService {
-  private applicationsUrl = environment.apiUrl+'apps/'; // URL to web api
 
-  constructor(private http: HttpClient, private msgService: MessageService) {
-    
-  }
+  private applicationsUrl = environment.apiUrl + 'apps/'; // URL to web api
+
+  constructor(private http: HttpClient, private msgService: MessageService) {}
 
   /** GET applications from the server */
   getApplications(): Observable<Application[]> {
@@ -31,7 +30,6 @@ export class ApplicationService {
   /** GET app by id. Will 404 if id not found */
   getApplication(id: number): Observable<Application> {
     const url = `${this.applicationsUrl}${id}`;
-
     return this.http.get<Application>(url).pipe(
       tap(_ => this.log(`fetched app id=${id}`)),
       catchError(this.handleError<Application>(`getApplication id=${id}`))
@@ -78,7 +76,6 @@ export class ApplicationService {
   deleteApplication(app: Application | number): Observable<Application> {
     const id = typeof app === 'number' ? app : app.id;
     const url = `${this.applicationsUrl}${id}`;
-
     return this.http.delete<Application>(url, { headers }).pipe(
       tap(_ => this.log(`deleted app id=${id}`)),
       catchError(this.handleError<Application>('deleteApplication'))
@@ -110,7 +107,6 @@ export class ApplicationService {
 
 export function toFormData<T>(formValue: T): FormData {
   const formData = new FormData();
-
   for (const key of Object.keys(formValue)) {
     const value = formValue[key];
     formData.append(key, value);

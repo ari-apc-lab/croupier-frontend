@@ -14,7 +14,6 @@ import { ApplistComponent } from './applist/applist.component';
 import { AppsearchComponent } from './appsearch/appsearch.component';
 
 @NgModule({
-  declarations: [AppdetailComponent, ApplistComponent, AppsearchComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -24,9 +23,14 @@ import { AppsearchComponent } from './appsearch/appsearch.component';
     KeycloakAuthModule,
     InstancesModule
   ],
+  declarations: [
+    AppdetailComponent,
+    ApplistComponent,
+    AppsearchComponent
+  ],
   exports: [AppsearchComponent]
 })
-export class ApplicationsModule { 
+export class ApplicationsModule {
   static forRoot() {
     return {
       ngModule: ApplicationModule,

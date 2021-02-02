@@ -9,9 +9,9 @@ import { environment } from 'src/environments/environment';
 export class TokenInterceptor implements HttpInterceptor {
     constructor(public auth: AuthService) {}
 
-    intercept(request: HttpRequest<any>, next: HttpHandler) : Observable<HttpEvent<any>> {
+    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-        let requestTokens = request.clone({
+        const requestTokens = request.clone({
             setHeaders: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
             }
@@ -20,8 +20,8 @@ export class TokenInterceptor implements HttpInterceptor {
     }
 }
 
-import { KeycloakService } from 'keycloak-angular';
+// import { KeycloakService } from 'keycloak-angular';
 
-export function initializer(keycloak: KeycloakService): () => Promise<any> {
-  return (): Promise<any> => keycloak.init(environment.keycloak);
-}
+// export function initializer(keycloak: KeycloakService): () => Promise<any> {
+//   return (): Promise<any> => keycloak.init(environment.keycloak);
+// }

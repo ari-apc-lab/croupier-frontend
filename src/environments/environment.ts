@@ -15,7 +15,9 @@ const keycloakSetUp: KeycloakOptions = {
   initOptions: {
     responseMode: 'fragment',
     flow: 'standard',
-    onLoad: 'check-sso'
+    // onLoad: 'check-sso',
+    onLoad: 'login-required',
+    checkLoginIframe: false
   },
   enableBearerInterceptor: true,
 };

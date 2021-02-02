@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
       window.dispatchEvent(
         new Event('resize')
       );
-    },300);
+    }, 300);
   }
 
   onLogin(): void {
@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogout(): void {
-    this.authService.logout(window.location.origin);
+    this.authService.logout(window.location.origin).then(() => localStorage.clear());
   }
 
   onRegister(): void {
