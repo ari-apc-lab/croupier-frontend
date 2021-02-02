@@ -3,9 +3,11 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer.component';
-import { MessagesComponent } from './utils/messages/messages.component';
-import { FileUploadComponent } from './utils/file-upload/file-upload.component';
-import { ProgressComponent } from './utils/progress/progress.component';
+import { UtilsModule } from './utils/utils.module';
+import { KeycloakAuthModule } from './keycloak-auth/keycloak-auth.module';
+// import { MessagesComponent } from './utils/messages/messages.component';
+// import { FileUploadComponent } from './utils/file-upload/file-upload.component';
+// import { ProgressComponent } from './utils/progress/progress.component';
 
 import { MatDividerModule } from '@angular/material/divider';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -26,21 +28,10 @@ import { PieComponent } from './widgets/pie/pie.component';
 
 import { MessageService } from './utils/message.service';
 
-import { AuthService } from './keycloak-auth/auth.service';
-import { AppAuthGuard } from './keycloak-auth/app.authguard';
+// import { AuthService } from './keycloak-auth/auth.service';
+// import { AppAuthGuard } from './keycloak-auth/app.authguard';
 
 @NgModule({
-  declarations: [
-    HeaderComponent,
-    SidebarComponent,
-    FooterComponent,
-    AreaComponent,
-    CardComponent,
-    PieComponent,
-    MessagesComponent,
-    FileUploadComponent,
-    ProgressComponent
-  ],
   imports: [
     CommonModule,
     MatDividerModule,
@@ -53,7 +44,20 @@ import { AppAuthGuard } from './keycloak-auth/app.authguard';
     RouterModule,
     HighchartsChartModule,
     MatCardModule,
-    MatGridListModule
+    MatGridListModule,
+    UtilsModule,
+    KeycloakAuthModule
+  ],
+  declarations: [
+    HeaderComponent,
+    SidebarComponent,
+    FooterComponent,
+    AreaComponent,
+    CardComponent,
+    PieComponent,
+    // MessagesComponent,
+    // FileUploadComponent,
+    // ProgressComponent
   ],
   exports: [
     HeaderComponent,
@@ -62,16 +66,19 @@ import { AppAuthGuard } from './keycloak-auth/app.authguard';
     AreaComponent,
     CardComponent,
     PieComponent,
-    MessagesComponent,
-    FileUploadComponent,
-    ProgressComponent
+    // MessagesComponent,
+    // FileUploadComponent,
+    // ProgressComponent
+    UtilsModule,
+    KeycloakAuthModule
   ]
 })
-export class SharedModule { 
+export class SharedModule {
   static forRoot() {
     return {
       ngModule: SharedModule,
-      providers: [MessageService, AuthService, AppAuthGuard]
+      providers: [MessageService]
+      // providers: [MessageService, AuthService, AppAuthGuard]
     };
   }
 }

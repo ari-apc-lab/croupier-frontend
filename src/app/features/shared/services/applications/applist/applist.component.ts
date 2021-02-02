@@ -7,6 +7,8 @@ import { HttpEvent, HttpEventType, HttpResponse } from '@angular/common/http';
 import { tap, filter, map } from 'rxjs/operators';
 import { pipe } from 'rxjs';
 
+import {} from '../../../utils/utils.module';
+
 import { requiredFileType } from '../../../utils/file-upload/update-file-validators';
 import { uploadProgress, toResponseBody } from '../../../utils/file-upload/file-upload.component';
 
@@ -44,7 +46,7 @@ export class ApplistComponent implements OnInit {
       return;
     }
 
-    //console.log(this.addForm.value);
+    // console.log(this.addForm.value);
 
     this.appService
       .addApplication(this.addForm.value)
