@@ -25,7 +25,8 @@ const keycloakSetUp: KeycloakOptions = {
 export const environment = {
   production: false,
   keycloak: keycloakSetUp,
-  apiUrl: 'https://sophora-105.man.poznan.pl/'
+  apiUrl: 'http://sophora-105.man.poznan.pl/'
+  // apiUrl: 'http://62.3.171.105/'
 };
 
 /*

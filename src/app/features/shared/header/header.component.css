@@ -1,7 +1,16 @@
+ul {
+    margin-bottom: 0;
+}
+
 ul li {
     list-style: none;
 }
 
 button {
     outline: none;
+    transition: all ease .35s;
+}
+
+button:hover, button:focus {
+    transform: scale(1.2);
 }

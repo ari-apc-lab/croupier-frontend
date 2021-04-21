@@ -14,3 +14,16 @@ img {
     object-fit: cover;
     border-radius: 50%;
 }
+
+.mat-list-option,
+.mat-nav-list .mat-list-item, 
+.mat-action-list .mat-list-item {
+    transition: all ease .2s;
+}
+
+.mat-list-option:hover, .mat-list-option:focus, 
+.mat-nav-list .mat-list-item:hover, .mat-nav-list .mat-list-item:focus, 
+.mat-action-list .mat-list-item:hover, .mat-action-list .mat-list-item:focus {
+    background-color: #3f51b5;
+    color: white;
+}
