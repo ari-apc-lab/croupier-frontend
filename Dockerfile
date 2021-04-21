@@ -10,7 +10,7 @@ ADD . /usr/src/app/
 RUN npm install 
 RUN npm audit fix
 RUN npm run build:prod
-RUN cp -r /dist/* /usr/share/nginx/html
+RUN cp -r /usr/src/app/dist/* /usr/share/nginx/html
 
 # Forward request logs to Docker log collector
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
