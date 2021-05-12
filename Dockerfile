@@ -9,7 +9,7 @@ WORKDIR /usr/src/app
 ADD . /usr/src/app/
 RUN npm install 
 RUN npm audit fix
-RUN npm run build:prod
+RUN npm run build
 RUN cp -r /usr/src/app/dist/* /usr/share/nginx/html
 
 # Forward request logs to Docker log collector
