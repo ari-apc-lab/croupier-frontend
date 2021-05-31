@@ -9,8 +9,11 @@ WORKDIR /usr/src/app
 ADD . /usr/src/app/
 RUN npm install 
 RUN npm audit fix
-RUN npm run build
+RUN npm run build:prod
+
+ADD ./nginx.conf /etc/nginx/sites-available/nginx.conf
 RUN cp -r /usr/src/app/dist/* /usr/share/nginx/html
+RUN ln -s /etc/nginx/sites-available/nginx.conf /etc/nginx/sites-enabled/nginx.conf
 
 # Forward request logs to Docker log collector
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
