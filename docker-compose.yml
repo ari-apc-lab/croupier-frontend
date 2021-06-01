@@ -2,9 +2,8 @@ version: '3'
 
 services:
  
-  frontend:
-    container_name: frontend
+  hid-portal-fe:
+    container_name: hid-portal-fe
     build: ./
     ports:
       - 80:80/tcp
-      - 443:443/tcp
