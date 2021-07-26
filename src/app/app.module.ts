@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DefaultModule } from './features/layouts/default/default.module';
-import { KeycloakAngularModule } from 'keycloak-angular';
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 
 import { CoreModule } from './features/core/core.module';
 import { TokenInterceptor } from './features/shared/keycloak-auth/interceptor';
@@ -19,6 +19,15 @@ import { CroupierComponent } from './features/modules/croupier/croupier.componen
 import { ZammadComponent } from './features/modules/zammad/zammad.component';
 import { CkanComponent } from './features/modules/ckan/ckan.component';
 import { VisualizerComponent } from './features/modules/visualizer/visualizer.component';
+import { LandingPageComponent } from './features/landing-page/landing-page.component';
+import { HeaderComponent } from './features/shared/header/header.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { LandingPageModule } from './features/landing-page/landing-page.module';
+import { environment } from 'src/environments/environment';
+import {CarouselModule} from 'primeng/carousel';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 // Import utils components
 
@@ -28,9 +37,14 @@ import { VisualizerComponent } from './features/modules/visualizer/visualizer.co
     BrowserModule,
     BrowserAnimationsModule,
     DefaultModule,
+    LandingPageModule,
     CoreModule,
     KeycloakAuthModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    MatToolbarModule,
+    MatIconModule,
+    CarouselModule,
+    FontAwesomeModule
   ],
   declarations: [
     AppComponent,
@@ -41,12 +55,15 @@ import { VisualizerComponent } from './features/modules/visualizer/visualizer.co
     CroupierComponent,
     CkanComponent,
     VisualizerComponent
+   // LandingPageComponent
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
-      multi: true
+      multi: true,
+      deps: [ KeycloakService ],
+
     }
   ],
   bootstrap: [AppComponent]

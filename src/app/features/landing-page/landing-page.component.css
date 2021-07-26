@@ -1,0 +1,119 @@
+/*
+main color = #00679a
+*/
+
+.mat-toolbar .mat-primary .mat-toolbar-multiple-rows {
+  background: #00679a !important;
+  color: #fff;
+}
+.title-section {
+  background-color: #00679a;
+  color: #fff;
+}
+
+.title {
+  font-size: 5em;
+  padding: 1em;
+}
+
+.news-section-cont {
+  padding: 2em;
+}
+
+.about-section {
+  color: white;
+  background-color: #00679a;
+}
+
+.about-content {
+  padding: 2em;
+}
+
+.contact-cont {
+  height: 20em;
+  width: 100%;
+  padding: 0 2em;
+  background-color: #00679a;
+  color: azure;
+  
+  /*clip-path: polygon(60% 31%, 100% 48%, 100% 100%, 0 100%, 0% 38%);
+  position: absolute;
+  z-index: -1;*/
+}
+
+.upper-contact-cont{
+  background-color: #fff;
+}
+
+.navigate-section {
+  padding: 2em;
+}
+
+.access-buttons {
+  text-align: center;
+}
+
+.access-btn {
+  border: #00679a solid 2px;
+  height: 9em;
+  width: 9em;
+  border-radius: 5%;
+  margin: 1em;
+  color: #00679a;
+  background-color: white;
+}
+
+.access-btn:hover {
+  background-color: #00679a;
+  color: white;
+}
+
+.icon {
+  font-size: 3em;
+}
+
+.car-details{
+  height: 30em;
+  background-size:     cover;
+  background-repeat:   no-repeat;
+  background-position: center center; 
+  padding: 10em;
+}
+
+.car-title {
+  background-color: rgb(65,59,59, 0.9);
+  color: white;
+  font-size: xx-large;
+  line-height: initial;
+  margin: 0.25em;
+  padding: 15px;
+}
+
+.car-subtitle {
+  background-color: rgb(65,59,59, 0.9);
+  color: white;
+  font-size: initial;
+  line-height: initial;
+  margin: 0.25em;
+  padding: 15px;
+}
+
+.section-title {
+  text-align: center;
+  font-size: xxx-large;
+  /*color: #00679a;*/
+}
+
+.grid-cont {
+  display: flex;
+}
+
+.col-cont {
+  width: 30%;
+  margin: 1.6%;
+}
+
+.sn-btn {
+  color: #00679a;
+  margin: 5%;
+}

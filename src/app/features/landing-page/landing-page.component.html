@@ -1,0 +1,184 @@
+
+<app-header (toggleSideBarForMe)="sideBarToggler()" ></app-header>
+
+<div class="title-section">
+  <p class="title">Welcome to Global Challenges Portal</p>
+
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 140 1440 120">
+    <path fill="#fff" fill-opacity="1" d="M0,192L480,160L960,224L1440,160L1440,320L960,320L480,320L0,320Z"></path>
+  </svg>
+</div>
+
+<div class="news-section">
+
+  <!--
+  <div class="upper-contact-cont">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 260">
+      <path fill="#fff" fill-opacity="1" d="M0,192L480,160L960,224L1440,160L1440,320L960,320L480,320L0,320Z"></path>
+    </svg>
+  </div>
+-->
+  <div class="news-section-cont">
+
+  
+    <h2 class="section-title" style="color: #00679a;">NEWS</h2>
+    <p-carousel [value]="newsList" [autoplayInterval]="5000" [numVisible]="1" [circular]="true">
+      <ng-template let-news pTemplate="item">
+          <div class="car-details" [style.background-image]="'url('+ news.image +')'" (click)="navigateExternal(news.link)">
+              <div class="p-grid p-nogutter">
+                  <div class="p-col-12">
+                    <div class="car-title">{{news.title}}</div>
+                  </div>
+                  <div class="p-col-12">
+                    <div class="car-subtitle">
+                      {{news.subtitle }}
+                    </div>
+                  </div>
+              </div>
+          </div>
+      </ng-template>
+  </p-carousel>
+  </div>
+</div>
+
+
+<div class="about-section">
+  <div class="upper-contact-cont">
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 140 1440 120">
+      <path fill="#00679a" fill-opacity="1" d="M0,192L480,160L960,224L1440,160L1440,320L960,320L480,320L0,320Z"></path>
+    </svg>
+  </div>
+  <div class="about-content">
+    <h2 style="color: #fff;" class="section-title">ABOUT US</h2>
+    <p>
+      <b>Our Vision:</b>
+       We advance technology to master global challenges
+    </p>
+    <p>
+      <b>Our Mission:</b>
+      We develop novel methods, 
+      algorithms and software for HPC and HPDA to accurately model and simulate the complex
+      processes, which arise in connection with major global challenges.
+    </p>
+    <p>
+      <b>Motivation & Main Objectives:</b>
+       Our society faces a wide range of global challenges 
+      in different areas such as sociology, economy, ecology and technology.
+       Solving the most vital problems in these fields often requires the analysis 
+       of a huge amount of data, and the utilization of appropriate methods and 
+       facilities for ample computations. In HiDALGO we develop a computational 
+       and data analytics environment, which enables systematic collaboration between 
+       scientists with different background and facilitates a profound understanding of 
+       several major global challenges. This will allow the decision makers to predict 
+       possible outcomes of certain social processes and act accordingly.
+    </p>
+
+    <p>
+      <b>Technology Evolution:</b>
+       In HiDALGO, we advance HPC, HPDA and AI technologies in order 
+      to improve data-centric computation in general. Although we mainly concentrate on 
+      three specific pilot applications, the technology baseline we develop in this project
+      can also be extended to other application domains as well. The technology evolution in
+      HiDALGO integrates our scientific objectives into a platform, which documents 
+      the success of the individual project developements and generates the required 
+      impact to establish a sustainable Centre of Excellence.
+    </p>
+  </div>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 140 1440 120">
+    <path fill="#fff" fill-opacity="1" d="M0,192L480,160L960,224L1440,160L1440,320L960,320L480,320L0,320Z"></path>
+  </svg>
+</div>
+
+<div class="navigate-section">
+  <h2 class="section-title" style="color: #00679a;">Direct accces</h2>
+
+  <div class="access-buttons">
+    <button class="access-btn" (click)="navigate('/dashboard')">
+      <mat-icon aria-hidden="false">apps</mat-icon>
+      <br>
+      Apps
+    </button>
+    <button class="access-btn" (click)="navigate('/module/ckan')">
+      <mat-icon aria-hidden="false">analytics</mat-icon>
+      <br>
+      Data
+    </button>
+    <button class="access-btn" (click)="navigate('/module/zammad')">
+      <mat-icon aria-hidden="false">info</mat-icon>
+      <br>
+      <p>Support</p>
+    </button>
+    <button class="access-btn" (click)="navigate('/apps')">
+      <mat-icon aria-hidden="false">bolt</mat-icon>
+      <br>
+      Deployment
+    </button>
+    <button class="access-btn" (click)="navigateExternal('https://wiki.hidalgo-project.eu')">
+      <mat-icon aria-hidden="false">description</mat-icon>
+      <br>
+      Documentation
+    </button>
+
+  </div>
+</div>
+
+<div class="upper-contact-cont">
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 140 1440 120">
+    <path fill="#00679a" fill-opacity="1" d="M0,192L480,160L960,224L1440,160L1440,320L960,320L480,320L0,320Z"></path>
+  </svg>
+</div>
+<div class="contact-cont">
+  
+  <div class="grid-cont">
+    <div class="col-cont">
+      <h2 style="color: #fff;">Contact us</h2>
+      <p>
+        CALLE DE ALBARRACIN 25 MADRID <br>
+        28037 <br>
+        Spain <br>
+      </p>
+      <p>
+        <a href="www.atos.net" style="color: #fff">
+          www.atos.net
+        </a>
+      </p>
+      <p>
+        <a href="contact@hidalgo-project.eu" style="color: #fff">
+          contact@hidalgo-project.eu
+        </a>
+      </p>
+    </div>
+    <div class="col-cont">
+      <div class="social-net">
+        <h2>Follow us</h2>
+        <button mat-fab color="link" class="sn-btn" (click)="navigateExternal('https://www.facebook.com/EU.Project.HiDALGO')">
+          <mat-icon>facebook</mat-icon>
+        </button>
+        <button  mat-fab color="link" class="sn-btn" (click)="navigateExternal('https://twitter.com/EU_HiDALGO')" >
+          <fa-icon [icon]="faRetweet"></fa-icon>
+        </button>
+        <button  mat-fab color="link" class="sn-btn" (click)="navigateExternal('https://www.youtube.com/channel/UCajIi2XMTsQRDMKcvgvoaAg')" >
+          YT
+        </button>
+        <button  mat-fab color="link" class="sn-btn" (click)="navigateExternal('https://www.researchgate.net/project/HiDALGO-HPC-and-Big-Data-Technologies-for-Global-Challenges?')" >
+          RG
+        </button>
+        
+        
+      </div>
+    </div>
+    <div class="col-cont">
+      <h3>
+        Funded by the Horizon 2020 Framework Programme of the European Union
+      </h3>
+      <img src="../../../assets/images/eu_flag.png" alt="European Union Flag"  height="150">
+    </div>
+  </div>
+
+     
+
+      
+  
+</div>

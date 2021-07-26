@@ -11,6 +11,9 @@ const keycloakSetUp: KeycloakOptions = {
     // url: 'https://prunus-212.man.poznan.pl/auth/',
     realm: 'Hidalgo',
     clientId: 'frontend',
+    credentials: {
+      secret: "d112469e-9386-4c00-b05d-7b6b5270bd3e"
+    },
   },
   initOptions: {
     responseMode: 'fragment',

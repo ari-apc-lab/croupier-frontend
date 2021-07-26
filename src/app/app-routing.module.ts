@@ -14,6 +14,8 @@ import { CkanComponent } from './features/modules/ckan/ckan.component';
 import { VisualizerComponent } from './features/modules/visualizer/visualizer.component';
 
 import { AppAuthGuard } from './features/shared/keycloak-auth/app.authguard';
+import { LandingPageComponent } from './features/landing-page/landing-page.component';
+import { KeycloakAuthGuard } from 'keycloak-angular';
 
 const routes: Routes = [
 
@@ -52,11 +54,11 @@ const routes: Routes = [
   }*/
 
   // Routes
-  {
+ /* {
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',
-  },
+  },*/
   {
     path: 'dashboard',
     component: DefaultComponent,
@@ -67,6 +69,7 @@ const routes: Routes = [
         loadChildren: () => import('./features/shared/services/dashboard/dashboard.module').then(m => m.DashboardModule)
       }
     ],
+  //  canActivate:  [AppAuthGuard]
   },
   {
     path: 'apps',
@@ -77,7 +80,8 @@ const routes: Routes = [
         // component: AddappComponent
         loadChildren: () => import('./features/shared/services/applications/applications.module').then(m => m.ApplicationsModule)
       }
-    ]
+    ],
+  //  canActivate:  [AppAuthGuard]
   },
   {
     path: 'instances',
@@ -87,7 +91,8 @@ const routes: Routes = [
         path: '',
         loadChildren: () => import('./features/shared/services/instances/instances.module').then(m => m.InstancesModule)
       }
-    ]
+    ],
+   // canActivate:  [AppAuthGuard]
   },
   {
     path: 'module',
@@ -121,7 +126,12 @@ const routes: Routes = [
         path: 'visualizer',
         component: VisualizerComponent
       }
-    ]
+    ],
+  //  canActivate:  [AppAuthGuard]
+  },
+  {
+    path: '',
+    component: LandingPageComponent
   }
   // Routes - 3
   /*{
