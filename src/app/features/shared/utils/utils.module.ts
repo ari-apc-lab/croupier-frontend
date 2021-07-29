@@ -33,10 +33,10 @@ import { ProgressComponent } from './progress/progress.component';
 })
 
 export class UtilsModule {
-    static forRoot(): ModuleWithProviders {
+    static forRoot(): ModuleWithProviders<UtilsModule> {
         return  {
           ngModule: UtilsModule,
           providers: [MessageService],
-        } as ModuleWithProviders;
+        } as ModuleWithProviders<UtilsModule>;
     }
 }
