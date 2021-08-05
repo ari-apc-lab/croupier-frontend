@@ -27,6 +27,7 @@ import { LandingPageModule } from './features/landing-page/landing-page.module';
 import { environment } from 'src/environments/environment';
 import {CarouselModule} from 'primeng/carousel';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CustomKeycloakService } from './features/shared/keycloak-auth/custom-keycloak.service';
 
 
 // Import utils components
@@ -62,7 +63,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true,
-      deps: [ KeycloakService ],
+      deps: [ CustomKeycloakService ],
 
     }
   ],

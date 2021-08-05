@@ -69,7 +69,7 @@ const routes: Routes = [
         loadChildren: () => import('./features/shared/services/dashboard/dashboard.module').then(m => m.DashboardModule)
       }
     ],
-  //  canActivate:  [AppAuthGuard]
+    canActivate:  [AppAuthGuard]
   },
   {
     path: 'apps',
@@ -81,7 +81,7 @@ const routes: Routes = [
         loadChildren: () => import('./features/shared/services/applications/applications.module').then(m => m.ApplicationsModule)
       }
     ],
-  //  canActivate:  [AppAuthGuard]
+    canActivate:  [AppAuthGuard]
   },
   {
     path: 'instances',
@@ -92,7 +92,7 @@ const routes: Routes = [
         loadChildren: () => import('./features/shared/services/instances/instances.module').then(m => m.InstancesModule)
       }
     ],
-   // canActivate:  [AppAuthGuard]
+    canActivate:  [AppAuthGuard]
   },
   {
     path: 'module',
@@ -127,7 +127,7 @@ const routes: Routes = [
         component: VisualizerComponent
       }
     ],
-  //  canActivate:  [AppAuthGuard]
+    canActivate:  [AppAuthGuard]
   },
   {
     path: '',

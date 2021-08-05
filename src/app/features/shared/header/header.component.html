@@ -13,8 +13,8 @@
                         <mat-icon>settings</mat-icon>
                     </button>
                 </li>
-                <li>
-                  <button mat-icon-button>
+                <li  *ngIf="!authService.signedIn">
+                  <button mat-icon-button (click)="onLogin()">
                       <mat-icon>login</mat-icon>
                   </button>
                 </li>
