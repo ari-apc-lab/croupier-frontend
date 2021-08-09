@@ -24,6 +24,6 @@ img {
 .mat-list-option:hover, .mat-list-option:focus, 
 .mat-nav-list .mat-list-item:hover, .mat-nav-list .mat-list-item:focus, 
 .mat-action-list .mat-list-item:hover, .mat-action-list .mat-list-item:focus {
-    background-color: #3f51b5;
+    background-color: #00679a;
     color: white;
 }

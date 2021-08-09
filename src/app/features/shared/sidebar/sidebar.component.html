@@ -1,23 +1,24 @@
 <mat-nav-list>
     <div class="profile-card">
         <div class="header">
-            <h5>{{userName}}</h5>
+            <h4>Good morning {{firstName}} {{lastName}}!</h4>
+            <h4>You logged as <b>{{userName}}</b></h4>
             <h6><i>({{email}})</i></h6>
         </div>
     </div>
-
+    
     <mat-divider></mat-divider>
 
     <h2 matSubheader>Applications</h2>
 
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/">
-        <mat-icon>article</mat-icon>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/dashboard">
+        <mat-icon class="material-icons-outlined">dashboard</mat-icon>
         Dashboard</a>
     <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['/apps']">
-        <mat-icon>article</mat-icon>
+        <mat-icon >apps</mat-icon>
         Applications</a>
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/module/croupier">
-        <mat-icon>article</mat-icon>
+        <mat-icon>architecture</mat-icon>
         Orchestrator
     </a>
     
@@ -26,11 +27,11 @@
     <h2 matSubheader>Community and Support</h2>
 
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/module/moodle">
-        <mat-icon>article</mat-icon>
+        <mat-icon>model_training</mat-icon>
         Training
     </a>
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/module/askbot">
-        <mat-icon>article</mat-icon>
+        <mat-icon>question_answer</mat-icon>
         Q&A Forum
     </a>
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/module/matchmaking">
@@ -38,19 +39,19 @@
         MatchMaking
     </a>
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/module/zammad">
-        <mat-icon>article</mat-icon>
+        <mat-icon>confirmation_number</mat-icon>
         Ticketing System
     </a>
 
     <h2 matSubheader>Data Management</h2>
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/module/ckan">
-        <mat-icon>article</mat-icon>
+        <mat-icon>description</mat-icon>
         Data Catalogue
     </a>
 
     <h2 matSubheader>Visualization</h2>
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/module/visualizer">
-        <mat-icon>article</mat-icon>
+        <mat-icon>preview</mat-icon>
         Visualizer
     </a>
 

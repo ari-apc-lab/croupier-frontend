@@ -30,6 +30,7 @@ export class SidebarComponent implements OnInit {
   }
 
   setValues(userProfile): void {
+    console.log('usser data: ', userProfile)
     this.firstName = userProfile.firstName;
     this.lastName = userProfile.lastName;
     this.userName = userProfile.username;

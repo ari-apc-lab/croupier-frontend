@@ -19,3 +19,8 @@ mat-toolbar {
   background-color: #00679a;
   color: white;
 }
+
+::ng-deep .mat-menu-panel {
+  overflow: hidden !important;
+  width: 15em;
+}
