@@ -2,7 +2,7 @@
 <ul class="applications">
   <li *ngFor="let application of applications">
     <a
-      routerLink="/app/detail/{{ application.id }}"
+      routerLink="/apps/detail/{{ application.id }}"
       routerLinkActive="router-link-active"
     >
       <span class="badge">{{ application.id }}</span> {{ application.name }}

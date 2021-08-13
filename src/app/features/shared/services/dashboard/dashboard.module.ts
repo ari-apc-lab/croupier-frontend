@@ -5,13 +5,15 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { ApplicationsModule } from '../applications/applications.module';
+import {MatIconModule} from '@angular/material/icon'; 
 
 @NgModule({
   declarations: [DashboardComponent],
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    ApplicationsModule
+    ApplicationsModule,
+    MatIconModule
   ]
 })
 export class DashboardModule { }

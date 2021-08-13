@@ -56,7 +56,6 @@ import { CustomKeycloakService } from './features/shared/keycloak-auth/custom-ke
     CroupierComponent,
     CkanComponent,
     VisualizerComponent
-   // LandingPageComponent
   ],
   providers: [
     {

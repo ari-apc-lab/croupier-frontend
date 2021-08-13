@@ -9,17 +9,33 @@ import { KeycloakAuthModule } from '../../keycloak-auth/keycloak-auth.module';
 import { InstancedetailComponent } from './instancedetail/instancedetail.component';
 import { InstancelistComponent } from './instancelist/instancelist.component';
 import { InstancetextlogComponent } from './instancetextlog/instancetextlog.component';
-
+import {MatIconModule} from '@angular/material/icon'; 
+import {InputTextModule} from 'primeng/inputtext';
+import { InstanceDashboardComponent } from './instance-dashboard/instance-dashboard.component';
+import { InstanceFormComponent } from './instance-form/instance-form.component';
+import { AppModule } from 'src/app/app.module';
 @NgModule({
-  declarations: [InstancedetailComponent, InstancelistComponent, InstancetextlogComponent],
+  declarations: [
+    InstancedetailComponent,
+    InstancelistComponent,
+    InstancetextlogComponent,
+    InstanceDashboardComponent,
+    InstanceFormComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     InstancesRoutingModule,
     UtilsModule,
-    KeycloakAuthModule
+    KeycloakAuthModule,
+    MatIconModule,
+    InputTextModule
   ],
-  exports: [InstancelistComponent]
+  exports: [
+    InstancelistComponent,
+    InstanceDashboardComponent,
+    InstanceFormComponent
+  ]
 })
 export class InstancesModule { }

@@ -29,4 +29,18 @@ label {
     color: #ccc;
     cursor: auto;
   }
+
+
+  .label-input{
+    width: 30%;
+  }
+  
+  .input-input {
+    width: 60%;
+  }
+  
+  .inputs-cont {
+    display: flex;
+    margin-bottom: 1em;
+  }
   

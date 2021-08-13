@@ -96,6 +96,16 @@ export class AppInstanceService {
     );
   }
 
+  executeInstance(instanceId): Observable<any> {
+    console.log('id de la instancia a ejecutar: ',instanceId);
+    const url = `${this.instancesUrl}${instanceId}`+'/execute/';
+    console.log(url)
+    return this.http.post(url, null, httpOptions).pipe(
+      tap(_ => this.log(`Executed instance w/ id=${instanceId}`)),
+      catchError(this.handleError<AppInstance>('executeInstance'))
+    );
+  }
+
   /** Log an AppInstanceService message with the MessageService */
   private log(message: string) {
     this.msgService.add(`AppInstanceService: ${message}`);

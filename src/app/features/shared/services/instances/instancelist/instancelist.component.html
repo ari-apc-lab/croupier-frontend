@@ -6,61 +6,18 @@
   </label>
   <!-- (click) passes input value to add() and then clears the input -->
   <!--<button (click)="add(appName.value); appName.value = ''">add</button>-->
-  <button (click)="add(); appName.value = ''">add</button>
+ <!-- <button (click)="add(); appName.value = ''">add</button> -->
 </div>
 <ul class="instances">
   <li *ngFor="let instance of instances">
     <a
-      [routerLink]="['/instance', 'detail', instance.id]"
+      [routerLink]="['/instances', 'detail', instance.id]"
       routerLinkActive="router-link-active"
     >
       <span class="badge">{{ instance.id }}</span> {{ instance.name }}
     </a>
-    <button class="delete" title="delete app" (click)="delete(instance)">x</button>
+    <button class="delete" title="delete app" (click)="delete(instance)">
+      <mat-icon aria-hidden="false" aria-label="Example home icon">close</mat-icon>
+    </button>
   </li>
 </ul>
-
-<h3>Add a new one</h3>
-<div>
-  <form [formGroup]="addForm" (ngSubmit)="add()">
-    <div class="form-group">
-      <label>Name</label>
-      <input class="form-control" formControlName="name" placeholder="Name" />
-      <div class="invalid-feedback" style="display: block">
-        <ng-container *ngIf="hasError('name', 'required')"
-          >This field is required</ng-container
-        >
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label>Description</label>
-      <input
-        class="form-control"
-        formControlName="description"
-        placeholder="Description"
-      />
-      <div class="invalid-feedback" style="display: block">
-        <ng-container *ngIf="hasError('description', 'required')"
-          >This field is required</ng-container
-        >
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label>Inputs file</label>
-      <!--<app-util-file-upload formControlName="inputs_file" [progress]="progress"></app-util-file-upload>-->
-      <app-util-file-upload formControlName="inputs_file"></app-util-file-upload>
-      <div class="invalid-feedback" style="display: block">
-        <ng-container *ngIf="hasError('inputs_file', 'required')"
-          >This field is required</ng-container
-        >
-        <ng-container *ngIf="hasError('inputs_file', 'requiredFileType')"
-          >Only ZIP</ng-container
-        >
-      </div>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
-</div>

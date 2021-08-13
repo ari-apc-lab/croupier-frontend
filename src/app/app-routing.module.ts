@@ -16,6 +16,8 @@ import { VisualizerComponent } from './features/modules/visualizer/visualizer.co
 import { AppAuthGuard } from './features/shared/keycloak-auth/app.authguard';
 import { LandingPageComponent } from './features/landing-page/landing-page.component';
 import { KeycloakAuthGuard } from 'keycloak-angular';
+import { AppdetailComponent } from './features/shared/services/applications/appdetail/appdetail.component';
+import { InstancedetailComponent } from './features/shared/services/instances/instancedetail/instancedetail.component';
 
 const routes: Routes = [
 
@@ -38,7 +40,8 @@ const routes: Routes = [
   {
     path: 'instances',
     component: DefaultComponent,
-    loadChildren: () => import('./features/shared/services/instances/instances.module').then(m => m.InstancesModule)
+    loadChildren: () => import('./features/shared/services/instances/instances.module').then(m => m.InstancesModule),
+   
   },
   {
     path: 'module/moodle',
@@ -79,6 +82,11 @@ const routes: Routes = [
         path: '',
         // component: AddappComponent
         loadChildren: () => import('./features/shared/services/applications/applications.module').then(m => m.ApplicationsModule)
+      },
+      {
+        path: 'detail/:id',
+        component: AppdetailComponent
+        
       }
     ],
     canActivate:  [AppAuthGuard]
@@ -90,7 +98,13 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: () => import('./features/shared/services/instances/instances.module').then(m => m.InstancesModule)
+      },
+      {
+        path: 'detail/:id',
+        component: InstancedetailComponent
       }
+    
+  
     ],
     canActivate:  [AppAuthGuard]
   },

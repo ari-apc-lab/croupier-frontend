@@ -12,6 +12,16 @@ import { ApplicationService } from './application.service';
 import { AppdetailComponent } from './appdetail/appdetail.component';
 import { ApplistComponent } from './applist/applist.component';
 import { AppsearchComponent } from './appsearch/appsearch.component';
+import {InputTextModule} from 'primeng/inputtext';
+import {MatTooltipModule} from '@angular/material/tooltip'; 
+import {MatIconModule} from '@angular/material/icon'; 
+import {MatExpansionModule} from '@angular/material/expansion'; 
+import {SelectButtonModule} from 'primeng/selectbutton';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle'; 
+import {InputNumberModule} from 'primeng/inputnumber';
+import {MatBadgeModule} from '@angular/material/badge'; 
+import {TabMenuModule} from 'primeng/tabmenu';
+import {MatTabsModule} from '@angular/material/tabs'; 
 
 @NgModule({
   imports: [
@@ -21,7 +31,17 @@ import { AppsearchComponent } from './appsearch/appsearch.component';
     ApplicationsRoutingModule,
     UtilsModule,
     KeycloakAuthModule,
-    InstancesModule
+    InstancesModule,
+    InputTextModule,
+    MatTooltipModule,
+    MatIconModule,
+    MatExpansionModule,
+    SelectButtonModule,
+    MatSlideToggleModule,
+    InputNumberModule,
+    MatBadgeModule,
+    TabMenuModule,
+    MatTabsModule
   ],
   declarations: [
     AppdetailComponent,

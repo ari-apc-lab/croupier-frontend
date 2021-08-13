@@ -1,10 +1,10 @@
 /* AppSearch private styles */
 .search-result li {
-  border-bottom: 1px solid gray;
-  border-left: 1px solid gray;
-  border-right: 1px solid gray;
-  width: 195px;
-  height: 16px;
+  border-bottom: 1px solid #cdcdcd;
+  border-left: 1px solid #cdcdcd;
+  border-right: 1px solid #cdcdcd;
+  width: 30em;
+  height: 2em;
   padding: 5px;
   background-color: white;
   cursor: pointer;
@@ -12,11 +12,11 @@
 }
 
 .search-result li:hover {
-  background-color: #607D8B;
+  background-color: #325668;
 }
 
 .search-result li a {
-  color: #888;
+  color: #325668;
   display: block;
   text-decoration: none;
 }
@@ -28,8 +28,10 @@
   color: white;
 }
 #search-box {
-  width: 200px;
-  height: 20px;
+  width: 30em;
+  height: 2em;
+  border-radius: 3px;
+  border: 1px #cdcdcd solid;
 }
 
 

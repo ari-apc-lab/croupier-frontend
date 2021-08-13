@@ -33,6 +33,8 @@ export class AppsearchComponent implements OnInit {
       // switch to new search observable each time the term changes
       switchMap((term: string) => this.appService.searchApplications(term)),
     );
+
+    
   }
 
 }

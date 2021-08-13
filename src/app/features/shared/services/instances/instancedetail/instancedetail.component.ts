@@ -13,6 +13,13 @@ import { AppInstanceService } from '../app-instance.service';
 export class InstancedetailComponent implements OnInit {
 
   instance: AppInstance;
+  inputs: any;
+
+  // hepers
+  isString(val): boolean {return typeof val === 'string';}
+  isNumber(val): boolean {return typeof val === 'number';}
+  isObject(val): boolean {return typeof val === 'object';}
+  isBoolean(val): boolean {return typeof val === 'boolean';}
 
   constructor(
     private route: ActivatedRoute,
@@ -28,7 +35,14 @@ export class InstancedetailComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.instanceService
       .getAppInstance(id)
-      .subscribe(instance => (this.instance = instance));
+      .subscribe(instance => {
+        this.instance = instance
+        
+        this.inputs = JSON.parse(instance['inputs'])[0];
+        console.log('instance inputs: ', this.inputs);
+
+
+      });
   }
 
   goBack(): void {
@@ -39,6 +53,15 @@ export class InstancedetailComponent implements OnInit {
     this.instanceService
       .updateAppInstance(this.instance)
       .subscribe(() => this.goBack());
+  }
+
+  execute() {
+    console.log('id ins:', this.instance.id);
+    this.instanceService.executeInstance(this.instance.id).subscribe(
+      (data) => {
+        console.log('resultado de la ejecución: ', data);
+      }
+    )
   }
 
 }

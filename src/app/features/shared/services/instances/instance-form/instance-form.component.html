@@ -1,0 +1,44 @@
+
+<h3>Add a new one</h3>
+<div>
+  <form [formGroup]="addForm" (ngSubmit)="add()">
+    <div class="form-group">
+      <label>Name</label>
+      <input class="form-control" formControlName="name" placeholder="Name" />
+      <div class="invalid-feedback" style="display: block">
+        <ng-container *ngIf="hasError('name', 'required')"
+          >This field is required</ng-container
+        >
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Description</label>
+      <input
+        class="form-control"
+        formControlName="description"
+        placeholder="Description"
+      />
+      <div class="invalid-feedback" style="display: block">
+        <ng-container *ngIf="hasError('description', 'required')"
+          >This field is required</ng-container
+        >
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Inputs file</label>
+      <!--<app-util-file-upload formControlName="inputs_file" [progress]="progress"></app-util-file-upload>-->
+      <app-util-file-upload formControlName="inputs_file"></app-util-file-upload>
+      <div class="invalid-feedback" style="display: block">
+        <ng-container *ngIf="hasError('inputs_file', 'required')"
+          >This field is required</ng-container
+        >
+        <ng-container *ngIf="hasError('inputs_file', 'requiredFileType')"
+          >Only ZIP</ng-container
+        >
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>

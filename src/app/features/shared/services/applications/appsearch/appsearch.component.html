@@ -5,8 +5,8 @@
 
   <ul class="search-result">
     <li *ngFor="let application of applications$ | async">
-      <a routerLink="/app/detail/{{ application.id }}">
-        {{ application.name }}
+      <a routerLink="/apps/detail/{{ application.id }}">
+        {{ application.name }} - {{application.owner}}
       </a>
     </li>
   </ul>

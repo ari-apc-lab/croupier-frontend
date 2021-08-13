@@ -15,7 +15,106 @@
   </div>
 </div>
 
+<h3>Instances list.</h3>
+<ul class="instances">
+  <app-instancelist [application]="application"></app-instancelist>
+</ul>
+
+<mat-tab-group>
+  <mat-tab label="Basic configuration"> 
+    <h2>Parameters:</h2>
+    <div >
+        <div *ngFor="let input of inputs" class="inputs-cont">
+          <div class="label-input">
+            <label>{{input.name}}</label>
+          </div>
+          <div class="input-input">
+            <input *ngIf="input.default === ''" class="field-input" type="text" pInputText [(ngModel)]="input.default">
+            <p *ngIf="!isObject(input.default)">{{input.default}}</p>
+            <mat-expansion-panel *ngIf="isObject(input.default)" hideToggle>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Open to display the fields of <b> {{input.name}}</b>.
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div *ngFor="let item of input.default | keyvalue">
+                  <b>{{item.key}}:</b>  {{item.value}}
+                </div>
+                <br>
+              </mat-expansion-panel>
+          </div>
+          <div>
+            <mat-icon style="color: #7ca6ba; margin-left: 15px;" aria-hidden="false" [matTooltip]="input.description">info</mat-icon>
+          </div>
+          
+        </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Expert configuration">
+    <h2>Parameters:</h2>
+    <div >
+        <div *ngFor="let input of inputs" class="inputs-cont">
+          <div class="label-input">
+            <label>{{input.name}}</label>
+          </div>
+          <div class="input-input">
+  
+            <input *ngIf="isString(input.default)" class="field-input" type="text" pInputText [(ngModel)]="input.default">
+          
+            <mat-expansion-panel *ngIf="isObject(input.default)" hideToggle>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Open to display the fields of <b> {{input.name}}</b>.
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div *ngFor="let item of input.default | keyvalue">
+                  <div class="object-input">
+                    <input type="text" [(ngModel)]="item.key">:
+                    <input type="text" [(ngModel)]="item.value">
+                  </div>
+                  <br>
+                  
+                </div>
+                <br>
+                <div class="object-input">
+                  <input type="text" #key>:
+                  <input type="text" #value>
+                </div>
+                
+                <button mat-raised-button color="primary" (click)="addField(input.default, key, value)">Save</button>
+            </mat-expansion-panel>
+  
+            <mat-slide-toggle 
+               *ngIf="isBoolean(input.default)"
+                color="primary"
+                [checked]="input.default">
+            </mat-slide-toggle>
+  
+            <p-inputNumber 
+                *ngIf="isNumber(input.default)"
+                [(ngModel)]="input.default" 
+                mode="decimal">
+            </p-inputNumber>
+          </div>
+          <div>
+            <mat-icon style="color: #7ca6ba; margin-left: 15px;" aria-hidden="false" [matTooltip]="input.description">info</mat-icon>
+          </div>
+          
+        </div>
+    </div>
+  </mat-tab>
+  
+  <mat-tab label="Upload file"> 
+  <!--  <app-instancelist [application]="application"></app-instancelist> -->
+    <app-instance-form></app-instance-form>
+  </mat-tab>
+</mat-tab-group>
+
+<div>
+  
+</div>
+
 <button (click)="goBack()">go back</button>
 <button (click)="save()">save</button>
 
-<app-instancelist [application]="application"></app-instancelist>
+

@@ -21,7 +21,21 @@ export class DashboardComponent implements OnInit {
   getApplications(): void {
     this.applicationService
       .getApplications()
-      .subscribe(applications => (this.applications = applications.slice(0, 3)));
+      .subscribe(applications => {
+        
+        applications.sort(function (a, b) {
+          if (a['created'] > b['created']) {
+            return 1;
+          }
+          if (a['created'] < b['created']) {
+            return -1;
+          }
+          // a must be equal to b
+          return 0;
+        });
+        this.applications = applications.slice(0,3);
+      });
+      
   }
 
 }

@@ -1,3 +1,7 @@
+
+<div class="nav-path">
+ Dashboard
+</div>
 <div *ngIf="instance">
   <h2>{{ instance.name | uppercase }} Details</h2>
   <div><span>id: </span>{{ instance.id }}</div>
@@ -13,9 +17,23 @@
       <input [(ngModel)]="instance.description" placeholder="description" />
     </label>
   </div>
+
+  <!-- INSTANCE INPUTS -->
+  <div>
+    <div *ngFor="let input of inputs" class="inputs-cont">
+
+      <div class="label-input">
+        <label>{{input.name}}</label>
+      </div>
+      <div class="input-input">
+        <p>{{input.value}}</p>
+      </div>
+    </div>
+  </div>
 </div>
 
 <button (click)="goBack()">go back</button>
-<button (click)="save()">save</button>
+<button (click)="execute()">Execute</button>
+<!--<button (click)="save()">save</button>-->
 
 <app-instancetextlog [instance]="instance"></app-instancetextlog>

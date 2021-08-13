@@ -5,6 +5,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer.component';
 import { UtilsModule } from './utils/utils.module';
 import { KeycloakAuthModule } from './keycloak-auth/keycloak-auth.module';
+import { BreadcrumbNavComponent } from './breadcrumb-nav/breadcrumb-nav.component';
 // import { MessagesComponent } from './utils/messages/messages.component';
 // import { FileUploadComponent } from './utils/file-upload/file-upload.component';
 // import { ProgressComponent } from './utils/progress/progress.component';
@@ -27,6 +28,7 @@ import { CardComponent } from './widgets/card/card.component';
 import { PieComponent } from './widgets/pie/pie.component';
 
 import { MessageService } from './utils/message.service';
+import {BreadcrumbModule} from 'primeng/breadcrumb';
 
 // import { AuthService } from './keycloak-auth/auth.service';
 // import { AppAuthGuard } from './keycloak-auth/app.authguard';
@@ -46,7 +48,8 @@ import { MessageService } from './utils/message.service';
     MatCardModule,
     MatGridListModule,
     UtilsModule,
-    KeycloakAuthModule
+    KeycloakAuthModule,
+    BreadcrumbModule
   ],
   declarations: [
     HeaderComponent,
@@ -55,6 +58,7 @@ import { MessageService } from './utils/message.service';
     AreaComponent,
     CardComponent,
     PieComponent,
+    BreadcrumbNavComponent
     // MessagesComponent,
     // FileUploadComponent,
     // ProgressComponent
@@ -70,7 +74,8 @@ import { MessageService } from './utils/message.service';
     // FileUploadComponent,
     // ProgressComponent
     UtilsModule,
-    KeycloakAuthModule
+    KeycloakAuthModule,
+    BreadcrumbNavComponent
   ]
 })
 export class SharedModule {
