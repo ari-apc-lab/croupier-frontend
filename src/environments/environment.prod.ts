@@ -6,11 +6,28 @@ import { KeycloakOptions } from 'keycloak-angular';
 
 // Keycloak config
 const keycloakSetUp: KeycloakOptions = {
-  config: {
+ /* config: {
     url: 'https://hidalgo-idm.hlrs.de/auth/',
     realm: 'Hidalgo',
     clientId: 'frontend',
+  },*/
+  config: {
+     url: 'https://prunus-212.man.poznan.pl/auth/',
+    realm: 'Hidalgo',
+    clientId: 'frontend',
+    credentials: {
+      secret: "e940c4ec-5204-41f2-b65a-b289983d9fbb"
+    },
   },
+  initOptions: {
+    responseMode: 'fragment',
+    flow: 'standard',
+     onLoad: 'check-sso',
+   // onLoad: 'login-required',
+    checkLoginIframe: false
+  },
+};
+  /*
   initOptions: {
     responseMode: 'fragment',
     flow: 'standard',
@@ -18,7 +35,7 @@ const keycloakSetUp: KeycloakOptions = {
     checkLoginIframe: false
   },
   enableBearerInterceptor: true,
-};
+};*/
 
 export const environment = {
   production: true,
