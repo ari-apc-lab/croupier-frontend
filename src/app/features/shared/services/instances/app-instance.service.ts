@@ -22,7 +22,7 @@ export class AppInstanceService {
 
   /** GET instances from the server */
   getAppInstances(application: Application): Observable<AppInstance[]> {
-    const url = `${this.instancesUrl}?app=${application.id}`;
+    const url = `${this.instancesUrl}?app=${application.name}`;
 
     return this.http.get<AppInstance[]>(url).pipe(
       tap(_ => this.log('fetched instances')),
