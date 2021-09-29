@@ -10,6 +10,7 @@ import { faRetweet } from '@fortawesome/free-solid-svg-icons';
 export class LandingPageComponent implements OnInit {
 
   sideBarOpen = false;
+  displayCookies: boolean;
   newsList = [
     {
       title: 'Summary from HiDALGO Plenary Meeting (May 31st to June 2nd)',
@@ -37,7 +38,6 @@ export class LandingPageComponent implements OnInit {
 
   faRetweet = faRetweet;
   ngOnInit(): void {
-
   }
 
   sideBarToggler() {
@@ -51,5 +51,7 @@ export class LandingPageComponent implements OnInit {
   navigateExternal(url) {
     window.open(url, "_blank");
   }
+
+  
 
 }

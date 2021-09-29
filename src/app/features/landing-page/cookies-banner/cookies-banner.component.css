@@ -1,0 +1,17 @@
+.cookies-banner {
+  border: 1px solid #ddd;
+  margin-top: 0px; /* Prevent double borders */
+  background-color: #f6f6f6;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+  display: block;
+  position: fixed;
+  margin:0px;
+  z-index: 10000;
+  left: 200px;
+right: 200px;
+bottom: 20px;
+z-index: 10000;
+}

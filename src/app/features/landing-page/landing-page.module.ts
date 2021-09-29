@@ -14,9 +14,13 @@ import {MatDividerModule} from '@angular/material/divider';
 import {CarouselModule} from 'primeng/carousel';
 import {MatButtonModule} from '@angular/material/button'; 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {SidebarModule} from 'primeng/sidebar';
+import {ButtonModule} from 'primeng/button';
 
 @NgModule({
-  declarations: [LandingPageComponent],
+  declarations: [
+    LandingPageComponent
+  ],
   imports: [
     CommonModule,
     RouterModule,
@@ -28,7 +32,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatDividerModule,
     CarouselModule,
     MatButtonModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    SidebarModule,
+    ButtonModule
     
   ],
   exports: [

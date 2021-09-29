@@ -117,3 +117,7 @@ main color = #00679a
   color: #00679a;
   margin: 5%;
 }
+
+.p-sidebar-bottom {
+  height: 15rem !important;
+}

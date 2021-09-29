@@ -18,6 +18,7 @@ import { LandingPageComponent } from './features/landing-page/landing-page.compo
 import { KeycloakAuthGuard } from 'keycloak-angular';
 import { AppdetailComponent } from './features/shared/services/applications/appdetail/appdetail.component';
 import { InstancedetailComponent } from './features/shared/services/instances/instancedetail/instancedetail.component';
+import { CookiesPolicyComponent } from './features/landing-page/cookies-banner/cookies-policy/cookies-policy.component';
 
 const routes: Routes = [
 
@@ -146,6 +147,10 @@ const routes: Routes = [
   {
     path: '',
     component: LandingPageComponent
+  },
+  {
+    path: 'cookies-policy',
+    component: CookiesPolicyComponent
   }
   // Routes - 3
   /*{

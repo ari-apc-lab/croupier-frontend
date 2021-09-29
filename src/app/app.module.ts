@@ -28,8 +28,9 @@ import { environment } from 'src/environments/environment';
 import {CarouselModule} from 'primeng/carousel';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CustomKeycloakService } from './features/shared/keycloak-auth/custom-keycloak.service';
-
-
+import { CookiesPolicyComponent } from './features/landing-page/cookies-banner/cookies-policy/cookies-policy.component';
+import {ButtonModule} from 'primeng/button';
+import { CookiesBannerComponent } from './features/landing-page/cookies-banner/cookies-banner.component';
 // Import utils components
 
 @NgModule({
@@ -45,6 +46,7 @@ import { CustomKeycloakService } from './features/shared/keycloak-auth/custom-ke
     MatToolbarModule,
     MatIconModule,
     CarouselModule,
+    ButtonModule,
     FontAwesomeModule
   ],
   declarations: [
@@ -55,7 +57,9 @@ import { CustomKeycloakService } from './features/shared/keycloak-auth/custom-ke
     ZammadComponent,
     CroupierComponent,
     CkanComponent,
-    VisualizerComponent
+    VisualizerComponent,
+    CookiesPolicyComponent,
+    CookiesBannerComponent
   ],
   providers: [
     {
