@@ -23,27 +23,17 @@
 <mat-tab-group>
   <mat-tab label="Basic configuration"> 
     <h2>Parameters:</h2>
-    <div >
-        <div *ngFor="let input of inputs" class="inputs-cont">
+    <div *ngFor="let input of inputs" >
+        <div *ngIf="input.default === ''" class="inputs-cont">
           <div class="label-input">
             <label>{{input.name}}</label>
           </div>
+          
           <div class="input-input">
-            <input *ngIf="input.default === ''" class="field-input" type="text" pInputText [(ngModel)]="input.default">
+            <input  class="field-input" type="text" pInputText [(ngModel)]="input.default">
             <p *ngIf="!isObject(input.default)">{{input.default}}</p>
-            <mat-expansion-panel *ngIf="isObject(input.default)" hideToggle>
-                <mat-expansion-panel-header>
-                  <mat-panel-title>
-                    Open to display the fields of <b> {{input.name}}</b>.
-                  </mat-panel-title>
-                </mat-expansion-panel-header>
-                <div *ngFor="let item of input.default | keyvalue">
-                  <b>{{item.key}}:</b>  {{item.value}}
-                </div>
-                <br>
-              </mat-expansion-panel>
           </div>
-          <div>
+          <div >
             <mat-icon style="color: #7ca6ba; margin-left: 15px;" aria-hidden="false" [matTooltip]="input.description">info</mat-icon>
           </div>
           
