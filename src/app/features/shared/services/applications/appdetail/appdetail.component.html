@@ -58,9 +58,21 @@
                   </mat-panel-title>
                 </mat-expansion-panel-header>
                 <div *ngFor="let item of input.default | keyvalue">
-                  <div class="object-input">
+                  <div class="object-input" style="width: 100%; background: #e1e1e1;
+                  border-radius: 1%;
+                  padding: 2%;">
                     <input type="text" [(ngModel)]="item.key">:
-                    <input type="text" [(ngModel)]="item.value">
+                    <div *ngIf="isObject(item.value)" >
+                      <div *ngFor="let element of item.value | keyvalue">
+                        <p><b>{{element.key}}: </b><input  type="text" [(ngModel)]="element.value"></p> 
+                      </div>
+                    </div>
+
+                    <div *ngIf="!isObject(item.value)">
+                      <input  type="text" [(ngModel)]="item.value">
+                    </div>
+                    
+                   
                   </div>
                   <br>
                   

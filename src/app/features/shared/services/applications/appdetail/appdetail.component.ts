@@ -87,5 +87,11 @@ export class AppdetailComponent implements OnInit {
     value.value = ''
   }
 
+  stringify(json) {
+    console.log(json);
+   // const parsed = JSON.stringify(json);
+   // return parsed;
+  }
+
 
 }

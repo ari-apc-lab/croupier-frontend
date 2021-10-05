@@ -25,7 +25,15 @@
       <div class="label-input">
         <label>{{input.name}}</label>
       </div>
-      <div class="input-input">
+      <div *ngIf="isObject(input.value)" style="width: 60%;background: #e1e1e1;
+      border-radius: 1%;
+      padding: 2%;">
+        <div *ngFor="let item of input.value | keyvalue">
+          <p><b>{{item.key}}:</b> {{item.value}}</p>
+        </div>
+        
+      </div>
+      <div class="input-input" *ngIf="isString(input.value)">
         <p>{{input.value}}</p>
       </div>
     </div>
