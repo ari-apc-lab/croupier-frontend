@@ -6,13 +6,16 @@ ul li {
     list-style: none;
 }
 
-button {
+.toolbar-btn {
     outline: none;
     transition: all ease .35s;
 }
 
-button:hover, button:focus {
+.toolbar-btn:hover, .toolbar-btn:focus {
     transform: scale(1.2);
+}
+.title-btn:hover, .title-btn:focus {
+  transform: scale(1) !important;
 }
 
 mat-toolbar {

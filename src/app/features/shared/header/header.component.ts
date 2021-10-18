@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { AuthService } from '../keycloak-auth/auth.service';
 
@@ -13,7 +14,10 @@ export class HeaderComponent implements OnInit {
 
   @Output() toggleSideBarForMe: EventEmitter<any> = new EventEmitter();
 
-  constructor(public authService: AuthService) { }
+  constructor(
+    public authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {  }
 
@@ -38,6 +42,10 @@ export class HeaderComponent implements OnInit {
 
   onRegister(): void {
     this.authService.register();
+  }
+
+  navigate(url) {
+    this.router.navigate([url])
   }
 
 }
