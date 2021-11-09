@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -54,13 +54,15 @@ export class AppdetailComponent implements OnInit {
   this.activeItem = this.items[0];
   }
 
+  
+
   getApp(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     console.log('id', id)
     this.appService.getApplication(id).subscribe(
       (app) => {
         this.application = app;
-
+        console.log('application', this.application);
         // input from string to json
         this.inputs = JSON.parse(this.application['inputs'])[0];
         console.log(this.inputs);
@@ -93,5 +95,9 @@ export class AppdetailComponent implements OnInit {
    // return parsed;
   }
 
+  // Upload file with inputs.
+  uploadinputs(event) {
+    console.log('uploaded file', event);
+  }
 
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { toResponseBody, uploadProgress } from '../../../utils/file-upload/file-upload.component';
 import { requiredFileType } from '../../../utils/file-upload/update-file-validators';
@@ -11,7 +11,7 @@ import { AppInstanceService } from '../app-instance.service';
   templateUrl: './instance-form.component.html',
   styleUrls: ['./instance-form.component.css']
 })
-export class InstanceFormComponent implements OnInit {
+export class InstanceFormComponent implements OnInit, OnChanges {
 
   constructor(private instanceService: AppInstanceService) { }
 
@@ -33,8 +33,16 @@ export class InstanceFormComponent implements OnInit {
     }
   }
 
+  @Input() app;
 
-  ngOnInit(): void {}
+
+  ngOnInit(): void {
+  }
+
+  ngOnChanges() {
+    console.log('applicatione', this.app)
+    this._app = this.app;
+  }
 
   add() {
     this.success = false;
@@ -42,6 +50,8 @@ export class InstanceFormComponent implements OnInit {
       markAllAsDirty(this.addForm);
       return;
     }
+
+
 
     this.addForm.value['app'] = this._app.name
 
@@ -62,6 +72,10 @@ export class InstanceFormComponent implements OnInit {
   hasError(field: string, error: string) {
     const control = this.addForm.get(field);
     return control.dirty && control.hasError(error);
+  }
+
+  getApp() {
+    console.log('app', this._app);
   }
 
 }

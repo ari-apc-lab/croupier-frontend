@@ -1,21 +1,26 @@
-
-<div class="nav-path">
- Dashboard
-</div>
 <div *ngIf="instance">
-  <h2>{{ instance.name | uppercase }} Details</h2>
-  <div><span>id: </span>{{ instance.id }}</div>
+  <h2 class="title">{{ instance.name | uppercase }} Details</h2>
+
   <div>
-    <label
-      >name:
-      <input [(ngModel)]="instance.name" placeholder="name" />
-    </label>
-  </div>
-  <div>
-    <label
-      >description:
-      <input [(ngModel)]="instance.description" placeholder="description" />
-    </label>
+    <p>
+      <label>
+        ID:
+      </label>
+      {{ instance.id }}
+    </p>
+    <p>
+      <label>
+        Name: 
+      </label>
+      {{instance.name}}
+    </p>
+    <p>
+      <label>
+        Description: 
+      </label>
+      {{instance.description}}
+    </p>
+
   </div>
 
   <!-- INSTANCE INPUTS -->
@@ -25,11 +30,24 @@
       <div class="label-input">
         <label>{{input.name}}</label>
       </div>
-      <div *ngIf="isObject(input.value)" style="width: 60%;background: #e1e1e1;
+      <div *ngIf="isObject(input.value)" style="width: 80%;background: #e1e1e1;
       border-radius: 1%;
       padding: 2%;">
         <div *ngFor="let item of input.value | keyvalue">
-          <p><b>{{item.key}}:</b> {{item.value}}</p>
+          <div *ngIf="item.value.length < 150">
+            <p><b>{{item.key}}:</b> {{item.value}}</p>
+          </div>
+          <div *ngIf="item.value.length >= 150">
+            <p class="long-text"><b>{{item.key}}:</b> {{item.value | slice:0:150}}</p>
+            <button type="button" (click)="displayLongText()" class="show-btn">Show complete value</button>
+            <p-dialog [header]="item.key" [(visible)]="displayLT" class="long-text-dialog">
+              <p>
+                {{item.value}}
+              </p>
+              
+            </p-dialog>
+            
+          </div>
         </div>
         
       </div>
@@ -40,8 +58,8 @@
   </div>
 </div>
 
-<button (click)="goBack()">go back</button>
-<button (click)="execute()">Execute</button>
+<button (click)="goBack()" class="gb-btn">Go back</button>
+<button (click)="execute()" class="ex-btn">Execute</button>
 <!--<button (click)="save()">save</button>-->
-
+<br>
 <app-instancetextlog [instance]="instance"></app-instancetextlog>

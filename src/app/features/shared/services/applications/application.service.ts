@@ -58,6 +58,7 @@ export class ApplicationService {
 
   /** POST: add a new application to the server */
   addApplication(formValue): Observable<HttpResponse<Application>> {
+    console.log('formValue---->',formValue)
     const data = toFormData(formValue); // TODO add owner
     return this.http
       .post(this.applicationsUrl, data, {

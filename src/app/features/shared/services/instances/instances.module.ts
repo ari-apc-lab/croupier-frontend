@@ -14,6 +14,10 @@ import {InputTextModule} from 'primeng/inputtext';
 import { InstanceDashboardComponent } from './instance-dashboard/instance-dashboard.component';
 import { InstanceFormComponent } from './instance-form/instance-form.component';
 import { AppModule } from 'src/app/app.module';
+import {DialogModule} from 'primeng/dialog';
+import {TableModule} from 'primeng/table';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
+
 @NgModule({
   declarations: [
     InstancedetailComponent,
@@ -30,7 +34,10 @@ import { AppModule } from 'src/app/app.module';
     UtilsModule,
     KeycloakAuthModule,
     MatIconModule,
-    InputTextModule
+    InputTextModule,
+    DialogModule,
+    TableModule,
+    ProgressSpinnerModule
   ],
   exports: [
     InstancelistComponent,

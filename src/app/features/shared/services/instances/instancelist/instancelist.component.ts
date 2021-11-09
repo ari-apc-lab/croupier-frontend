@@ -6,6 +6,7 @@ import { AppInstanceService } from '../app-instance.service';
 import { Application } from '../../applications/application';
 import { requiredFileType } from '../../../utils/file-upload/update-file-validators';
 import { uploadProgress, toResponseBody } from '../../../utils/file-upload/file-upload.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-instancelist',
@@ -30,21 +31,34 @@ export class InstancelistComponent implements OnInit {
     return this._app;
   }
 
-  
+  constructor(
+    private instanceService: AppInstanceService,
+    private router: Router
+  ) {}
+
   delete(instance: AppInstance): void {
     this.instances = this.instances.filter(a => a !== instance);
     this.instanceService.deleteAppInstance(instance).subscribe();
   }
 
-
-  constructor(private instanceService: AppInstanceService) {}
-
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   getAppInstances(): void {
+    console.log('---->',this.application);
     this.instanceService
       .getAppInstances(this.application)
       .subscribe(instances => (this.instances = instances));
+  }
+
+  /** todo */
+  search() {
+
+  }
+
+  open(inst: AppInstance) {
+    const url = '/instances/detail/' + inst.id;
+    this.router.navigate([url])
   }
 
 }

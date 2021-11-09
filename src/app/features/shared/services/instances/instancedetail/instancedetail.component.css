@@ -1,7 +1,7 @@
 /* InstanceDetailComponent's private CSS styles */
 label {
     display: inline-block;
-    width: 3em;
+    width: 10em;
     margin: 0.5em 0;
     color: #607d8b;
     font-weight: bold;
@@ -32,7 +32,7 @@ label {
 
 
   .label-input{
-    width: 30%;
+    width: 10em;
   }
   
   .input-input {
@@ -43,4 +43,39 @@ label {
     display: flex;
     margin-bottom: 1em;
   }
+
+.title {
+  color: #00679a;
+}
+
+.gb-btn {
+  margin: 1em;
+  
+}
+
+.ex-btn {
+  margin: 1em;
+  background-color: #00679a;
+  color: white;
+}
+
+.show-btn {
+  color: #00679a;
+  border: #00679a solid 1px;
+}
+
+
+.long-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+::ng-deep .p-dialog {
+  width: 50% !important;
+  height: 50% !important;
+}
   

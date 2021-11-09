@@ -1,24 +1,23 @@
 <div *ngIf="application">
-  <h2>{{ application.name | uppercase }} Details</h2>
-  <div><span>id: </span>{{ application.id }}</div>
-  <div>
-    <label
-      >name:
-      <input [(ngModel)]="application.name" placeholder="name" />
-    </label>
+  <h2 class="title">{{ application.name | uppercase }} Details</h2>
+  <div class="app-summary">
+    <h2 class="title">Summary</h2>
+    <div>
+      <label>id: </label> {{ application.id }}
+    </div>
+    <div>
+      <label>name:</label> {{application.name}}
+    </div>
+    <div>
+      <label>description:</label> {{application.description}}
+    </div>
   </div>
-  <div>
-    <label
-      >description:
-      <input [(ngModel)]="application.description" placeholder="description" />
-    </label>
-  </div>
+  
 </div>
 
-<h3>Instances list.</h3>
-<ul class="instances">
-  <app-instancelist [application]="application"></app-instancelist>
-</ul>
+
+<app-instancelist [application]="application"></app-instancelist>
+
 
 <mat-tab-group>
   <mat-tab label="Basic configuration"> 
@@ -108,7 +107,10 @@
   
   <mat-tab label="Upload file"> 
   <!--  <app-instancelist [application]="application"></app-instancelist> -->
-    <app-instance-form></app-instance-form>
+  <!--<p> Subir archivo para los inputs </p>
+    <input type="file" class="file-upload" (change)="uploadinputs($event)">
+     <p>Checkear que hace este componente ...</p>-->
+    <app-instance-form [app]="application"></app-instance-form>
   </mat-tab>
 </mat-tab-group>
 

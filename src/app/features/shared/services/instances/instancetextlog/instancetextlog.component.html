@@ -1,16 +1,48 @@
-<h3>Execution logs:</h3>
+<div class="logs-comp">
+  <div class="logs-title">
+    <h2>Execution logs:</h2>
+  </div>
+  <div>
+    <div *ngIf="instance; else notInstance">
 
-<div>
+      <p-table [value]="logs" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll">
+          <ng-template pTemplate="header">
+              <tr>
+                  <th>Status</th>
+                  <th>Timestamp</th>
+                  <th>Type</th>
+                  <th>Workflow</th>
+                  <th>Message</th>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-log>
+              <tr>
   
-</div>
-<div *ngIf="instance; else notInstance">
-  <textarea>
-    {{ logs }}
-  </textarea>
+                  <td>
+                    {{log.event_type}}
+                  </td>
+                  <td>{{log.timestamp}}</td>
+                  <td>{{log.type}}</td>
+                  <td>{{log.workflow_id}}</td>
+                  <td>{{log.message}}</td>
+              </tr>
+          </ng-template>
+      </p-table>
+    </div>
+    
+  
+    <!--
+      
+    -->
+    <ng-template #notInstance>
+      <div class="spinner-div">
+        <p-progressSpinner class="custom-spinner" [style]="{width: '70px', height: '70px'}" animationDuration=".5s"></p-progressSpinner>
+        <p>Loading...</p>
+      </div>
+    </ng-template>
+  </div>
 </div>
 
-<ng-template #notInstance>
-  <textarea>
-    ...
-  </textarea>
-</ng-template>
+
+
+

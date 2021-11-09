@@ -14,6 +14,7 @@ export class InstancedetailComponent implements OnInit {
 
   instance: AppInstance;
   inputs: any;
+  displayLT = false;
 
   // hepers
   isString(val): boolean {return typeof val === 'string';}
@@ -62,6 +63,10 @@ export class InstancedetailComponent implements OnInit {
         console.log('resultado de la ejecución: ', data);
       }
     )
+  }
+
+  displayLongText() {
+    this.displayLT = true;
   }
 
 }

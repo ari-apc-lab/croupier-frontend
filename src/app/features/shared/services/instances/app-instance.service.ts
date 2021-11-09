@@ -16,7 +16,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AppInstanceService {
-  private instancesUrl = environment.apiUrl +'instances/'; // URL to web api
+  private instancesUrl = environment.apiUrl + 'instances/'; // URL to web api
 
   constructor(private http: HttpClient, private msgService: MessageService) {}
 
@@ -97,9 +97,9 @@ export class AppInstanceService {
   }
 
   executeInstance(instanceId): Observable<any> {
-    console.log('id de la instancia a ejecutar: ',instanceId);
-    const url = `${this.instancesUrl}${instanceId}`+'/execute/';
-    console.log(url)
+    console.log('id de la instancia a ejecutar: ', instanceId);
+    const url = `${this.instancesUrl}${instanceId}` + '/execute/';
+    console.log(url);
     return this.http.post(url, null, httpOptions).pipe(
       tap(_ => this.log(`Executed instance w/ id=${instanceId}`)),
       catchError(this.handleError<AppInstance>('executeInstance'))

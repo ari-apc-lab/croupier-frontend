@@ -1,23 +1,31 @@
 <h2>My Instances</h2>
 <div>
-  <label
-    >Instance name:
-    <input #appName />
-  </label>
+
+  <!--
+        BUSCADOR ¿?
+    <label>Instance name:
+        <input #appName />
+      </label>
+  -->
+  
   <!-- (click) passes input value to add() and then clears the input -->
   <!--<button (click)="add(appName.value); appName.value = ''">add</button>-->
  <!-- <button (click)="add(); appName.value = ''">add</button> -->
 </div>
-<ul class="instances">
-  <li *ngFor="let instance of instances">
-    <a
-      [routerLink]="['/instances', 'detail', instance.id]"
-      routerLinkActive="router-link-active"
-    >
-      <span class="badge">{{ instance.id }}</span> {{ instance.name }}
-    </a>
-    <button class="delete" title="delete app" (click)="delete(instance)">
-      <mat-icon aria-hidden="false" aria-label="Example home icon">close</mat-icon>
-    </button>
-  </li>
-</ul>
+
+
+<div class="ins-list">
+  <div *ngFor="let instance of instances" class="app-card" (click)="open(instance)">
+    <div class="ins-id">
+      <p class="ins-name">{{instance.id}}</p>
+    </div>
+    <div class="ins-name">
+      <p class="ins-name">{{instance.name}}</p>
+    </div>
+    <div class="ins-delete-btn">
+      <mat-icon aria-hidden="false" aria-label="Example home icon">clear</mat-icon>
+    </div>
+    
+  </div>
+</div>
+

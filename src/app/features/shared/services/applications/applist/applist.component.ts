@@ -11,6 +11,8 @@ import {} from '../../../utils/utils.module';
 
 import { requiredFileType } from '../../../utils/file-upload/update-file-validators';
 import { uploadProgress, toResponseBody } from '../../../utils/file-upload/file-upload.component';
+import { Router } from '@angular/router';
+import * as JSZip from 'jszip';
 
 @Component({
   selector: 'app-applist',
@@ -20,16 +22,22 @@ import { uploadProgress, toResponseBody } from '../../../utils/file-upload/file-
 export class ApplistComponent implements OnInit {
 
   applications: Application[];
-
+  displayFormNew = false;
   progress = 0;
   addForm = new FormGroup({
     name: new FormControl(null, Validators.required),
     description: new FormControl(null, Validators.required),
-    blueprint: new FormControl(null, [Validators.required, requiredFileType('zip')])
+    created: new FormControl(null),
+    updated: new FormControl(null),
+    main_blueprint_file: new FormControl(null),
+    blueprint_file: new FormControl(null, [Validators.required, requiredFileType('zip')])
   });
   success = false;
 
-  constructor(private appService: ApplicationService) { }
+  constructor(
+    private appService: ApplicationService,
+    private router: Router
+    ) { }
 
   ngOnInit() {
     this.getApplications();
@@ -47,6 +55,24 @@ export class ApplistComponent implements OnInit {
     }
 
     // console.log(this.addForm.value);
+    let file = this.addForm.get('blueprint_file').value;
+    let date = new Date();
+
+
+    const jsZip = require('jszip');
+   /* jsZip.loadAsync(fileList[0]).then((zip) => { // <----- HERE
+      Object.keys(zip.files).forEach((filename) => { // <----- HERE
+        zip.files[filename].async('string').then((fileData) => { // <----- HERE
+          this.fileData = this.fileData + '**$$##$$**' + fileData;
+        });
+      });
+    });*/
+
+    console.log('####', this.addForm.get('blueprint_file').value)
+    this.addForm.get('created').setValue(date.toISOString());
+    this.addForm.get('updated').setValue(date.toISOString());
+    this.addForm.get('main_blueprint_file').setValue('blueprint_publish_demo.yaml');
+
 
     this.appService
       .addApplication(this.addForm.value)
@@ -70,6 +96,19 @@ export class ApplistComponent implements OnInit {
   delete(app: Application): void {
     this.applications = this.applications.filter(a => a !== app);
     this.appService.deleteApplication(app).subscribe();
+  }
+
+  openApp(application: Application) {
+    let url = '/apps/detail/' + application.id
+    this.router.navigate([url])
+  }
+
+  displayFormNewApp() {
+    this.displayFormNew = true;
+  }
+
+  hideFormNew() {
+    this.displayFormNew = false;
   }
 
 }

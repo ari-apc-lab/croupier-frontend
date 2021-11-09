@@ -1,18 +1,7 @@
-<h2>My Applications</h2>
-<ul class="applications">
-  <li *ngFor="let application of applications">
-    <a
-      routerLink="/apps/detail/{{ application.id }}"
-      routerLinkActive="router-link-active"
-    >
-      <span class="badge">{{ application.id }}</span> {{ application.name }}
-    </a>
-    <button class="delete" title="delete app" (click)="delete(application)">x</button>
-  </li>
-</ul>
 
-<h3>Add a new one</h3>
-<div>
+<app-appsearch></app-appsearch>
+<div class="new-form" *ngIf="displayFormNew">
+  <h3 style="color: #00679a;">Add a new one</h3>
   <form [formGroup]="addForm" (ngSubmit)="add()">
     <div class="form-group">
       <label>Name</label>
@@ -32,13 +21,60 @@
 
     <div class="form-group">
       <!--<app-util-file-upload formControlName="blueprint" [progress]="progress"></app-util-file-upload>-->
-      <app-util-file-upload formControlName="blueprint"></app-util-file-upload>
+      <app-util-file-upload formControlName="blueprint_file"></app-util-file-upload>
       <div class="invalid-feedback" style="display: block">
-        <ng-container *ngIf="hasError('blueprint', 'required')">This field is required</ng-container>
-        <ng-container *ngIf="hasError('blueprint', 'requiredFileType')">Only ZIP</ng-container>
+        <ng-container *ngIf="hasError('blueprint_file', 'required')">This field is required</ng-container>
+        <ng-container *ngIf="hasError('blueprint_file', 'requiredFileType')">Only ZIP</ng-container>
       </div>
     </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button class="btn cancel-btn" (click)="hideFormNew()">
+      <mat-icon aria-hidden="false" aria-label="Example home icon">close</mat-icon>
+      Cancel
+    </button>
+    <button type="submit" class="btn btn-primary btn-submit">
+      <mat-icon aria-hidden="false" aria-label="Example home icon">done</mat-icon>
+      Submit
+    </button>
   </form>
 </div>
+
+<h2 style="color: #00679a;">My Applications</h2>
+
+<mat-grid-list cols="3" rowHeight="3:1">
+  <mat-grid-tile>
+    <div class="new-app-btn" (click)="displayFormNewApp()">
+      <p>
+        <mat-icon aria-hidden="false" aria-label="Example home icon">add_circle_outline</mat-icon>
+        Add new Application
+      </p>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile *ngFor="let app of applications">
+    <div class="app-card" (click)="openApp(app)">
+      <p class="app-name">{{app.name}}</p>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
+
+
+<!--
+<div class="app-list p-grid">
+  <div *ngFor="let app of applications" class="app-card p-col-4" (click)="openApp(app)">
+    <div class="app-id">
+      <p class="app-name">{{app.id}}</p>
+    </div>
+    <div class="app-name">
+  
+      <p class="app-name">{{app.name}}</p>
+    </div>
+   <div class="app-delete-btn">
+      <mat-icon aria-hidden="false" aria-label="Example home icon">clear</mat-icon>
+    </div>
+    
+  </div>
+</div>
+
+-->
+
+
