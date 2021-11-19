@@ -39,3 +39,15 @@ ul.search-result {
   margin-top: 0;
   padding-left: 0;
 }
+
+.search-component {
+  display: inline-flex;
+}
+
+.search-label {
+  margin: 1em;
+}
+
+.search-input {
+  margin-top: 1em;
+}

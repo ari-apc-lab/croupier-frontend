@@ -4,11 +4,13 @@ import { Location } from '@angular/common';
 
 import { AppInstance } from '../app-instance';
 import { AppInstanceService } from '../app-instance.service';
+import { MessageService, PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: 'app-instancedetail',
   templateUrl: './instancedetail.component.html',
-  styleUrls: ['./instancedetail.component.css']
+  styleUrls: ['./instancedetail.component.css'],
+  providers: [MessageService, PrimeNGConfig]
 })
 export class InstancedetailComponent implements OnInit {
 
@@ -17,18 +19,21 @@ export class InstancedetailComponent implements OnInit {
   displayLT = false;
 
   // hepers
-  isString(val): boolean {return typeof val === 'string';}
-  isNumber(val): boolean {return typeof val === 'number';}
-  isObject(val): boolean {return typeof val === 'object';}
-  isBoolean(val): boolean {return typeof val === 'boolean';}
+  isString(val): boolean {return typeof val === 'string'; }
+  isNumber(val): boolean {return typeof val === 'number'; }
+  isObject(val): boolean {return typeof val === 'object'; }
+  isBoolean(val): boolean {return typeof val === 'boolean'; }
 
   constructor(
     private route: ActivatedRoute,
     private instanceService: AppInstanceService,
-    private location: Location
+    private location: Location,
+    private messageService: MessageService,
+    private primengConfig: PrimeNGConfig
   ) {}
 
   ngOnInit() {
+    this.primengConfig.ripple = true;
     this.getApp();
   }
 
@@ -37,12 +42,9 @@ export class InstancedetailComponent implements OnInit {
     this.instanceService
       .getAppInstance(id)
       .subscribe(instance => {
-        this.instance = instance
-        
+        this.instance = instance;
         this.inputs = JSON.parse(instance['inputs'])[0];
         console.log('instance inputs: ', this.inputs);
-
-
       });
   }
 
@@ -58,11 +60,24 @@ export class InstancedetailComponent implements OnInit {
 
   execute() {
     console.log('id ins:', this.instance.id);
+    this.messageService.add({severity: 'info', summary: 'Executing:', detail: 'The instance is executing, please wait!'});
     this.instanceService.executeInstance(this.instance.id).subscribe(
       (data) => {
         console.log('resultado de la ejecución: ', data);
+        this.messageService.clear();
+        this.messageService.add({severity: 'success', summary: 'Success:', detail: 'Instance executed successfully!'});
+        setTimeout(() => {
+          this.messageService.clear();
+        }, 5000);
+      },
+      (err) => {
+        console.error(err);
+        this.messageService.add({severity: 'error', summary: 'Error:', detail: 'The instance has failed to execute!'});
+        setTimeout(() => {
+          this.messageService.clear();
+        }, 5000);
       }
-    )
+    );
   }
 
   displayLongText() {

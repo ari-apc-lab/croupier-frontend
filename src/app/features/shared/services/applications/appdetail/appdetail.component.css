@@ -153,4 +153,39 @@ button:hover {
 
 .title {
   color: #00679a;
+  margin: 0.5em;
+  font-size: xx-large;
 }
+
+.title-section {
+  color: #00679a;
+}
+
+.save-btn {
+  background-color: #00679a;
+  float: right;
+  margin-right: 4em;
+  color: white;
+  font-size: large;
+  padding: 0.5em;
+}
+
+.save-btn:hover {
+  background-color: #345565;
+}
+
+.p-button.p-button-icon-only.p-button-rounded {
+  color:#00679a;
+  margin: 0.5em;
+}
+
+.p-button.p-button-icon-only.p-button-rounded.save-btn:hover {
+  background-color: #00679a;
+  color: white;
+}
+
+.title-cont {
+  display: flex;
+}
+
+

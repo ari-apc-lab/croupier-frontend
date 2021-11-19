@@ -7,11 +7,13 @@ import { ApplicationService } from '../application.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {MenuItem} from 'primeng/api';
 import { AppInstanceService } from '../../instances/app-instance.service';
+import { MessageService, PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: 'app-appdetail',
   templateUrl: './appdetail.component.html',
-  styleUrls: ['./appdetail.component.css']
+  styleUrls: ['./appdetail.component.css'],
+  providers: [MessageService, PrimeNGConfig]
 })
 export class AppdetailComponent implements OnInit {
 
@@ -25,24 +27,28 @@ export class AppdetailComponent implements OnInit {
 
   activeItem: MenuItem;
   instances: any;
-
-  // helpers
-  isString(val): boolean {return typeof val === 'string';}
-  isNumber(val): boolean {return typeof val === 'number';}
-  isObject(val): boolean {return typeof val === 'object';}
-  isBoolean(val): boolean {return typeof val === 'boolean';}
   boolOpts = [
     {label: 'False', value: false},
-    {label: 'True', value: true}];
+    {label: 'True', value: true}
+  ];
+
+  // helpers
+  isString(val): boolean {return typeof val === 'string'; }
+  isNumber(val): boolean {return typeof val === 'number'; }
+  isObject(val): boolean {return typeof val === 'object'; }
+  isBoolean(val): boolean {return typeof val === 'boolean'; }
+
   constructor(
     private route: ActivatedRoute,
     private appService: ApplicationService,
-    private location: Location
+    private location: Location,
+    private messageService: MessageService,
+    private primengConfig: PrimeNGConfig
 
   ) { }
 
   ngOnInit(): void {
-    
+    this.primengConfig.ripple = true;
     this.getApp();
 
     this.items = [
@@ -50,11 +56,8 @@ export class AppdetailComponent implements OnInit {
       {label: 'Expert configuration'},
       {label: 'Upload File'}
   ];
-
-  this.activeItem = this.items[0];
+    this.activeItem = this.items[0];
   }
-
-  
 
   getApp(): void {
     const id = +this.route.snapshot.paramMap.get('id');
@@ -62,13 +65,12 @@ export class AppdetailComponent implements OnInit {
     this.appService.getApplication(id).subscribe(
       (app) => {
         this.application = app;
-        console.log('application', this.application);
         // input from string to json
         this.inputs = JSON.parse(this.application['inputs'])[0];
-        console.log(this.inputs);
+        console.log('inputs: ',this.inputs);
 
-        }
-      );
+      }
+    );
   }
 
   goBack(): void {
@@ -85,8 +87,8 @@ export class AppdetailComponent implements OnInit {
 
   addField(event, key, value) {
     event[key.value] = value.value;
-    key.value = ''
-    value.value = ''
+    key.value = '';
+    value.value = '';
   }
 
   stringify(json) {

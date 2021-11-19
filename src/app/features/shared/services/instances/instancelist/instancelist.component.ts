@@ -45,7 +45,6 @@ export class InstancelistComponent implements OnInit {
   }
 
   getAppInstances(): void {
-    console.log('---->',this.application);
     this.instanceService
       .getAppInstances(this.application)
       .subscribe(instances => (this.instances = instances));
@@ -58,7 +57,7 @@ export class InstancelistComponent implements OnInit {
 
   open(inst: AppInstance) {
     const url = '/instances/detail/' + inst.id;
-    this.router.navigate([url])
+    this.router.navigate([url]);
   }
 
 }

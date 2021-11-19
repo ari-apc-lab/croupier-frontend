@@ -127,6 +127,13 @@ export class AppInstanceService {
       return of(result as T);
     };
   }
+
+  getInstancesList(): Observable<any> {
+    return this.http.get<AppInstance[]>(`${this.instancesUrl}`).pipe(
+        tap(_ => this.log(`found instances matching`)),
+      //  catchError(this.handleError<AppInstance[]>('searchAppInstances', []))
+    );
+  }
 }
 
 export function toFormData<T>(formValue: T): FormData {

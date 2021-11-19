@@ -45,7 +45,6 @@ export class FileUploadComponent implements ControlValueAccessor {
 
 export function uploadProgress<T>(cb: (progress: number) => void) {
   return tap((event: HttpEvent<T>) => {
-    console.log('event', event);
     if (event.type === HttpEventType.UploadProgress) {
       cb(Math.round((100 * event.loaded) / event.total));
     }

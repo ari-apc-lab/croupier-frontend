@@ -13,11 +13,14 @@ import { requiredFileType } from '../../../utils/file-upload/update-file-validat
 import { uploadProgress, toResponseBody } from '../../../utils/file-upload/file-upload.component';
 import { Router } from '@angular/router';
 import * as JSZip from 'jszip';
+import {Message, MessageService, PrimeNGConfig} from 'primeng/api';
+import * as fs from 'fs'
 
 @Component({
   selector: 'app-applist',
   templateUrl: './applist.component.html',
-  styleUrls: ['./applist.component.css']
+  styleUrls: ['./applist.component.css'],
+  providers: [MessageService, PrimeNGConfig],
 })
 export class ApplistComponent implements OnInit {
 
@@ -36,11 +39,28 @@ export class ApplistComponent implements OnInit {
 
   constructor(
     private appService: ApplicationService,
-    private router: Router
+    private router: Router,
+    private messageService: MessageService,
+    private primengConfig: PrimeNGConfig
     ) { }
 
   ngOnInit() {
+    this.primengConfig.ripple = true;
     this.getApplications();
+  }
+
+  getBPFileName() {
+    const file = this.addForm.get('blueprint_file').value;
+    const jsZip = require('jszip');
+    jsZip.loadAsync(file).then((zip) => {
+      Object.keys(zip.files).forEach((filename) => {
+        if (filename.includes('.yaml')) {
+          const slashPosition = filename.indexOf('/');
+          const yamlFile = filename.slice(slashPosition + 1, filename.length);
+          this.addForm.get('main_blueprint_file').setValue(yamlFile);
+        }
+      });
+    });
   }
 
   getApplications(): void {
@@ -48,31 +68,16 @@ export class ApplistComponent implements OnInit {
   }
 
   add() {
+    this.messageService.add({severity: 'info', summary: 'Saving', detail: 'The application is being saved in the server, please wait!'});
     this.success = false;
     if (!this.addForm.valid) {
       markAllAsDirty(this.addForm);
       return;
     }
 
-    // console.log(this.addForm.value);
-    let file = this.addForm.get('blueprint_file').value;
-    let date = new Date();
-
-
-    const jsZip = require('jszip');
-   /* jsZip.loadAsync(fileList[0]).then((zip) => { // <----- HERE
-      Object.keys(zip.files).forEach((filename) => { // <----- HERE
-        zip.files[filename].async('string').then((fileData) => { // <----- HERE
-          this.fileData = this.fileData + '**$$##$$**' + fileData;
-        });
-      });
-    });*/
-
-    console.log('####', this.addForm.get('blueprint_file').value)
+    const date = new Date();
     this.addForm.get('created').setValue(date.toISOString());
     this.addForm.get('updated').setValue(date.toISOString());
-    this.addForm.get('main_blueprint_file').setValue('blueprint_publish_demo.yaml');
-
 
     this.appService
       .addApplication(this.addForm.value)
@@ -80,12 +85,26 @@ export class ApplistComponent implements OnInit {
         uploadProgress(progress => (this.progress = progress)),
         toResponseBody()
       )
-      .subscribe((app: Application) => {
-        this.applications.push(app);
-        this.progress = 0;
-        this.success = true;
-        this.addForm.reset();
-      });
+      .subscribe(
+        (app: Application) => {
+          this.messageService.clear();
+          this.applications.push(app);
+          this.progress = 0;
+          this.success = true;
+          this.addForm.reset();
+          this.messageService.add({severity: 'success', summary: 'Success', detail: 'Application created successfully!'});
+          setTimeout(() => {
+            this.messageService.clear();
+          }, 5000);
+        },
+        (err) => {
+          console.error(err);
+          this.messageService.add({severity: 'error', summary: 'Error', detail: 'Error saving application!'});
+          setTimeout(() => {
+            this.messageService.clear();
+          }, 5000);
+        }
+      );
   }
 
   hasError(field: string, error: string) {
@@ -99,8 +118,8 @@ export class ApplistComponent implements OnInit {
   }
 
   openApp(application: Application) {
-    let url = '/apps/detail/' + application.id
-    this.router.navigate([url])
+    const url = '/apps/detail/' + application.id;
+    this.router.navigate([url]);
   }
 
   displayFormNewApp() {

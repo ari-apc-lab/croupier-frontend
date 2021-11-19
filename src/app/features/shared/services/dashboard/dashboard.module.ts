@@ -5,7 +5,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { ApplicationsModule } from '../applications/applications.module';
-import {MatIconModule} from '@angular/material/icon'; 
+import {MatIconModule} from '@angular/material/icon';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MessagesModule} from 'primeng/messages';
 
 @NgModule({
   declarations: [DashboardComponent],
@@ -13,7 +15,9 @@ import {MatIconModule} from '@angular/material/icon';
     CommonModule,
     DashboardRoutingModule,
     ApplicationsModule,
-    MatIconModule
+    MatIconModule,
+    MatGridListModule,
+    MessagesModule
   ]
 })
 export class DashboardModule { }

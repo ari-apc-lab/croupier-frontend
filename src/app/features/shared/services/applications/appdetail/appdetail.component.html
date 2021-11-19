@@ -1,7 +1,11 @@
 <div *ngIf="application">
-  <h2 class="title">{{ application.name | uppercase }} Details</h2>
+  <div class="title-cont">
+    <button (click)="goBack()" pButton pRipple type="button" icon="pi pi-chevron-left" class="p-button-rounded p-button-outlined"></button>
+    <h2 class="title">{{ application.name | uppercase }} Details</h2>
+  </div>
+  
   <div class="app-summary">
-    <h2 class="title">Summary</h2>
+    <h2 class="title-section">Summary</h2>
     <div>
       <label>id: </label> {{ application.id }}
     </div>
@@ -21,7 +25,7 @@
 
 <mat-tab-group>
   <mat-tab label="Basic configuration"> 
-    <h2>Parameters:</h2>
+    <h2 class="title-section">Parameters:</h2>
     <div *ngFor="let input of inputs" >
         <div *ngIf="input.default === ''" class="inputs-cont">
           <div class="label-input">
@@ -38,6 +42,7 @@
           
         </div>
     </div>
+    <button (click)="save()" class="save-btn">save</button>
   </mat-tab>
   <mat-tab label="Expert configuration">
     <h2>Parameters:</h2>
@@ -103,6 +108,7 @@
           
         </div>
     </div>
+    <button (click)="save()" class="save-btn">save</button>
   </mat-tab>
   
   <mat-tab label="Upload file"> 
@@ -113,12 +119,3 @@
     <app-instance-form [app]="application"></app-instance-form>
   </mat-tab>
 </mat-tab-group>
-
-<div>
-  
-</div>
-
-<button (click)="goBack()">go back</button>
-<button (click)="save()">save</button>
-
-

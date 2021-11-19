@@ -17,6 +17,9 @@ import { AppModule } from 'src/app/app.module';
 import {DialogModule} from 'primeng/dialog';
 import {TableModule} from 'primeng/table';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MessagesModule} from 'primeng/messages';
+
 
 @NgModule({
   declarations: [
@@ -37,7 +40,9 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner';
     InputTextModule,
     DialogModule,
     TableModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    MatGridListModule,
+    MessagesModule
   ],
   exports: [
     InstancelistComponent,

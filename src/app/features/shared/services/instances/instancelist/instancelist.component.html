@@ -1,4 +1,4 @@
-<h2>My Instances</h2>
+<h2 class="title">My Instances</h2>
 <div>
 
   <!--
@@ -13,19 +13,17 @@
  <!-- <button (click)="add(); appName.value = ''">add</button> -->
 </div>
 
-
-<div class="ins-list">
-  <div *ngFor="let instance of instances" class="app-card" (click)="open(instance)">
-    <div class="ins-id">
-      <p class="ins-name">{{instance.id}}</p>
+<mat-grid-list cols="3" rowHeight="3:1">
+  <mat-grid-tile *ngFor="let instance of instances">
+    <div class="app-card" (click)="open(instance)">
+      <div class="ins-name">
+        <p class="ins-name">{{instance.id}} - {{instance.name}}</p>
+      </div>
+      <div class="ins-delete-btn">
+        <button class="close-btn">
+          <mat-icon aria-hidden="false" aria-label="Example home icon">clear</mat-icon>
+        </button>
+      </div>
     </div>
-    <div class="ins-name">
-      <p class="ins-name">{{instance.name}}</p>
-    </div>
-    <div class="ins-delete-btn">
-      <mat-icon aria-hidden="false" aria-label="Example home icon">clear</mat-icon>
-    </div>
-    
-  </div>
-</div>
-
+  </mat-grid-tile>
+</mat-grid-list>

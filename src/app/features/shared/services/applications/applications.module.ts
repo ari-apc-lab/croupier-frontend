@@ -24,6 +24,10 @@ import {TabMenuModule} from 'primeng/tabmenu';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {ButtonModule} from 'primeng/button';
+import {MessagesModule} from 'primeng/messages';
+import {TabViewModule} from 'primeng/tabview';
+import { MonacoEditorModule } from 'ngx-monaco-editor';
+
 
 @NgModule({
   imports: [
@@ -45,7 +49,10 @@ import {ButtonModule} from 'primeng/button';
     TabMenuModule,
     MatTabsModule,
     MatGridListModule,
-    ButtonModule
+    ButtonModule,
+    MessagesModule,
+    TabViewModule,
+    MonacoEditorModule.forRoot()
   ],
   declarations: [
     AppdetailComponent,

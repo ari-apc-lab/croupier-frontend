@@ -1,13 +1,19 @@
-<div id="search-component">
-  <h4><label for="search-box">Application Search</label></h4>
+<div id="search-component" class="search-component">
 
-  <input #searchBox id="search-box" (input)="search(searchBox.value)" />
+  <div style="width: 30%; ">
+    <h4><label for="search-box" class="search-label">Application Search</label></h4>
+  </div>
 
-  <ul class="search-result">
-    <li *ngFor="let application of applications$ | async">
-      <a routerLink="/apps/detail/{{ application.id }}">
-        {{ application.name }} - {{application.owner}}
-      </a>
-    </li>
-  </ul>
+  <div style="width: 70%;">
+    <input #searchBox id="search-box" (input)="search(searchBox.value)" class="search-input" />
+
+    <ul class="search-result">
+      <li *ngFor="let application of applications$ | async">
+        <a routerLink="/apps/detail/{{ application.id }}">
+          {{ application.name }} - {{application.owner}}
+        </a>
+      </li>
+    </ul>
+  </div>
+  
 </div>

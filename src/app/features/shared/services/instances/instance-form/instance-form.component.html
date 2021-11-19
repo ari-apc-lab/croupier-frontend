@@ -29,7 +29,7 @@
     <div class="form-group">
       <label>Inputs file</label>
       <!--<app-util-file-upload formControlName="inputs_file" [progress]="progress"></app-util-file-upload>-->
-      <app-util-file-upload formControlName="inputs_file"></app-util-file-upload>
+      <app-util-file-upload formControlName="inputs_file" (change)="getInputsFromYaml()"></app-util-file-upload>
       <div class="invalid-feedback" style="display: block">
         <ng-container *ngIf="hasError('inputs_file', 'required')"
           >This field is required</ng-container
@@ -40,5 +40,5 @@
       </div>
     </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="save-btn">Submit</button>
   </form>

@@ -23,7 +23,7 @@ export class ApplicationService {
   getApplications(): Observable<Application[]> {
     return this.http.get<Application[]>(this.applicationsUrl).pipe(
       tap(_ => this.log('fetched applications')),
-      catchError(this.handleError<Application[]>('getApplications', []))
+     // catchError(this.handleError<Application[]>('getApplications', []))
     );
   }
 
@@ -58,7 +58,6 @@ export class ApplicationService {
 
   /** POST: add a new application to the server */
   addApplication(formValue): Observable<HttpResponse<Application>> {
-    console.log('formValue---->',formValue)
     const data = toFormData(formValue); // TODO add owner
     return this.http
       .post(this.applicationsUrl, data, {

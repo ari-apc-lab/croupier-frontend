@@ -31,20 +31,31 @@ h4 {
   width: 33.3%;
 }
 .module {
-  padding: 20px;
+
   text-align: center;
   color: #eee;
-  max-height: 120px;
-  min-width: 120px;
+ /* max-height: 120px;
+  min-width: 120px;*/
   /*background-color: #3f525c;*/
   background-image: linear-gradient(140deg, #00679a, #355565);
   border-radius: 2px;
+  display: block ruby;
+  height: 100%;
 }
 .module:hover {
   background-color: #eee;
   cursor: pointer;
   color: #607d8b;
 }
+
+.app-data {
+  width: 70%;
+}
+
+.is-new-star {
+  width: 30%;
+}
+
 .grid-pad {
   padding: 10px 0;
 }
@@ -66,11 +77,32 @@ h4 {
   }
 }
 
-.new-app {
-  background-color: #3590ae;
-  color: black;
+.instance-card {
+  padding: 20px;
+  text-align: center;
+  color: #eee;
+ /* max-height: 120px;
+  min-width: 120px;*/
+  /*background-color: #3f525c;*/
+  background-image: linear-gradient(140deg, #00679a, #355565);
+  border-radius: 10px;
   display: block ruby;
-  width: 4em;
-  height: 3em;
-  border-radius: 8px;
+  height: 100%;
+  width: 95%;
+  display: block;
+}
+
+.app-card {
+  padding: 20px;
+  text-align: center;
+  color: #eee;
+ /* max-height: 120px;
+  min-width: 120px;*/
+  /*background-color: #3f525c;*/
+  background-image: linear-gradient(140deg, #00679a, #355565);
+  border-radius: 10px;
+  display: block ruby;
+  height: 100%;
+  width: 95%;
+  display: block;
 }

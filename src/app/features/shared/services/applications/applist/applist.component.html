@@ -1,6 +1,8 @@
-
+<p-messages></p-messages>
+<h1 class="title">My Applications</h1>
 <app-appsearch></app-appsearch>
 <div class="new-form" *ngIf="displayFormNew">
+
   <h3 style="color: #00679a;">Add a new one</h3>
   <form [formGroup]="addForm" (ngSubmit)="add()">
     <div class="form-group">
@@ -20,8 +22,13 @@
     </div>
 
     <div class="form-group">
+      <label>Blue print main file</label>
+      <input class="form-control" formControlName="main_blueprint_file" disabled/>
+    </div>    
+
+    <div class="form-group">
       <!--<app-util-file-upload formControlName="blueprint" [progress]="progress"></app-util-file-upload>-->
-      <app-util-file-upload formControlName="blueprint_file"></app-util-file-upload>
+      <app-util-file-upload formControlName="blueprint_file" (change)="getBPFileName()" placeholder="Upload a blue print file to fill this field"></app-util-file-upload>
       <div class="invalid-feedback" style="display: block">
         <ng-container *ngIf="hasError('blueprint_file', 'required')">This field is required</ng-container>
         <ng-container *ngIf="hasError('blueprint_file', 'requiredFileType')">Only ZIP</ng-container>
@@ -37,9 +44,8 @@
       Submit
     </button>
   </form>
+  
 </div>
-
-<h2 style="color: #00679a;">My Applications</h2>
 
 <mat-grid-list cols="3" rowHeight="3:1">
   <mat-grid-tile>

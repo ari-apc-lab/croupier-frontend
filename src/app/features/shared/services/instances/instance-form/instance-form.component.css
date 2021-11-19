@@ -1,0 +1,13 @@
+.save-btn {
+  background-color: #00679a;
+  float: right;
+  margin-right: 4em;
+  color: white;
+  font-size: large;
+  padding: 0.5em;
+  border-radius: 3px !important;
+}
+
+.save-btn:hover {
+  background-color: #345565;
+}
