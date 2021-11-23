@@ -15,7 +15,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
   declarations: [
     DefaultComponent,
     DashboardComponent,
-    AddappComponent
+    AddappComponent,
   ],
   imports: [
     CommonModule,
@@ -24,7 +24,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatSidenavModule,
     MatDividerModule,
     FlexLayoutModule,
-    MatCardModule
+    MatCardModule,
   ]
 })
 export class DefaultModule { }

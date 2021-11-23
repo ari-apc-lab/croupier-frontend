@@ -19,6 +19,7 @@ import { KeycloakAuthGuard } from 'keycloak-angular';
 import { AppdetailComponent } from './features/shared/services/applications/appdetail/appdetail.component';
 import { InstancedetailComponent } from './features/shared/services/instances/instancedetail/instancedetail.component';
 import { CookiesPolicyComponent } from './features/landing-page/cookies-banner/cookies-policy/cookies-policy.component';
+import { GettingStartedComponent } from './features/getting-started/getting-started.component';
 
 const routes: Routes = [
 
@@ -151,7 +152,12 @@ const routes: Routes = [
   {
     path: 'cookies-policy',
     component: CookiesPolicyComponent
-  }
+  },
+  {
+    path: 'getting-started',
+    component: GettingStartedComponent
+  },
+
   // Routes - 3
   /*{
   path: '',

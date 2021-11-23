@@ -31,6 +31,7 @@ import { CustomKeycloakService } from './features/shared/keycloak-auth/custom-ke
 import { CookiesPolicyComponent } from './features/landing-page/cookies-banner/cookies-policy/cookies-policy.component';
 import {ButtonModule} from 'primeng/button';
 import { CookiesBannerComponent } from './features/landing-page/cookies-banner/cookies-banner.component';
+import { GettingStartedModule } from './features/getting-started/getting-started.module';
 // Import utils components
 
 @NgModule({
@@ -40,6 +41,7 @@ import { CookiesBannerComponent } from './features/landing-page/cookies-banner/c
     BrowserAnimationsModule,
     DefaultModule,
     LandingPageModule,
+    GettingStartedModule,
     CoreModule,
     KeycloakAuthModule.forRoot(),
     AppRoutingModule,
@@ -60,6 +62,7 @@ import { CookiesBannerComponent } from './features/landing-page/cookies-banner/c
     VisualizerComponent,
     CookiesPolicyComponent,
     CookiesBannerComponent
+    
   ],
   providers: [
     {
