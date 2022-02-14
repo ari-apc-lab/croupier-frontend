@@ -1,0 +1,25 @@
+<h2>Edit the file <span style="color: #00679a;">{{fileTitle}}</span></h2>
+
+<h3 *ngIf="!fileTitle">
+  <b>Atention:</b> No file uploaded, please go to <b>Upload file</b> tab and upload a YAML file.
+</h3>
+<h3>
+  Editor theme: 
+  <p-toggleButton 
+    offLabel="I reject" 
+    onIcon="pi pi-moon" 
+    offIcon="pi pi-sun"
+    (onChange)="changeTheme($event)">
+  </p-toggleButton>
+</h3>
+
+<div class="editor-container">
+
+  <ngx-monaco-editor 
+    class="textEditorContainer" 
+    [options]="editorOptions" 
+    [(ngModel)]="fileContent" 
+    (init)="editorInit($event)">
+  </ngx-monaco-editor>
+</div>
+

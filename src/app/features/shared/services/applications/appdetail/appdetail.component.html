@@ -47,6 +47,7 @@
   <mat-tab label="Expert configuration">
     <h2>Parameters:</h2>
     <div >
+     
         <div *ngFor="let input of inputs" class="inputs-cont">
           <div class="label-input">
             <label>{{input.name}}</label>
@@ -75,8 +76,6 @@
                     <div *ngIf="!isObject(item.value)">
                       <input  type="text" [(ngModel)]="item.value">
                     </div>
-                    
-                   
                   </div>
                   <br>
                   
@@ -116,6 +115,17 @@
   <!--<p> Subir archivo para los inputs </p>
     <input type="file" class="file-upload" (change)="uploadinputs($event)">
      <p>Checkear que hace este componente ...</p>-->
-    <app-instance-form [app]="application"></app-instance-form>
+    <app-instance-form 
+      [app]="application" 
+      (fileInputsJSON)="receiveImputsJSON($event)" 
+      (fileInputsText)="receiveImputsText($event)"
+      (fileTitle)="receiveFileTitle($event)">
+    </app-instance-form>
+  </mat-tab>
+  <mat-tab label="Edit file"> 
+    <app-text-editor 
+      [fileContent]="yamlContentText"
+      [fileTitle]="fileTitle">
+    </app-text-editor>
   </mat-tab>
 </mat-tab-group>

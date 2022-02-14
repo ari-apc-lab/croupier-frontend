@@ -32,6 +32,7 @@ import { CookiesPolicyComponent } from './features/landing-page/cookies-banner/c
 import {ButtonModule} from 'primeng/button';
 import { CookiesBannerComponent } from './features/landing-page/cookies-banner/cookies-banner.component';
 import { GettingStartedModule } from './features/getting-started/getting-started.module';
+import { CoviseVisualizeComponent } from './features/modules/covise-visualize/covise-visualize.component';
 // Import utils components
 
 @NgModule({
@@ -61,7 +62,8 @@ import { GettingStartedModule } from './features/getting-started/getting-started
     CkanComponent,
     VisualizerComponent,
     CookiesPolicyComponent,
-    CookiesBannerComponent
+    CookiesBannerComponent,
+    CoviseVisualizeComponent,
     
   ],
   providers: [

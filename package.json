@@ -31,6 +31,7 @@
     "@fortawesome/angular-fontawesome": "^0.6.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "@materia-ui/ngx-monaco-editor": "^5.1.0",
     "angular-in-memory-web-api": "^0.11.0",
     "bootstrap": "^4.5.0",
     "cloudify-js": "github:cloudify-cosmo/cloudify-js",
@@ -43,7 +44,7 @@
     "jszip": "^3.7.1",
     "keycloak-angular": "^6.1.0",
     "keycloak-js": "^10.0.2",
-    "ngx-monaco-editor": "^12.0.0",
+    "monaco-editor": "^0.32.1",
     "path-browserify": "^1.0.1",
     "primeflex": "^3.0.1",
     "primeicons": "^4.1.0",
@@ -52,6 +53,7 @@
     "tslib": "^2.0.0",
     "util": "^0.12.4",
     "utils-extend": "^1.0.8",
+    "yamljs": "^0.3.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
@@ -65,7 +67,7 @@
     "codelyzer": "^6.0.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
-    "karma": "~6.3.4",
+    "karma": "^6.3.16",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~4.0.0",

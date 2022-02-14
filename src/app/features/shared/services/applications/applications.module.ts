@@ -26,7 +26,11 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {ButtonModule} from 'primeng/button';
 import {MessagesModule} from 'primeng/messages';
 import {TabViewModule} from 'primeng/tabview';
-import { MonacoEditorModule } from 'ngx-monaco-editor';
+import {DropdownModule} from 'primeng/dropdown';
+import { TextEditorComponent } from '../../text-editor/text-editor.component';
+import { MonacoEditorModule, MONACO_PATH } from '@materia-ui/ngx-monaco-editor';
+import {ToggleButtonModule} from 'primeng/togglebutton';
+
 
 
 @NgModule({
@@ -52,20 +56,26 @@ import { MonacoEditorModule } from 'ngx-monaco-editor';
     ButtonModule,
     MessagesModule,
     TabViewModule,
-    MonacoEditorModule.forRoot()
+    DropdownModule,
+    MonacoEditorModule,
+    ToggleButtonModule
   ],
   declarations: [
     AppdetailComponent,
     ApplistComponent,
-    AppsearchComponent
+    AppsearchComponent,
+    TextEditorComponent
   ],
-  exports: [AppsearchComponent]
+  exports: [AppsearchComponent, TextEditorComponent]
 })
 export class ApplicationsModule {
   static forRoot() {
     return {
       ngModule: ApplicationModule,
-      providers: [ApplicationService]
+      providers: [ApplicationService, {
+        provide: MONACO_PATH,
+        useValue: 'https://unpkg.com/monaco-editor@0.18.0/min/vs'
+      }]
     };
   }
 }

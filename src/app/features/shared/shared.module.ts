@@ -58,7 +58,7 @@ import {BreadcrumbModule} from 'primeng/breadcrumb';
     AreaComponent,
     CardComponent,
     PieComponent,
-    BreadcrumbNavComponent
+    BreadcrumbNavComponent,
     // MessagesComponent,
     // FileUploadComponent,
     // ProgressComponent

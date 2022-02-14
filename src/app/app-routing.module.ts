@@ -20,6 +20,7 @@ import { AppdetailComponent } from './features/shared/services/applications/appd
 import { InstancedetailComponent } from './features/shared/services/instances/instancedetail/instancedetail.component';
 import { CookiesPolicyComponent } from './features/landing-page/cookies-banner/cookies-policy/cookies-policy.component';
 import { GettingStartedComponent } from './features/getting-started/getting-started.component';
+import { CoviseVisualizeComponent } from './features/modules/covise-visualize/covise-visualize.component';
 
 const routes: Routes = [
 
@@ -141,6 +142,10 @@ const routes: Routes = [
       {
         path: 'visualizer',
         component: VisualizerComponent
+      },
+      {
+        path: 'covise',
+        component: CoviseVisualizeComponent
       }
     ],
     canActivate:  [AppAuthGuard]

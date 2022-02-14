@@ -27,3 +27,8 @@ img {
     background-color: #00679a;
     color: white;
 }
+
+::ng-deep .active {
+    background-color: #00679a !important;
+    color: white  !important;
+}

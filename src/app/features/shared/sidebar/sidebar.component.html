@@ -11,10 +11,10 @@
 
     <h2 matSubheader>Applications</h2>
 
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/dashboard">
+    <a mat-list-item [routerLinkActive]="['active']" [routerLink]="['/dashboard']" id="dashboard">
         <mat-icon class="material-icons-outlined">dashboard</mat-icon>
         Dashboard</a>
-    <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['/apps']">
+    <a mat-list-item [routerLinkActive]="['active']" [routerLink]="['/apps']" id="apps">
         <mat-icon >apps</mat-icon>
         Applications</a>
   <!--  <a mat-list-item routerLinkActive="list-item-active" routerLink="/module/croupier">
@@ -26,11 +26,11 @@
     
     <h2 matSubheader>Community and Support</h2>
 
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/module/moodle">
+    <a mat-list-item [routerLinkActive]="['active']" routerLink="/module/moodle" id="training">
         <mat-icon>model_training</mat-icon>
         Training
     </a>
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/module/askbot">
+    <a mat-list-item [routerLinkActive]="['active']" routerLink="/module/askbot" id="askbot">
         <mat-icon>question_answer</mat-icon>
         Q&A Forum
     </a>
@@ -38,21 +38,26 @@
         <mat-icon>article</mat-icon>
         MatchMaking
     </a>-->
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/module/zammad">
+    <a mat-list-item [routerLinkActive]="['active']" routerLink="/module/zammad" id="zammad">
         <mat-icon>confirmation_number</mat-icon>
         Ticketing System
     </a>
 
     <h2 matSubheader>Data Management</h2>
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/module/ckan">
+    <a mat-list-item [routerLinkActive]="['active']" routerLink="/module/ckan" id="ckan">
         <mat-icon>description</mat-icon>
         Data Catalogue
     </a>
 
     <h2 matSubheader>Visualization</h2>
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/module/visualizer">
+    <a mat-list-item [routerLinkActive]="['active']" routerLink="/module/visualizer" id="visualizer">
         <mat-icon>preview</mat-icon>
         Visualizer
+    </a>
+
+    <a mat-list-item [routerLinkActive]="['active']" routerLink="/module/covise" id="covise">
+      <mat-icon>view_in_ar</mat-icon>
+      Covise
     </a>
 
     <!--

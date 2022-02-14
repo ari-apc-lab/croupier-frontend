@@ -1,11 +1,13 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Console } from 'console';
+import { map } from 'rxjs/operators';
 import { toResponseBody, uploadProgress } from '../../../utils/file-upload/file-upload.component';
 import { requiredFileType } from '../../../utils/file-upload/update-file-validators';
 import { Application } from '../../applications/application';
 import { AppInstance } from '../app-instance';
 import { AppInstanceService } from '../app-instance.service';
+
 
 @Component({
   selector: 'app-instance-form',
@@ -14,9 +16,13 @@ import { AppInstanceService } from '../app-instance.service';
 })
 export class InstanceFormComponent implements OnInit, OnChanges {
 
-  constructor(private instanceService: AppInstanceService) { }
+  constructor(
+    private instanceService: AppInstanceService,
+    private http: HttpClient
+    ) { }
 
 
+  
   private _app: Application;
   success = false;
   progress = 0;
@@ -37,6 +43,9 @@ export class InstanceFormComponent implements OnInit, OnChanges {
   }
 
   @Input() app;
+  @Output() fileInputsJSON = new EventEmitter<any>();
+  @Output() fileInputsText = new EventEmitter<any>();
+  @Output() fileTitle = new EventEmitter<any>();
 
 
   ngOnInit(): void {
@@ -83,7 +92,8 @@ export class InstanceFormComponent implements OnInit, OnChanges {
 
   getInputsFromYaml() {
     const file = this.addForm.get('inputs_file').value;
-    console.log('up filed: ', file)
+    console.log('test yaml', file);
+
 
     const yaml = require('js-yaml');
 
@@ -91,64 +101,20 @@ export class InstanceFormComponent implements OnInit, OnChanges {
     const x = fileReader.readAsText(file);
     let yamlContent;
    // let contentLines;
-
-
+    this.fileTitle.emit(file.name);
     fileReader.onload = (e) => {
-      
       yamlContent = fileReader.result;
-
-      this.contentLines = yamlContent.split('\n');
-      let xLastKey = '';
-
-      for (let i = 0; i < this.contentLines.length; i++) {
-        const currentLine = this.contentLines[i];
-
-        // exclude lines of comments in the yaml file.
-        if (!currentLine.startsWith('#')) {
-          let colonPosition = currentLine.indexOf(':');
-          let key =  currentLine.substr(0, colonPosition).trim();
-          let value = currentLine.substr(colonPosition +2, currentLine.length).trim();
-          let chartPosition = 0;
-
-          // difference between SCALAR, COLLECTON and MULTILINE COLLECTION
-          // SCALAR
-          if (key && value && key.charAt(0) != ' ' && !value.includes('|')) {
-            this.inputsJSON[key] = this.getScalar(key, value).trim();
-            xLastKey = key;
-          } 
-          // MULTILINE COLLECTION
-          else if (currentLine.includes('|') && key.charAt(chartPosition) != ' ') {
-            let result = this.getMultilineCollection(i,chartPosition);
-            value = result.value;
-            i = result.position;
-            this.inputsJSON[key] = value.trim();
-          }
-
-          else if (value.length === 0) {
-            let x = i + 1;
-            this.inputsJSON[key] = {}
-            while (x < this.contentLines.length) { // stops if not more lines in the array
-              if (this.contentLines[x].charAt(1) == ' ') {
-                colonPosition = this.contentLines[x].indexOf(':');
-                let paramKey =  this.contentLines[x].substr(0, colonPosition).trim();
-                value = this.contentLines[x].substr(colonPosition +1, this.contentLines[x].length);
-                if (this.contentLines[x].includes(':') && value.charAt(1) != ' ' && !value.includes('|')) {
-                  this.inputsJSON[key][paramKey] = this.getScalar(key, value).trim();
-                } else if (this.contentLines[x].includes('|')) {
-                  let result = this.getMultilineCollection(x,chartPosition);
-                  this.inputsJSON[key][paramKey] = result.value.trim();
-                }
-                x++;
-              } else {
-                break; 
-              }
-            } 
-          }
-        }
+      this.fileInputsText.emit(yamlContent);
+      console.log('inputs in text format: ', yamlContent);
+      try {
+        const doc = yaml.load(yamlContent);
+        console.log(doc);
+        this.fileInputsJSON.emit(doc);
+      } catch (e) {
+        console.log(e);
       }
 
-      console.log('Parsed values to JSON: ', this.inputsJSON);
-    }
+    };
   }
 
   getScalar(key, value){
@@ -161,8 +127,7 @@ export class InstanceFormComponent implements OnInit, OnChanges {
     let x = position + 1; // itinerator index for the collection lines.
     let value = '';
     while (x < this.contentLines.length) { // stops if not more lines in the array
-      if (this.contentLines[x].charAt(charPosition + 1) == ' ') {
-      
+      if (this.contentLines[x].charAt(charPosition + 1) === ' ') {
         value = value.concat(' ', this.contentLines[x].trim().replace('\r', '')) // + contentLines[i];
         x++;
       } else {

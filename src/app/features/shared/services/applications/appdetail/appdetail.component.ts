@@ -32,6 +32,9 @@ export class AppdetailComponent implements OnInit {
     {label: 'True', value: true}
   ];
 
+  yamlContentText: any;
+  fileTitle: any;
+
   // helpers
   isString(val): boolean {return typeof val === 'string'; }
   isNumber(val): boolean {return typeof val === 'number'; }
@@ -100,6 +103,24 @@ export class AppdetailComponent implements OnInit {
   // Upload file with inputs.
   uploadinputs(event) {
     console.log('uploaded file', event);
+  }
+
+  /**
+   * TODO set the values in the form (basic and expert configuration).
+   * @param event inputs from the .yaml file in JSON format, received from InstanceFormComponent.
+   */
+  receiveImputsJSON(event) {
+    console.log('event: ', event)
+  //  this.inputs.push(event);
+   
+  }
+
+  receiveImputsText(event) {
+    this.yamlContentText = event;
+  }
+
+  receiveFileTitle(event) {
+    this.fileTitle = event;
   }
 
 }

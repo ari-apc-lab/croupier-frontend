@@ -1,19 +1,44 @@
 <div id="search-component" class="search-component">
 
-  <div style="width: 30%; ">
-    <h4><label for="search-box" class="search-label">Application Search</label></h4>
+  <div style="width: 20%; ">
+    <h4><label for="search-box" class="search-label">Browser</label></h4>
   </div>
 
-  <div style="width: 70%;">
+  <div style="width: 50%;">
     <input #searchBox id="search-box" (input)="search(searchBox.value)" class="search-input" />
 
     <ul class="search-result">
-      <li *ngFor="let application of applications$ | async">
-        <a routerLink="/apps/detail/{{ application.id }}">
-          {{ application.name }} - {{application.owner}}
-        </a>
-      </li>
+      
+      <div *ngIf="searchOption === 'both' || searchOption === 'app'">
+        <li *ngFor="let application of applications$ | async">
+          <a routerLink="/apps/detail/{{ application.id }}">
+            (App) {{ application.name }} - {{application.owner}}
+          </a>
+        </li >
+      </div>
+      
+      <div *ngIf="searchOption === 'both' || searchOption === 'ins'">
+        <li *ngFor="let instance of instances$ | async">
+          <a routerLink="/instances/detail/{{ instance.id }}" >
+            (Ins) {{ instance.name }}
+          </a>
+        </li>
+      </div>
+      
     </ul>
   </div>
+  <div style="width: 30%; ">
+
+    Search by:
+    <p-dropdown 
+      [options]="searchOptionList" 
+      [(ngModel)]="searchOption" 
+      optionLabel="name" 
+      optionValue="code"
+      styleClass="options-dropdown"
+      placeholder="Option">
+    </p-dropdown>
+  </div>
+ 
   
 </div>

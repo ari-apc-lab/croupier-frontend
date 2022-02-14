@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../keycloak-auth/auth.service';
 import { KeycloakEvent, KeycloakEventType } from 'keycloak-angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -14,8 +15,9 @@ export class SidebarComponent implements OnInit {
   userName: string;
   email: string;
   userMessage: string;
+  lastSelectedLink = '';
 
-  constructor( private authService: AuthService ) { }
+  constructor( private authService: AuthService, private router: Router ) { }
 
   ngOnInit(): void {
     if (localStorage.getItem('token') && localStorage.getItem('email')) {

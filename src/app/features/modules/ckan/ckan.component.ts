@@ -11,7 +11,8 @@ export class CkanComponent implements OnInit {
   iFrameUrl: SafeResourceUrl; 
 
   constructor(private sanitizer: DomSanitizer) {
-    this.iFrameUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://hidalgo1.man.poznan.pl/');    
+    //this.iFrameUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://hidalgo1.man.poznan.pl/');    
+    this.iFrameUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://ckan.hidalgo-project.eu/');  
     console.log(this.iFrameUrl)
   }
 

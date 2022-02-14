@@ -7,3 +7,10 @@ services:
     build: ./
     ports:
       - 80:80/tcp
+      - 443:443/tcp
+    networks:
+      - api_backend
+
+networks:
+  api_backend:
+    external: true
