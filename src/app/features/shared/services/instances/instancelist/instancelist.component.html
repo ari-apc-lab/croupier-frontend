@@ -12,7 +12,9 @@
   <!--<button (click)="add(appName.value); appName.value = ''">add</button>-->
  <!-- <button (click)="add(); appName.value = ''">add</button> -->
 </div>
-
+<div *ngIf="!instances">
+  No instances
+</div>
 <mat-grid-list cols="3" rowHeight="3:1">
   <mat-grid-tile *ngFor="let instance of instances">
     <div class="app-card" (click)="open(instance)">

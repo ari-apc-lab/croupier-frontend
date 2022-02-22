@@ -1,8 +1,0 @@
-
-ssh_config:
-  host: mihost.host.hosteo
-  user: sidorenko
-  private_key: |
-    -----BEGIN RSA PRIVATE KEY-----
-    fiumba/zumbi/adfasdfasdf2435234adfasdfasdf/asdfqwerqwefaqw4r23q4rfqwaefq24521435/121234/123/rwqef/wef/qew/fqw/r/23/42/34/efwefq23rf1324fqwe/
-    -----END RSA PRIVATE KEY-----

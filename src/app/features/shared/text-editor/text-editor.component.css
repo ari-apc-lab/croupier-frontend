@@ -23,3 +23,7 @@ ngx-monaco-editor {
   border: 2px #cdcdcd solid;
   border-radius: 10px;
 }
+
+.title-section {
+  color: #00679a;
+}

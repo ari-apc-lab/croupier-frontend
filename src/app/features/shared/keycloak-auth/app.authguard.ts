@@ -20,7 +20,7 @@ export class AppAuthGuard extends KeycloakAuthGuard implements CanActivate {
         console.log('User is not authenticated');
         this.keycloakAngular.login()
            .catch(e => console.error(e));
-        return resolve(false);
+        return Promise.resolve(false);
         // this.keycloakAngular.login()
         //   .catch(e => console.error(e));
         // return reject(false);

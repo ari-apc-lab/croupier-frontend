@@ -7,7 +7,7 @@ import { KeycloakOptions } from 'keycloak-angular';
 // Keycloak config
 export const keycloakSetUp: KeycloakOptions = {
   config: {
-    url: 'https://hidalgo-idm.hlrs.de/auth/',
+    url: 'https://hidalgo-idm.hlrs.de/auth',
     // url: 'https://prunus-212.man.poznan.pl/auth/',
     realm: 'Hidalgo',
     clientId: 'frontend',
@@ -19,8 +19,8 @@ export const keycloakSetUp: KeycloakOptions = {
   initOptions: {
     responseMode: 'fragment',
     flow: 'standard',
-     onLoad: 'check-sso',
-   // onLoad: 'login-required',
+    onLoad: 'check-sso',
+    //onLoad: 'login-required',
     checkLoginIframe: false
   },
   enableBearerInterceptor: true,

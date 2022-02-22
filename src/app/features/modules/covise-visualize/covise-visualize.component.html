@@ -1,1 +1,200 @@
-<p>covise-visualize works!</p>
+<div style="margin: 2em;">
+  <h1>Interactive 3D Visualization with <span class="blue-span">COVISE</span></h1>
+
+  <p>
+    <span class="blue-span">COVISE</span> is an open-source software environment for integration of simulation, 
+    postprocessing and visualization. It is designed for visualization of scientific data, 
+    collaborative working and visualization in VR/AR environments through dedicated rendering modules. 
+    This allows visualization on Desktops as well as CAVEs, HMDs, or Powerwalls.
+    <br>
+    <br>
+    <span class="blue-span">COVISE</span> uses a modular structure to separate between different processing steps. This enables distribution of 
+    steps across several machines, moreover, enabling processing on HPC platforms.
+    <br>
+    Besides the modular structure allows flexible assembling of processing workflows. 
+    These can be assemble using COVISE's graphical user interface. 
+    <br>
+    <a href="https://www.hlrs.de/solutions-services/service-portfolio/visualization/covise/features/" 
+      target="_blank"
+      class="blue-span"
+      >
+      More information on the features of COVISE can be found here
+      <mat-icon aria-hidden="false" aria-label="Features of COVISE">launch</mat-icon>
+    </a>
+  </p>
+
+  <h2>
+    <mat-icon aria-hidden="false">construction</mat-icon> Installation
+  </h2>
+
+  <p>
+    COVISE is supported on various platforms. COVISE builds can be downloaded from:
+    <br>
+    <a href="https://fs.hlrs.de/projects/covise/support/download/" target="_blank" class="blue-span">
+      https://fs.hlrs.de/projects/covise/support/download/
+    </a>
+    <br> 
+    Besides, COVISE can be obtained from the following sources:
+    <br>
+  </p>
+
+  <ul style="list-style-type: none;">
+    
+      <li class="inst-os-module">
+        <p>
+          <b>Windows</b>
+          <br>
+          On Windows, an Installer is available here:
+          <br>
+          <a href="https://fs.hlrs.de/projects/covise/support/download/snapshot-2021-12-17/" target="_blank" class="blue-span">
+            https://fs.hlrs.de/projects/covise/support/download/snapshot-2021-12-17/
+          </a>
+        </p>
+      </li>
+   
+
+    <li class="inst-os-module">
+      <p>
+        <b>MacOS</b>
+        <br>
+        On MacOS, COVISE can be installed through Homebrew:
+        <br>
+      </p>
+        <div class="code-light">
+          <code>
+            	brew install hlrs-vis/tap/covise
+          </code>
+        </div>
+
+      
+    </li>
+
+    <li class="inst-os-module">
+      <p>
+        <b>UNIX</b>
+        For UNIX systems, building from source code is enabled by acquiring the code from GitHub:
+        <br>
+        <a href="https://github.com/hlrs-vis/covise" target="_blank" class="blue-span">
+          https://github.com/hlrs-vis/covise
+        </a>
+        <br>
+        There also build requirements are listed. Once, these are ensured, COVISE can be installed:
+        <br>
+      </p>
+        <div class="code-light">
+          <code>
+              git clone https://github.com/hlrs-vis/covise.git --recursive <br>
+              cd covise <br>
+              source .covise.sh <br>
+              make <br>
+          </code>
+        </div>
+
+    </li>
+  </ul>
+  
+  <h2>
+    <mat-icon aria-hidden="false">bolt</mat-icon> Quick Start
+  </h2>
+  <p>
+    <span class="blue-span">COVISE</span> can be invoked from the terminal by:
+  </p>
+  <div>
+    <code class="code-light" style="width: 100%;">
+      covise
+    </code>
+  </div>
+
+  <p>
+    or, on Windows, started through the Application Icon
+    
+    This will start the <span class="blue-span">COVISE</span> Mapeditor (<i>Figure 1</i>) which is composed into several areas: a workflow area, 
+    showing the assembled map; a <b>module browser</b> to add modules to the map; a <b>message area</b> where Modules can print 
+    messages and a <b>menu tool bar</b>.
+  </p>
+
+  <div class="img-cont">
+    <img src="../../../../assets/images/covise_images/map_editor.png">
+    <i>Figure 1: The COVISE GUI</i>
+  </div>
+  
+
+  <p>
+    A workflow can be assembled by dragging modules from the browser to the workflow area.
+    <br>
+    Modules a divided into categories: 
+
+  </p>
+
+  <ul>
+    <li>
+      <b class="blue-span">IO:</b> Import datasets from files
+    </li>
+    <li>
+      <b class="blue-span">Mapper:</b> Map data to geometries (e.g. iso surfaces)
+    </li>
+    <li>
+      <b class="blue-span">map</b> data to color values
+    </li>
+    <li>
+      <b class="blue-span">Tracer:</b> trace particles and compute streamlines
+    </li>
+    <li>
+      <b class="blue-span">Filter:</b> extract subsets of larger datasets (e.g. cutting surfaces)
+    </li>
+    <li>
+     <b class="blue-span">Tools:</b> apply further tools, such as cutting off selected parts 
+    </li>
+    <li>
+     <b class="blue-span">Renderer:</b> display the results 
+    </li>
+  </ul>
+
+  <p>
+    Modules are represented by a blue rectangle. On top and bottom of it, input and output ports are shown as squares. 
+    These can be interconnected between different modules to pass data from one to another. However, 
+    it is required to pass matching data types.
+    The book icon on the modules opens the module parameter settings where additional adjustments can be made, 
+    such as to set the path to a data file or define an iso value. For some modules, these settings can also be 
+    interactively changed from within the renderer.
+    An individual module can be executed by double-click on it. All subsequent modules will execute as well.
+    The full map can be executed by clicking on the cogwheel in the menu toolbar.
+    <br>
+    Once a renderer is added to the workflow, the rendering window will open-up in a separate window (<i>Figure 2</i>). 
+    This provides additional menus and allows for interaction and navigation using the mouse.
+  </p>
+    <div class="img-cont">
+      <img src="../../../../assets/images/covise_images/open_cover_w.png">
+      <i>Figure 2: The OpenCOVER window, showing the rendering</i>
+    </div>
+    
+    <h2>
+      <mat-icon aria-hidden="false">domain_verification</mat-icon> Examples
+    </h2>
+    <p>
+      Examples of <span class="blue-span">COVISE</span> (<i>.net</i>) files contain a preconfigured processing map of modules, 
+      dedicated to a selected use case. Several examples come with the installation of COVISE. They can be loaded into <span class="blue-span">COVISE</span> 
+      by clicking on the folder icon in the menu tool bar. This should open the <i>covise/net</i> directory where a subdirectory for examples 
+      is located. Select a <i>.net</i> file by double-click and a preconfigured module map will be loaded.
+    </p>
+
+  <h2>
+    <mat-icon aria-hidden="false">description</mat-icon> Documentation
+  </h2>
+  <p>
+    Further material can be found in the following:
+  </p>
+  <ul>
+    <li>
+      <a class="blue-span" href="https://www.hlrs.de/covise/">General information</a>
+    </li>
+    <li>
+      <a class="blue-span" href="https://github.com/hlrs-vis/covise">Build instructions </a>
+    </li>
+    <li>
+      <a class="blue-span" href="https://www.hlrs.de/solutions-services/service-portfolio/visualization/covise/documentation/">
+        Documentation, Tutorials, Guides
+      </a>
+    </li>
+  </ul>
+</div>

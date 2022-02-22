@@ -96,7 +96,7 @@ export class InstanceFormComponent implements OnInit, OnChanges {
 
 
     const yaml = require('js-yaml');
-
+    
     let fileReader = new FileReader();
     const x = fileReader.readAsText(file);
     let yamlContent;

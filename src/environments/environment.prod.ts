@@ -6,17 +6,14 @@ import { KeycloakOptions } from 'keycloak-angular';
 
 // Keycloak config
 const keycloakSetUp: KeycloakOptions = {
- /* config: {
-    url: 'https://hidalgo-idm.hlrs.de/auth/',
-    realm: 'Hidalgo',
-    clientId: 'frontend',
-  },*/
   config: {
-     url: 'https://prunus-212.man.poznan.pl/auth/',
+    url: 'https://hidalgo-idm.hlrs.de/auth',
+    // url: 'https://prunus-212.man.poznan.pl/auth/',
     realm: 'Hidalgo',
     clientId: 'frontend',
     credentials: {
-      secret: "e940c4ec-5204-41f2-b65a-b289983d9fbb"
+      secret: "d112469e-9386-4c00-b05d-7b6b5270bd3e"
+      //secret: "e940c4ec-5204-41f2-b65a-b289983d9fbb"
     },
   },
   initOptions: {

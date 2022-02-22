@@ -25,6 +25,31 @@
   </div>
 
   <!-- INSTANCE INPUTS -->
+
+  <div class="inputs-list">
+    <div class="input-card" *ngFor="let input of inputs">
+      <div class="input-name">
+        {{input.name}}
+      </div>
+      <div class="input-value">
+        
+         <!-- TYPE TEXT OR NUMBER-->
+        <div *ngIf="isString(input.value)">
+          {{input.value}}
+        </div>
+         <!-- TYPE OBJECT-->
+        <div *ngIf="isObject(input.value)">
+          <div *ngFor="let item of input.value | keyvalue">
+            <b>{{item.key}}:</b> <pre>{{item.value | json}}</pre>
+          </div>
+
+            
+          
+        </div>
+      </div>
+    </div>
+  </div>
+ <!--
   <div>
     <div *ngFor="let input of inputs" class="inputs-cont">
 
@@ -57,6 +82,9 @@
       </div>
     </div>
   </div>
+
+ -->
+
 </div>
 
 <button (click)="goBack()" class="gb-btn">Go back</button>

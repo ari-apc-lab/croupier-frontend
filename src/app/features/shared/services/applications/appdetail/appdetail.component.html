@@ -45,7 +45,7 @@
     <button (click)="save()" class="save-btn">save</button>
   </mat-tab>
   <mat-tab label="Expert configuration">
-    <h2>Parameters:</h2>
+    <h2 class="title-section">Parameters:</h2>
     <div >
      
         <div *ngFor="let input of inputs" class="inputs-cont">
@@ -121,8 +121,8 @@
       (fileInputsText)="receiveImputsText($event)"
       (fileTitle)="receiveFileTitle($event)">
     </app-instance-form>
-  </mat-tab>
-  <mat-tab label="Edit file"> 
+  </mat-tab> 
+  <mat-tab label="Edit file">
     <app-text-editor 
       [fileContent]="yamlContentText"
       [fileTitle]="fileTitle">

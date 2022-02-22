@@ -80,3 +80,33 @@ label {
   height: 50% !important;
 }
   
+.inputs-list {
+}
+
+.input-card {
+  background-color: white;
+  border: 1px rgba(0, 0, 0, 0.2) solid;
+  display:flex;
+  margin: 0.6em;
+  border-radius: 3px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15), 0 3px 8px 0 rgba(0, 0, 0, 0.19);
+  
+}
+
+.input-card:hover {
+  background-color: #e6e7ec;
+}
+
+.input-name {
+  width: 30%;
+  border-radius: 5px 0 0 5px;
+  padding: 0.5em;
+  color: #607d8b;
+  font-weight: bold;
+  overflow: clip;
+}
+
+.input-value {
+  width: 70%;
+  padding: 0.5em;
+}
