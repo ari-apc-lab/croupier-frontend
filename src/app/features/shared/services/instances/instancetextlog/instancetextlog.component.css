@@ -35,3 +35,55 @@
   background-color: #e1e1e1;
   padding: 0.4em;
 }
+
+::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+
+  padding: 0.3rem 1rem !important;
+}
+
+.t-tag {
+  text-align: center;
+  padding: 0.2em;
+  border-radius: 3px;
+}
+
+.log-tag {
+  color: white;
+  background-color: #500472;
+}
+
+.event-tag {
+  color: black;
+  background-color: #79cbb8;
+}
+
+.filter-list {
+  display: block ruby;
+}
+
+.filter {
+  display: inline-flex;
+  padding: 0.5em;
+  width: 30%;
+}
+
+.filter-label {
+  padding: 0.5em;
+  width: 30%;
+}
+
+.filter-inp {
+  padding: 0.5em;
+  width: 50%;
+}
+
+::ng-deep .mat-flat-button.mat-primary, .mat-raised-button.mat-primary, .mat-fab.mat-primary, .mat-mini-fab.mat-primary {
+  background-color: white;
+  border: 1px #00679a solid;
+  color: #00679a;
+}
+
+::ng-deep .p-dropdown {
+  width: 10em;
+}
+

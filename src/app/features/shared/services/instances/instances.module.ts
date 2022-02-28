@@ -19,6 +19,8 @@ import {TableModule} from 'primeng/table';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MessagesModule} from 'primeng/messages';
+import {DropdownModule} from 'primeng/dropdown';
+import {MatButtonModule} from '@angular/material/button';
 
 
 @NgModule({
@@ -42,7 +44,9 @@ import {MessagesModule} from 'primeng/messages';
     TableModule,
     ProgressSpinnerModule,
     MatGridListModule,
-    MessagesModule
+    MessagesModule,
+    DropdownModule,
+    MatButtonModule
   ],
   exports: [
     InstancelistComponent,

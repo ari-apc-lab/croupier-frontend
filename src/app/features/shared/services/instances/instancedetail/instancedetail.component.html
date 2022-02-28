@@ -25,7 +25,7 @@
   </div>
 
   <!-- INSTANCE INPUTS -->
-
+  <h2 style="color: #00679a">Inputs</h2>
   <div class="inputs-list">
     <div class="input-card" *ngFor="let input of inputs">
       <div class="input-name">
@@ -40,7 +40,33 @@
          <!-- TYPE OBJECT-->
         <div *ngIf="isObject(input.value)">
           <div *ngFor="let item of input.value | keyvalue">
-            <b>{{item.key}}:</b> <pre>{{item.value | json}}</pre>
+            <!-- if the value is a simple value-->
+            <div *ngIf="isString(item.value)">
+              <p><b>{{item.key}}:</b> {{item.value}}</p>
+              
+            </div>
+            <!-- if the value is a object and length is less or equal than 100-->
+            <div *ngIf="isObject(item.value) && passToYaml(item.value).length < 101 ">
+              <b>{{item.key}}:</b> 
+              <pre style="margin-left: 2em; margin-bottom: 0;">{{passToYaml(item.value)}}</pre>
+            </div>
+            <!-- if the object is greater than 100 characters -->
+            <div *ngIf="isObject(item.value) && passToYaml(item.value).length > 100 ">
+              <b>{{item.key}}:</b> 
+              <pre style="margin-left: 2em; margin-bottom: 0;">{{passToYaml(item.value) | slice:0:100}}</pre>
+              <!-- Button to display the whole object -->
+              <button type="button" (click)="displayLongText()" class="show-btn">Show complete value</button>
+              <!-- Dialog to display the whole -->
+              <p-dialog [header]="input.name + ' > ' + item.key" [(visible)]="displayLT" class="long-text-dialog">
+                  <pre>{{passToYaml(item.value)}}</pre>
+              </p-dialog>
+            </div>
+
+
+          <!--  
+            <pre style="color:blueviolet">{{passToYaml(item.value).length}}</pre>
+            <pre>{{passToYaml(item.value)}}</pre>
+          -->
           </div>
 
             

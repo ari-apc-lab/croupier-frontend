@@ -1,0 +1,150 @@
+[
+	{
+		"code": "debug",
+		"title": "Debug",
+		"icon": "bug_report",
+    "type": "log"
+	},
+	{
+		"code": "info",
+		"title": "Info",
+		"icon": "info",
+    "type": "log"
+	},
+	{
+		"code": "warning",
+		"title": "Warning",
+		"icon": "warning",
+    "type": "log"
+	},
+	{
+		"code": "error",
+		"title": "Error",
+		"icon": "report",
+    "type": "log"
+	},
+	{
+		"code": "critical",
+		"title": "Critical",
+		"icon": "new_releases",
+    "type": "log"
+	},
+	{
+		"code": "policy_success",
+		"title": "Policy end successfully started",
+		"icon": "check_circle",
+    "type": "event"
+	},
+	{
+		"code": "policy_failed",
+		"title": "Policy failed",
+		"icon": "error",
+    "type": "event"
+	},
+	{
+		"code": "processing_trigger",
+		"title": "Processing trigger",
+    "type": "event"
+	},	
+	{
+		"code": "task_succeeded",
+		"title": "Task ended successfully",
+		"icon": "check_circle",
+    "type": "event"
+	},
+		{
+		"code": "task_failed",
+		"title": "Task failed",
+		"icon": "error",
+    "type": "event"
+	},
+	{
+		"code": "task_received",
+		"title": "Task received",
+    "type": "event"
+	},
+	{
+		"code": "task_rescheduled",
+		"title": "Task rescheduled",
+    "type": "event"
+	},	
+	{
+		"code": "task_retried",
+		"title": "Task retried",
+    "type": "event"
+	},
+		{
+		"code": "sending_task",
+		"title": "Task sent",
+    "type": "event"
+	},
+	{
+		"code": "task_started",
+		"title": "Task started",
+    "type": "event"
+	},
+	{
+		"code": "trigger_failed",
+		"title": "Trigger failed",
+		"icon": "error",
+    "type": "event"
+	},	
+	{
+		"code": "trigger_succeeded",
+		"title": "Trigger succeeded",
+		"icon": "check_circle",
+    "type": "event"
+	},
+		{
+		"code": "workflow_cancelled",
+		"title": "Workflow cancelled",
+    "type": "event"
+	},
+	{
+		"code": "workflow_succeeded",
+		"title": "Workflow ended successfully",
+		"icon": "check_circle",
+    "type": "event"
+	},
+	{
+		"code": "workflow_event",
+		"title": "Workflow event",
+    "type": "event"
+	},	
+	{
+		"code": "workflow_failed",
+		"title": "Workflow failed",
+		"icon": "error",
+    "type": "event"
+	},
+	{
+		"code": "workflow_initializing_node",
+		"title": "Workflow initializing node",
+    "type": "event"
+	},	
+	{
+		"code": "workflow_initializing_policies",
+		"title": "Workflow initializing policies",
+    "type": "event"
+	},
+	{
+		"code": "workflow_node_event",
+		"title": "Workflow node event",
+    "type": "event"
+	},	
+	{
+		"code": "workflow_received",
+		"title": "Workflow received",
+    "type": "event"
+	},
+	{
+		"code": "workflow_stage",
+		"title": "Workflow staged",
+    "type": "event"
+	},	
+	{
+		"code": "workflow_started",
+		"title": "Workflow started",
+    "type": "event"
+	}
+]

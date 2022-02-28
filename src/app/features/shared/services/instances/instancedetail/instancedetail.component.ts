@@ -35,7 +35,6 @@ export class InstancedetailComponent implements OnInit {
   ngOnInit() {
     this.primengConfig.ripple = true;
     this.getApp();
-    this.passToYaml()
   }
 
   getApp(): void {
@@ -85,21 +84,13 @@ export class InstancedetailComponent implements OnInit {
     this.displayLT = true;
   }
 
-  passToYaml() {
-    const testJSON = {nombre: "perro sanxe", edad: "milenario", delito: {dia:"1-2-3", nombre: "tekito tuvoto"}};
-    const yaml = require('js-yaml');
+  passToYaml(json) {
+   // const testJSON = {nombre: "perro sanxe", edad: "milenario", delito: {dia:"1-2-3", nombre: "tekito tuvoto"}};
+    const YAML = require('yaml');
     // Get document, or throw exception on error
-    try {
-      const doc = yaml.dump(JSON.stringify(testJSON), {
-        'styles': {
-          '!!null': 'canonical' // dump null as ~
-        },
-        'sortKeys': true        // sort object keys
-      });
-      console.log('-------------->', doc);
-    } catch (e) {
-      console.log(e);
-    }
+    const doc = new YAML.Document();
+    doc.contents = json;
+    return doc.toString();
 
   }
 
