@@ -14,10 +14,10 @@ input {
 button {
   margin-top: 20px;
   font-family: Arial;
-  background-color: #eee;
+  /*background-color: #eee;*/
   border: none;
   padding: 5px 10px;
-  border-radius: 4px;
+/*  border-radius: 4px; */
   cursor: pointer;
   cursor: hand;
 }
@@ -188,4 +188,36 @@ button:hover {
   display: flex;
 }
 
+.data-cont {
+  width: 100%;
+  display: flex;
 
+}
+
+.data-label {
+  width: 15%;
+  color: #607D8B;
+  margin: 0.5em;
+}
+
+.data-result {
+  width: 80%;
+}
+
+::ng-deep .mat-flat-button.mat-primary, .mat-raised-button.mat-primary, .mat-fab.mat-primary, .mat-mini-fab.mat-primary, .rounded-btn {
+  background-color: #3f51b5 !important;
+}
+
+
+.long-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+::ng-deep .p-dialog {
+  width: 50% !important;
+}

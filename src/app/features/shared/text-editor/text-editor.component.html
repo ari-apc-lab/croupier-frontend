@@ -1,7 +1,7 @@
 <h2 class="title-section">Edit the file <span style="color: #00679a;">{{fileTitle}}</span></h2>
 
-<h3 *ngIf="!fileTitle">
-  <b>Atention:</b> No file uploaded, please go to <b>Upload file</b> tab and upload a YAML file.
+<h3 *ngIf="!fileContent">
+  <b>Atention:</b> No file uploaded, please upload a file to see the content.
 </h3>
 <h3>
   Editor theme: 
@@ -19,7 +19,9 @@
     class="textEditorContainer" 
     [options]="editorOptions" 
     [(ngModel)]="fileContent" 
-    (init)="editorInit($event)">
+    (init)="editorInit($event)"
+    (ngModelChange)="emitStatus('2'); disabled=false">
   </ngx-monaco-editor>
 </div>
 
+<p-button icon="pi pi-save" (click)="emitText()" label="Save changes"></p-button>

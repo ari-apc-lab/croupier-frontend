@@ -1,44 +1,72 @@
-
-<h2 class="title-section">Add a new one</h2>
-<div>
-  <form [formGroup]="addForm" (ngSubmit)="add()">
-    <div class="form-group">
-      <label>Name</label>
-      <input class="form-control" formControlName="name" placeholder="Name" />
-      <div class="invalid-feedback" style="display: block">
-        <ng-container *ngIf="hasError('name', 'required')"
-          >This field is required</ng-container
-        >
-      </div>
+<p-toast position="bottom-right" key="bc"></p-toast>
+<h2 class="title-section" >Add a new one</h2>
+<mat-tab-group>
+  <mat-tab label="Form">
+    
+    <div>
+      <form [formGroup]="addForm" (ngSubmit)="add()">
+        <div class="form-group">
+          <label>Name</label>
+          <input class="form-control" formControlName="name" placeholder="Name" />
+          <div class="invalid-feedback" style="display: block">
+            <ng-container *ngIf="hasError('name', 'required')">
+              This field is required
+            </ng-container>
+          </div>
+        </div>
+    
+        <div class="form-group">
+          <label>Description</label>
+          <input
+            class="form-control"
+            formControlName="description"
+            placeholder="Description"
+          />
+          <div class="invalid-feedback" style="display: block">
+            <ng-container *ngIf="hasError('description', 'required')"
+              >This field is required</ng-container
+            >
+          </div>
+        </div>
+    
+        <div class="form-group">
+          <label>Inputs file</label>
+          <!--<app-util-file-upload formControlName="inputs_file" [progress]="progress"></app-util-file-upload>-->
+          <app-util-file-upload formControlName="inputs_file" (change)="getInputsFromYaml()"></app-util-file-upload>
+          <div class="invalid-feedback" style="display: block">
+            <ng-container *ngIf="hasError('inputs_file', 'required')"
+              >This field is required</ng-container
+            >
+            <ng-container *ngIf="hasError('inputs_file', 'requiredFileType')">
+              Only ZIP
+            </ng-container>
+          </div>
+          <div style="display: block ruby; margin: 1em;">
+            Document status: 
+            <div class="status-tag gray-tag" *ngIf="fileStatus === '0'">Not uploaded</div>
+            <div class="status-tag blue-tag" *ngIf="fileStatus === '1'">Original</div>
+            <div class="status-tag yellow-tag" *ngIf="fileStatus === '2'">Modified</div>
+            <div class="status-tag green-tag" *ngIf="fileStatus === '3'">Modified and saved</div>
+          </div>
+          
+        </div>
+    
+        You can save this document , or modify it's content in <b>Edit file</b> tab.
+        <p-button type="submit" >Save</p-button>
+      </form>
     </div>
+  
+  </mat-tab>
+  <mat-tab label="Edit file">
+    <app-text-editor 
+      [fileContent]="yamlContentText"
+      [fileTitle]="fileTitle"
+      (textEdited)="convertYaml($event)"
+      (contentStatus)="manageStatus($event)"
+    >
 
-    <div class="form-group">
-      <label>Description</label>
-      <input
-        class="form-control"
-        formControlName="description"
-        placeholder="Description"
-      />
-      <div class="invalid-feedback" style="display: block">
-        <ng-container *ngIf="hasError('description', 'required')"
-          >This field is required</ng-container
-        >
-      </div>
-    </div>
+  </app-text-editor>
+ </mat-tab>
+</mat-tab-group>
 
-    <div class="form-group">
-      <label>Inputs file</label>
-      <!--<app-util-file-upload formControlName="inputs_file" [progress]="progress"></app-util-file-upload>-->
-      <app-util-file-upload formControlName="inputs_file" (change)="getInputsFromYaml()"></app-util-file-upload>
-      <div class="invalid-feedback" style="display: block">
-        <ng-container *ngIf="hasError('inputs_file', 'required')"
-          >This field is required</ng-container
-        >
-        <ng-container *ngIf="hasError('inputs_file', 'requiredFileType')"
-          >Only ZIP</ng-container
-        >
-      </div>
-    </div>
 
-    <button type="submit" class="save-btn">Save</button>
-  </form>

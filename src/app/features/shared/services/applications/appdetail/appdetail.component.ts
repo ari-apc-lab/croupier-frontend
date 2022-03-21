@@ -1,12 +1,10 @@
 import { Component, OnChanges, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-
 import { Application } from '../application';
 import { ApplicationService } from '../application.service';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import {MenuItem} from 'primeng/api';
-import { AppInstanceService } from '../../instances/app-instance.service';
 import { MessageService, PrimeNGConfig } from 'primeng/api';
 
 @Component({
@@ -34,6 +32,8 @@ export class AppdetailComponent implements OnInit {
 
   yamlContentText: any;
   fileTitle: any;
+  displayD = false;
+  jsonParsedToYaml: string;
 
   // helpers
   isString(val): boolean {return typeof val === 'string'; }
@@ -64,14 +64,11 @@ export class AppdetailComponent implements OnInit {
 
   getApp(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    console.log('id', id)
     this.appService.getApplication(id).subscribe(
       (app) => {
         this.application = app;
         // input from string to json
         this.inputs = JSON.parse(this.application['inputs'])[0];
-        console.log('inputs: ',this.inputs);
-
       }
     );
   }
@@ -84,25 +81,10 @@ export class AppdetailComponent implements OnInit {
     this.appService.updateApplication(this.application).subscribe(() => this.goBack());
   }
 
-  testSave() {
-    console.log(this.inputs);
-  }
-
   addField(event, key, value) {
     event[key.value] = value.value;
     key.value = '';
     value.value = '';
-  }
-
-  stringify(json) {
-    console.log(json);
-   // const parsed = JSON.stringify(json);
-   // return parsed;
-  }
-
-  // Upload file with inputs.
-  uploadinputs(event) {
-    console.log('uploaded file', event);
   }
 
   /**
@@ -110,17 +92,41 @@ export class AppdetailComponent implements OnInit {
    * @param event inputs from the .yaml file in JSON format, received from InstanceFormComponent.
    */
   receiveImputsJSON(event) {
-    console.log('event: ', event)
-  //  this.inputs.push(event);
-   
+    Object.keys(event).forEach(key => {
+      this.inputs.forEach(element => {
+        if (key === element['name']) {
+          element.default = event[key];
+        }
+      });
+    });
   }
 
   receiveImputsText(event) {
     this.yamlContentText = event;
   }
 
-  receiveFileTitle(event) {
-    this.fileTitle = event;
+ /**
+  * Open the editor to edit the paratmeters value in YAML format.
+  */
+  openParameterEditor(inputName, valueJson) {
+    this.displayD = inputName;
+    const YAML = require('yaml');
+    // Get document, or throw exception on error
+    const doc = new YAML.Document();
+    doc.contents = valueJson;
+    this.jsonParsedToYaml = doc.toString();
+  }
+
+  /**
+   * Get the inputs value from the text editor. pass the string data to json, then print in the screen.
+   * @param input string of new values.
+   * @returns parsed input values
+   */
+  receiveEditorValue(input){
+    const yaml = require('js-yaml');
+    const parsedJSON = yaml.load(input);
+    this.messageService.add({key: 'bc', severity: 'success', summary: 'Success', detail: 'Input data modified correctly'});
+    return parsedJSON;
   }
 
 }

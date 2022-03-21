@@ -70,8 +70,9 @@ export class AppInstanceService {
   }
 
   /** POST: add a new instance to the server */
-  addAppInstance(formValue): Observable<HttpResponse<Application>> {
+  addAppInstance(formValue){ //}: Observable<HttpResponse<Application>> {
     const data = toFormData(formValue); // TODO add owner
+    console.log('data?¿¿?', data)
     return this.http
       .post(this.instancesUrl, data, {
         reportProgress: true,

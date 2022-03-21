@@ -1,6 +1,8 @@
 <p-messages></p-messages>
 <h1 class="title">My Applications</h1>
 <app-appsearch></app-appsearch>
+
+
 <div class="new-form" *ngIf="displayFormNew">
 
   <h3 style="color: #00679a;">Add a new one</h3>
@@ -56,11 +58,22 @@
       </p>
     </div>
   </mat-grid-tile>
-  <mat-grid-tile *ngFor="let app of applications">
-    <div class="app-card" (click)="openApp(app)">
-      <p class="app-name">{{app.name}}</p>
+  <mat-grid-tile *ngIf="!applications">
+    <div class="spinner-div" >
+      <p-progressSpinner class="custom-spinner" [style]="{width: '70px', height: '70px'}" animationDuration=".5s"></p-progressSpinner>
+      <p>Loading...</p>
     </div>
   </mat-grid-tile>
+
+  <div>
+    <mat-grid-tile *ngFor="let app of applications">
+
+      <div class="app-card" (click)="openApp(app)">
+        <p class="app-name">{{app.name}}</p>
+      </div>
+    </mat-grid-tile>
+  </div>
+
 </mat-grid-list>
 
 

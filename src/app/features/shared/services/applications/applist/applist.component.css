@@ -148,3 +148,13 @@ button.delete {
   color:#00679a;
   font-size: xx-large;
 }
+
+.spinner-div {
+  width: 100%;
+  text-align: center;
+  color: #00679a;
+}
+
+.custom-spinner::ng-deep circle{
+  stroke: #00679a !important;
+}

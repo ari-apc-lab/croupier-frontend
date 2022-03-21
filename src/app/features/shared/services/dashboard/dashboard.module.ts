@@ -8,6 +8,7 @@ import { ApplicationsModule } from '../applications/applications.module';
 import {MatIconModule} from '@angular/material/icon';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MessagesModule} from 'primeng/messages';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @NgModule({
   declarations: [DashboardComponent],
@@ -17,7 +18,8 @@ import {MessagesModule} from 'primeng/messages';
     ApplicationsModule,
     MatIconModule,
     MatGridListModule,
-    MessagesModule
+    MessagesModule,
+    ProgressSpinnerModule
   ]
 })
 export class DashboardModule { }

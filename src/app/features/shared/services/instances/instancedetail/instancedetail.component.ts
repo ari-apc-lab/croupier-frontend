@@ -85,7 +85,6 @@ export class InstancedetailComponent implements OnInit {
   }
 
   passToYaml(json) {
-   // const testJSON = {nombre: "perro sanxe", edad: "milenario", delito: {dia:"1-2-3", nombre: "tekito tuvoto"}};
     const YAML = require('yaml');
     // Get document, or throw exception on error
     const doc = new YAML.Document();

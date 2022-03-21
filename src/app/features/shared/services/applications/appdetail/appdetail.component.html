@@ -1,3 +1,4 @@
+<p-toast position="bottom-right" key="bc"></p-toast>
 <div *ngIf="application">
   <div class="title-cont">
     <button (click)="goBack()" pButton pRipple type="button" icon="pi pi-chevron-left" class="p-button-rounded p-button-outlined"></button>
@@ -6,22 +7,34 @@
   
   <div class="app-summary">
     <h2 class="title-section">Summary</h2>
-    <div>
-      <label>id: </label> {{ application.id }}
+    <div class="data-cont">
+      <div class="data-label">
+        <b>ID:</b>
+      </div>
+      <div class="data-result">
+        {{ application.id }}
+      </div>
     </div>
-    <div>
-      <label>name:</label> {{application.name}}
+    <div class="data-cont">
+      <div class="data-label">
+        <b>Name:</b>
+      </div>
+      <div class="data-result">
+        {{application.name}}
+      </div>
     </div>
-    <div>
-      <label>description:</label> {{application.description}}
+    <div class="data-cont">
+      <div class="data-label">
+        <b>Description:</b>
+      </div>
+      <div class="data-result">
+        {{application.description}}
+      </div>
     </div>
   </div>
-  
 </div>
 
-
 <app-instancelist [application]="application"></app-instancelist>
-
 
 <mat-tab-group>
   <mat-tab label="Basic configuration"> 
@@ -85,7 +98,6 @@
                   <input type="text" #key>:
                   <input type="text" #value>
                 </div>
-                
                 <button mat-raised-button color="primary" (click)="addField(input.default, key, value)">Save</button>
             </mat-expansion-panel>
   
@@ -101,10 +113,21 @@
                 mode="decimal">
             </p-inputNumber>
           </div>
+
+          <div>
+            <button type="button" (click)="openParameterEditor(input.name, input.default)" class="show-btn">value</button>
+            <p-dialog [header]="input.name" [(visible)]="input.name === displayD" class="long-text-dialog">
+              <app-text-editor 
+                (textEdited)="input.default = receiveEditorValue($event)"
+                [fileContent]="jsonParsedToYaml"
+              >
+              </app-text-editor>
+            </p-dialog>
+            
+          </div>
           <div>
             <mat-icon style="color: #7ca6ba; margin-left: 15px;" aria-hidden="false" [matTooltip]="input.description">info</mat-icon>
           </div>
-          
         </div>
     </div>
     <button (click)="save()" class="save-btn">save</button>
@@ -118,14 +141,7 @@
     <app-instance-form 
       [app]="application" 
       (fileInputsJSON)="receiveImputsJSON($event)" 
-      (fileInputsText)="receiveImputsText($event)"
-      (fileTitle)="receiveFileTitle($event)">
+      (fileInputsText)="receiveImputsText($event)">
     </app-instance-form>
   </mat-tab> 
-  <mat-tab label="Edit file">
-    <app-text-editor 
-      [fileContent]="yamlContentText"
-      [fileTitle]="fileTitle">
-    </app-text-editor>
-  </mat-tab>
 </mat-tab-group>

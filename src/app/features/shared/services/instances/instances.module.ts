@@ -21,6 +21,14 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MessagesModule} from 'primeng/messages';
 import {DropdownModule} from 'primeng/dropdown';
 import {MatButtonModule} from '@angular/material/button';
+import { MatBadgeModule } from '@angular/material/badge';
+import { TabMenuModule } from 'primeng/tabmenu';
+import {MatTabsModule} from '@angular/material/tabs'; 
+import { TextEditorComponent } from '../../text-editor/text-editor.component';
+import { MonacoEditorModule } from '@materia-ui/ngx-monaco-editor';
+import { ToggleButtonModule } from 'primeng/togglebutton';
+import { ButtonModule } from 'primeng/button';
+import {ToastModule} from 'primeng/toast';
 
 
 @NgModule({
@@ -29,7 +37,8 @@ import {MatButtonModule} from '@angular/material/button';
     InstancelistComponent,
     InstancetextlogComponent,
     InstanceDashboardComponent,
-    InstanceFormComponent
+    InstanceFormComponent,
+    TextEditorComponent
   ],
   imports: [
     CommonModule,
@@ -46,12 +55,20 @@ import {MatButtonModule} from '@angular/material/button';
     MatGridListModule,
     MessagesModule,
     DropdownModule,
-    MatButtonModule
+    MatButtonModule,
+    MatBadgeModule,
+    TabMenuModule,
+    MatTabsModule,
+    MonacoEditorModule,
+    ToggleButtonModule,
+    ButtonModule,
+    ToastModule
   ],
   exports: [
     InstancelistComponent,
     InstanceDashboardComponent,
-    InstanceFormComponent
+    InstanceFormComponent,
+    TextEditorComponent
   ]
 })
 export class InstancesModule { }

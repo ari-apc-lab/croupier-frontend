@@ -30,6 +30,9 @@ import {DropdownModule} from 'primeng/dropdown';
 import { TextEditorComponent } from '../../text-editor/text-editor.component';
 import { MonacoEditorModule, MONACO_PATH } from '@materia-ui/ngx-monaco-editor';
 import {ToggleButtonModule} from 'primeng/togglebutton';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { DialogModule } from 'primeng/dialog';
+import {ToastModule} from 'primeng/toast';
 
 
 
@@ -58,15 +61,18 @@ import {ToggleButtonModule} from 'primeng/togglebutton';
     TabViewModule,
     DropdownModule,
     MonacoEditorModule,
-    ToggleButtonModule
+    ProgressSpinnerModule,
+    DialogModule,
+    ToastModule
   ],
   declarations: [
     AppdetailComponent,
     ApplistComponent,
     AppsearchComponent,
-    TextEditorComponent
+   // TextEditorComponent
   ],
-  exports: [AppsearchComponent, TextEditorComponent]
+  exports: [AppsearchComponent, //TextEditorComponent
+  ]
 })
 export class ApplicationsModule {
   static forRoot() {

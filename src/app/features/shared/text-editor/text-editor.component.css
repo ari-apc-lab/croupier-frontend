@@ -27,3 +27,9 @@ ngx-monaco-editor {
 .title-section {
   color: #00679a;
 }
+
+::ng-deep .p-button {
+  background-color: #00679a;
+  float: inline-end;
+  margin: 1em;
+}

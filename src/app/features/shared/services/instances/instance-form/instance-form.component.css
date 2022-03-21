@@ -16,3 +16,35 @@
 .title-section {
   color: #00679a;
 }
+
+.status-tag {
+  padding: 0.4em;
+  width: fit-content;
+  border-radius: 3px;
+}
+
+.blue-tag {
+  background-color: #00679a;
+  color: white;
+}
+
+.yellow-tag {
+  background-color: #f9c70e;
+  color: black;
+}
+
+.green-tag {
+  background-color:  	#32CD32;
+  color: white;
+}
+
+.gray-tag {
+  background-color:  	 #c9c9c9 ;
+  color: black;
+}
+
+::ng-deep .p-button {
+  background-color: #00679a;
+  float: inline-end;
+  margin: 1em;
+}

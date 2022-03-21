@@ -106,3 +106,13 @@ h4 {
   width: 95%;
   display: block;
 }
+
+.spinner-div {
+  width: 100%;
+  text-align: center;
+  color: #00679a;
+}
+
+.custom-spinner::ng-deep circle{
+  stroke: #00679a !important;
+}

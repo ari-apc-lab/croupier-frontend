@@ -14,9 +14,9 @@ import { AppInstanceService } from '../../instances/app-instance.service';
 })
 export class DashboardComponent implements OnInit {
 
-  applications: Application[] = []; // display the apps in the screen (3 units)
+  applications: Application[]; // display the apps in the screen (3 units)
   appList = []; // store all the apps to manage other functionalities.
-  instances: any[] = [];
+  instances: any[];
 
   constructor(
     private applicationService: ApplicationService,
