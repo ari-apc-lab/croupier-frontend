@@ -1,0 +1,161 @@
+<p-dialog header="Selected execution values" [(visible)]="displayModal">
+
+  <div class="data-cont" *ngIf="selectedExecution">
+
+    <!-- Instance -->
+    <div class="val-cont">
+      <div class="tag-name">
+        Instance:
+      </div>
+      <div class="value">
+        {{selectedExecution.instance}}
+      </div>
+    </div>
+
+    <!-- Created date -->
+    <div class="val-cont">
+      <div class="tag-name">
+        Created on:
+      </div>
+      <div class="value">
+        {{selectedExecution.created | date:'short'}}
+      </div>
+    </div>
+
+    <!-- Fisished -->
+    <div class="val-cont">
+      <div class="tag-name">
+        Created on:
+      </div>
+      <div class="value">
+        {{selectedExecution.finished | date:'short'}}
+      </div>
+    </div>
+
+    <!-- Fisished -->
+    <div class="val-cont">
+      <div class="tag-name">
+        Execution time:
+      </div>
+      <div class="value">
+        {{selectedExecution.execution_time}}
+      </div>
+    </div>
+
+    <!-- Fisished -->
+    <div class="val-cont">
+      <div class="tag-name">
+        Owner:
+      </div>
+      <div class="value">
+        {{selectedExecution.owner}}
+      </div>
+    </div>
+
+    <!-- Status -->
+    <div class="val-cont">
+      <div class="tag-name">
+        Status:
+      </div>
+      <div class="value">
+        {{selectedExecution.status}}
+      </div>
+    </div>
+
+    <!-- Has errors -->
+    <div class="val-cont">
+      <div class="tag-name">
+        Has errors?
+      </div>
+      <div class="value" *ngIf="selectedExecution.has_errors">
+        Yes
+      </div>
+      <div class="value" *ngIf="!selectedExecution.has_errors">
+        No
+      </div>
+    </div>
+
+    <!-- Number of errors -->
+    <div class="val-cont">
+      <div class="tag-name">
+        Numbers of errors
+      </div>
+      <div class="value">
+        {{selectedExecution.num_errors}}
+      </div>
+    </div>
+
+    <!-- Current task -->
+    <div class="val-cont">
+      <div class="tag-name">
+        Current task
+      </div>
+      <div class="value">
+        {{selectedExecution.current_task}}
+      </div>
+    </div>
+
+    <!-- Progress -->
+    <div class="val-cont">
+      <div class="tag-name">
+        Progress
+      </div>
+      <div class="value">
+        <p-progressBar [value]="selectedExecution.progress"></p-progressBar>
+      </div>
+    </div>    
+
+  </div>
+</p-dialog>
+<div>
+
+  <h1 class="title">
+    Executions
+  </h1>
+
+  <p-table [value]="executions" responsiveLayout="scroll" [paginator]="true" [rows]="10">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Created on</th>
+            <th>Finished on</th>
+            <th>Status</th>
+            <th>Has errors</th>
+            <th>Errors</th>
+            <th *ngIf="!instance">Instance</th>
+            <th>Open</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-exec>
+        <tr>
+            <td>{{exec.created | date:'short'}}</td>
+            <td>{{exec.finished}}</td>
+            <td>{{exec.status}}</td>
+            <td>
+              <mat-icon class="icon-check" aria-hidden="false" *ngIf="!exec.has_errors">check_circle</mat-icon>
+              <mat-icon class="icon-cancel" *ngIf="exec.has_errors">cancel</mat-icon>
+            </td>
+            <td>{{exec.num_errors}}</td>
+            <td *ngIf="!instance">
+              <!--
+                <button (click)="navigate('/instances/detail/'+exec.instance)">{{exec.instance}}</button>
+              -->
+              <p-button styleClass="p-button-open" (click)="navigate('/instances/detail/'+exec.instance)" styleClass="p-button-open">
+                {{exec.instance}}
+                <mat-icon aria-hidden="false">chevron_right</mat-icon>
+                
+              </p-button>
+              <p > 
+                
+              </p>
+              
+            </td>
+            <td>
+              <p-button styleClass="p-button-open" (click)="openExecutionModal(exec)">
+                <mat-icon aria-hidden="false">open_in_new</mat-icon>
+              </p-button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+</div>
+

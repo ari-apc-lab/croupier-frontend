@@ -21,6 +21,8 @@ import { InstancedetailComponent } from './features/shared/services/instances/in
 import { CookiesPolicyComponent } from './features/landing-page/cookies-banner/cookies-policy/cookies-policy.component';
 import { GettingStartedComponent } from './features/getting-started/getting-started.component';
 import { CoviseVisualizeComponent } from './features/modules/covise-visualize/covise-visualize.component';
+import { UserProfileComponent } from './features/shared/user-profile/user-profile.component';
+import { ExecutionsComponent } from './features/shared/services/executions/executions.component';
 
 const routes: Routes = [
 
@@ -154,6 +156,33 @@ const routes: Routes = [
     path: '',
     component: LandingPageComponent
   },
+ /* {
+    path: '',
+    component: DefaultComponent,
+    children: [
+      {
+        path: '',
+        // component: DashboardComponent,
+     //   loadChildren: () => import('./features/shared/shared.module').then(m => m.SharedModule)
+        loadChildren: () => import('./features/landing-page/landing-page.module').then(m => m.LandingPageModule),
+        component: LandingPageComponent
+      }
+    ],
+  },*/
+
+  {
+    path: 'executions',
+    component: DefaultComponent,
+    children: [
+      {
+        path: '',
+        // component: DashboardComponent,
+     //   loadChildren: () => import('./features/shared/shared.module').then(m => m.SharedModule)
+        loadChildren: () => import('./features/shared/services/executions/executions.module').then(m => m.ExecutionModule),
+        component: ExecutionsComponent
+      }
+    ],
+  },
   {
     path: 'cookies-policy',
     component: CookiesPolicyComponent
@@ -161,6 +190,20 @@ const routes: Routes = [
   {
     path: 'getting-started',
     component: GettingStartedComponent
+  },
+  {
+    path: 'profile',
+    component: DefaultComponent,
+    children: [
+      {
+        path: '',
+        // component: DashboardComponent,
+     //   loadChildren: () => import('./features/shared/shared.module').then(m => m.SharedModule)
+        loadChildren: () => import('./features/shared/user-profile/user-profile.module').then(m => m.UserProfileModule),
+        component: UserProfileComponent
+      }
+    ],
+    canActivate:  [AppAuthGuard]
   },
 
   // Routes - 3

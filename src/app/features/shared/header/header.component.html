@@ -1,6 +1,6 @@
 <mat-toolbar>
     <mat-toolbar-row>
-        <button class="toolbar-btn" mat-icon-button (click)="toggleSideBar()">
+        <button class="toolbar-btn" mat-icon-button (click)="toggleSideBar()" *ngIf="displaySBButton">
             <mat-icon>menu</mat-icon>
         </button>
 
@@ -34,6 +34,10 @@
                             <mat-icon>exit_to_app</mat-icon>
                             Sign out
                         </button>
+                        <button class="toolbar-btn" mat-menu-item (click)="navigate('/profile')">
+                          <mat-icon>person_outline</mat-icon>
+                          See profile
+                      </button>
                     </mat-menu>
                 </li>
             </ul>

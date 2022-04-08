@@ -1,4 +1,5 @@
-<h2 class="title-section">Edit the file <span style="color: #00679a;">{{fileTitle}}</span></h2>
+
+<h2 class="title-section" *ngIf="fileTitle">Edit the file <span style="color: #00679a;">{{fileTitle}}</span></h2>
 
 <h3 *ngIf="!fileContent">
   <b>Atention:</b> No file uploaded, please upload a file to see the content.

@@ -1,0 +1,59 @@
+
+<div class="profile-board">
+  <h1 class="title">Profile of {{profile.username}}</h1>
+
+  <div class="profile-data">
+  
+    <div class="attr-cont">
+      <div class="data-label">
+        Username: 
+      </div>
+      <div class="data-val">
+        {{profile.username}}
+      </div>
+    </div>
+  
+    <div class="attr-cont">
+      <div class="data-label">
+        First name: 
+      </div>
+      <div class="data-val">
+        {{profile.firstName}}
+      </div>
+    </div>
+  
+    <div class="attr-cont">
+      <div class="data-label">
+        Last name: 
+      </div>
+      <div class="data-val">
+        {{profile.lastName}}
+      </div>
+    </div>
+  
+    <div class="attr-cont">
+      <div class="data-label">
+        Email: 
+      </div>
+      <div class="data-val">
+        {{profile.email}}
+      </div>
+    </div>
+  
+    <div class="attr-cont">
+      <div class="data-label">
+        e-mail status: 
+      </div>
+      <div class="data-val">
+        <div *ngIf="profile.emailVerified" class="tag green-tag">
+          Verified
+        </div>
+        <div *ngIf="!profile.emailVerified" class="tag red-tag">
+          Pendent to verify
+        </div>
+      </div>
+    </div>
+  
+  </div>
+</div>
+

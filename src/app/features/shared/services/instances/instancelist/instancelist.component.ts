@@ -18,7 +18,7 @@ export class InstancelistComponent implements OnInit {
   private _app: Application;
 
   instances: AppInstance[];
-
+  @Input() reloadInstList: boolean;
   @Input()
   set application(app: Application) {
     if (app !== undefined) {
@@ -26,6 +26,8 @@ export class InstancelistComponent implements OnInit {
       this.getAppInstances();
     }
   }
+
+  
 
   get application(): Application {
     return this._app;

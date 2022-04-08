@@ -37,15 +37,13 @@ h4 {
  /* max-height: 120px;
   min-width: 120px;*/
   /*background-color: #3f525c;*/
-  background-image: linear-gradient(140deg, #00679a, #355565);
+ /* background-image: linear-gradient(140deg, #00679a, #355565);*/
   border-radius: 2px;
   display: block ruby;
   height: 100%;
 }
 .module:hover {
-  background-color: #eee;
   cursor: pointer;
-  color: #607d8b;
 }
 
 .app-data {
@@ -77,7 +75,7 @@ h4 {
   }
 }
 
-.instance-card {
+.obj-card {
   padding: 20px;
   text-align: center;
   color: #eee;
@@ -92,19 +90,16 @@ h4 {
   display: block;
 }
 
-.app-card {
-  padding: 20px;
-  text-align: center;
-  color: #eee;
- /* max-height: 120px;
-  min-width: 120px;*/
-  /*background-color: #3f525c;*/
+.ins-obj-card {
   background-image: linear-gradient(140deg, #00679a, #355565);
-  border-radius: 10px;
-  display: block ruby;
-  height: 100%;
-  width: 95%;
-  display: block;
+}
+
+.app-obj-card {
+  background-image: linear-gradient(140deg, #00679a, #355565);
+}
+
+.hl-obj-card {
+  background-image: linear-gradient(140deg, #00679a, #ba0488);
 }
 
 .spinner-div {

@@ -221,3 +221,13 @@ button:hover {
 ::ng-deep .p-dialog {
   width: 50% !important;
 }
+
+.rounded-btn {
+  margin-top: 0;
+  border-radius: 50%;
+  width: 2.2em;
+  padding: 0.1em;
+  background-color: #7ca6ba !important;
+  color: white;
+  margin-left: 01em;
+}

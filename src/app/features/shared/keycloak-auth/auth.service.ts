@@ -11,6 +11,7 @@ export class AuthService extends KeycloakService {
   signedIn = false;
   token: string;
   userName: string;
+  profile;
 
   constructor() {
     // initialize KeycloakSerive
@@ -50,6 +51,7 @@ export class AuthService extends KeycloakService {
         this.signedIn = true;
         console.log('logged in: OnAuthSuccess');
         this.getKeycloakInstance().loadUserProfile().success(profile => {
+          this.profile = profile;
           console.log(profile.firstName);
           console.log(profile.lastName);
           console.log(profile.username);
@@ -75,5 +77,9 @@ export class AuthService extends KeycloakService {
       default:
         break;
     }
+  }
+
+  getProfile() {
+    return this.profile;
   }
 }

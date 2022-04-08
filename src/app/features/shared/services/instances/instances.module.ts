@@ -29,6 +29,8 @@ import { MonacoEditorModule } from '@materia-ui/ngx-monaco-editor';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { ButtonModule } from 'primeng/button';
 import {ToastModule} from 'primeng/toast';
+import { ExecutionModule } from '../executions/executions.module';
+import {TabViewModule} from 'primeng/tabview';
 
 
 @NgModule({
@@ -38,7 +40,8 @@ import {ToastModule} from 'primeng/toast';
     InstancetextlogComponent,
     InstanceDashboardComponent,
     InstanceFormComponent,
-    TextEditorComponent
+    TextEditorComponent,
+
   ],
   imports: [
     CommonModule,
@@ -62,13 +65,15 @@ import {ToastModule} from 'primeng/toast';
     MonacoEditorModule,
     ToggleButtonModule,
     ButtonModule,
-    ToastModule
+    ToastModule,
+    ExecutionModule,
+    TabViewModule
   ],
   exports: [
     InstancelistComponent,
     InstanceDashboardComponent,
     InstanceFormComponent,
-    TextEditorComponent
+    TextEditorComponent,
   ]
 })
 export class InstancesModule { }

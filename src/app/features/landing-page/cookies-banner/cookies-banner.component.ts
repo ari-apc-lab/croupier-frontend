@@ -15,7 +15,6 @@ export class CookiesBannerComponent implements OnInit {
   }
 
   acceptCookies() {
-    console.log(document.cookie);
     localStorage.setItem('cookies-acceptance', 'true');
     this.closeCookies.emit(false)
   }

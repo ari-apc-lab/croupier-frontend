@@ -3,9 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Application } from '../application';
 import { ApplicationService } from '../application.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {MenuItem} from 'primeng/api';
 import { MessageService, PrimeNGConfig } from 'primeng/api';
+import { AppInstanceService } from '../../instances/app-instance.service';
+import { requiredFileType } from '../../../utils/file-upload/update-file-validators';
+import { AppInstance } from '../../instances/app-instance';
 
 @Component({
   selector: 'app-appdetail',
@@ -18,11 +21,9 @@ export class AppdetailComponent implements OnInit {
   application: Application;
   inputs: any;
   displayForm: boolean;
-  appParamsForm: FormGroup; //new FormGroup({});
+  appParamsForm: FormGroup;
   formBuilder: FormBuilder;
-
   items: MenuItem[];
-
   activeItem: MenuItem;
   instances: any;
   boolOpts = [
@@ -30,10 +31,19 @@ export class AppdetailComponent implements OnInit {
     {label: 'True', value: true}
   ];
 
+  instanceForm = new FormGroup({
+    name: new FormControl(null, Validators.required),
+    description: new FormControl(null, Validators.required),
+    inputs_file: new FormControl(null, [Validators.required, requiredFileType('yaml')]),
+    app: new FormControl(null)
+  });
+
   yamlContentText: any;
   fileTitle: any;
   displayD = false;
   jsonParsedToYaml: string;
+  reloadInsList: boolean;
+  inputsFromFile;
 
   // helpers
   isString(val): boolean {return typeof val === 'string'; }
@@ -46,7 +56,8 @@ export class AppdetailComponent implements OnInit {
     private appService: ApplicationService,
     private location: Location,
     private messageService: MessageService,
-    private primengConfig: PrimeNGConfig
+    private primengConfig: PrimeNGConfig,
+    private instaceService: AppInstanceService
 
   ) { }
 
@@ -77,8 +88,52 @@ export class AppdetailComponent implements OnInit {
     this.location.back();
   }
 
-  save(): void {
-    this.appService.updateApplication(this.application).subscribe(() => this.goBack());
+  /**
+   * It can't update because method PUT is disabled, So is needed to create a yaml file and send it.
+   */
+  save(event): void {
+
+    // import yaml converter
+    const yaml = require('yaml');
+    Object.keys(this.inputsFromFile).forEach(key => {
+      this.inputs.forEach(element => {
+        if (key === element['name']) {
+          this.inputsFromFile[key] = element.default;
+        }
+      });
+    });
+
+    // create yaml instance
+    const content = new yaml.Document();
+    // set input values to yaml's value. (content)
+    content.contents = this.inputsFromFile;
+    // constanto to host yaml content in string.
+    const contentToFile = content.toString();
+    // create new file with the yaml value in string.
+    const file = new File([contentToFile], 'inputs.yaml', {type: ''});
+    // set app name to the form of instance.
+    this.instanceForm.get('app').setValue(this.application.name);
+    this.instanceForm.get('inputs_file').setValue(file);
+
+    // send form to the instance service to store it in DB.
+    this.instaceService.addAppInstance(this.instanceForm.value)
+    .pipe(
+
+    )
+    .subscribe(
+      (data) => {
+        if (this.reloadInsList) {
+          this.reloadInsList = false;
+        } else {
+          this.reloadInsList = true;
+        }
+        this.messageService.add({key: 'bc', severity: 'success', summary: 'Success', detail: 'The instance was saved correctlly'});
+      },
+      (err) => {
+        this.messageService.add({key: 'bc', severity: 'error', summary: 'Error', detail: 'Error saving the instance'});
+      }
+    );
+    // this.appService.updateApplication(this.application).subscribe(() => this.goBack());
   }
 
   addField(event, key, value) {
@@ -92,6 +147,7 @@ export class AppdetailComponent implements OnInit {
    * @param event inputs from the .yaml file in JSON format, received from InstanceFormComponent.
    */
   receiveImputsJSON(event) {
+    this.inputsFromFile = event;
     Object.keys(event).forEach(key => {
       this.inputs.forEach(element => {
         if (key === element['name']) {

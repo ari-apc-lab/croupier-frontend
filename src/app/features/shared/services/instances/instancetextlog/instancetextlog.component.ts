@@ -63,6 +63,7 @@ export class InstancetextlogComponent implements OnInit, OnChanges {
   getAppInstanceEvents(): void {
     if (this._instance) {
       this.instanceService.getAppInstanceEvents(this._instance.id).subscribe(response => {
+        console.log('response', response)
         if (response) {
           this.logs = response['logs'];
           this.permanentLogs = response['logs'];
@@ -72,6 +73,9 @@ export class InstancetextlogComponent implements OnInit, OnChanges {
           this.logs = '';
           // TODO reset status
         }
+      },
+      (err)=> {
+        console.log('error en el componente: ', err);
       });
     }
   }

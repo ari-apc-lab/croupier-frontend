@@ -18,6 +18,7 @@ export class TextEditorComponent implements OnInit {
   @ViewChild(MonacoEditorComponent, { static: false }) monacoComponent: MonacoEditorComponent;
   @Input() fileContent;
   @Input() fileTitle;
+  @Input() editorLanguage = 'yaml';
   @Output() textEdited = new EventEmitter<any>();
   @Output() contentStatus = new EventEmitter<any>();
 
@@ -25,7 +26,7 @@ export class TextEditorComponent implements OnInit {
   userTheme: string = "vs-light";
   editorOptions: MonacoEditorConstructionOptions = {
       theme: this.userTheme,
-      language: this.userLanguage,
+      language: this.editorLanguage,
       roundedSelection: true
     };
   editor: MonacoStandaloneCodeEditor;
@@ -35,7 +36,6 @@ export class TextEditorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('yaml content:', this.fileContent);
   }
 
   editorInit(editor: MonacoStandaloneCodeEditor) {
@@ -44,7 +44,6 @@ export class TextEditorComponent implements OnInit {
   }
 
   changeTheme(event) {
-    console.log('event: ', event.checked);
     if (event.checked) {
      // this.editorOptions.theme = 'vs-dark';
      this.editorOptions = { ...this.editorOptions, theme: 'vs-dark' };

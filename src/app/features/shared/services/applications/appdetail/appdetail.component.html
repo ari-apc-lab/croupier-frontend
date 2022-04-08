@@ -34,11 +34,33 @@
   </div>
 </div>
 
-<app-instancelist [application]="application"></app-instancelist>
+<app-instancelist [application]="application" [reloadInstList]="reloadInsList"></app-instancelist>
 
 <mat-tab-group>
   <mat-tab label="Basic configuration"> 
     <h2 class="title-section">Parameters:</h2>
+    <form [formGroup]="instanceForm">
+      <div class="inputs-cont">
+        <div class="label-input">
+          <label>Name</label>
+        </div> 
+        <div class="input-input">
+          <input class="field-input" type="text" pInputText formControlName="name">
+        </div>
+      </div>
+      <div class="inputs-cont">
+        <div class="label-input">
+          <label>Description</label>
+        </div>
+        <div class="input-input">
+          <input class="field-input" type="text" pInputText formControlName="description">
+        </div>
+      </div>
+    </form>
+
+    <mat-divider></mat-divider>
+    <br>
+
     <div *ngFor="let input of inputs" >
         <div *ngIf="input.default === ''" class="inputs-cont">
           <div class="label-input">
@@ -55,13 +77,34 @@
           
         </div>
     </div>
-    <button (click)="save()" class="save-btn">save</button>
+    <button (click)="save($event)" class="save-btn">save</button>
   </mat-tab>
   <mat-tab label="Expert configuration">
     <h2 class="title-section">Parameters:</h2>
     <div >
-     
-        <div *ngFor="let input of inputs" class="inputs-cont">
+
+      <form [formGroup]="instanceForm">
+        <div class="inputs-cont">
+          <div class="label-input">
+            <label>Name</label>
+          </div> 
+          <div class="input-input">
+            <input class="field-input" type="text" pInputText formControlName="name">
+          </div>
+        </div>
+        <div class="inputs-cont">
+          <div class="label-input">
+            <label>Description</label>
+          </div>
+          <div class="input-input">
+            <input class="field-input" type="text" pInputText formControlName="description">
+          </div>
+        </div>
+      </form>
+
+      <mat-divider></mat-divider>
+      <br>
+      <div *ngFor="let input of inputs" class="inputs-cont">
           <div class="label-input">
             <label>{{input.name}}</label>
           </div>
@@ -115,7 +158,13 @@
           </div>
 
           <div>
-            <button type="button" (click)="openParameterEditor(input.name, input.default)" class="show-btn">value</button>
+            <button 
+                type="button" 
+                (click)="openParameterEditor(input.name, input.default)" 
+                class="rounded-btn" >
+              <mat-icon aria-hidden="false" aria-label="Example home icon">edit_note</mat-icon>
+
+            </button>
             <p-dialog [header]="input.name" [(visible)]="input.name === displayD" class="long-text-dialog">
               <app-text-editor 
                 (textEdited)="input.default = receiveEditorValue($event)"
@@ -130,7 +179,7 @@
           </div>
         </div>
     </div>
-    <button (click)="save()" class="save-btn">save</button>
+    <button (click)="save(inputs)" class="save-btn" type="submit">Save</button>
   </mat-tab>
   
   <mat-tab label="Upload file"> 

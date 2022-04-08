@@ -14,9 +14,7 @@ export class AppComponent implements OnInit{
   }
 
   checkCookies() {
-    console.log('cookies acepatdas? ', localStorage.getItem('cookies-acceptance'))
     if (localStorage.getItem('cookies-acceptance')) {
-      console.log('las ookies han sido aceptadas XD')
       this.displayCookies = false;
     } else {
       this.displayCookies = true;

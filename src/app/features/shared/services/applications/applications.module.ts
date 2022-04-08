@@ -33,6 +33,7 @@ import {ToggleButtonModule} from 'primeng/togglebutton';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { DialogModule } from 'primeng/dialog';
 import {ToastModule} from 'primeng/toast';
+import {MatDividerModule} from '@angular/material/divider'; 
 
 
 
@@ -63,7 +64,8 @@ import {ToastModule} from 'primeng/toast';
     MonacoEditorModule,
     ProgressSpinnerModule,
     DialogModule,
-    ToastModule
+    ToastModule,
+    MatDividerModule
   ],
   declarations: [
     AppdetailComponent,

@@ -72,7 +72,8 @@ export class AppInstanceService {
   /** POST: add a new instance to the server */
   addAppInstance(formValue){ //}: Observable<HttpResponse<Application>> {
     const data = toFormData(formValue); // TODO add owner
-    console.log('data?¿¿?', data)
+    console.log('form value', formValue);
+    console.log('data: ', data);
     return this.http
       .post(this.instancesUrl, data, {
         reportProgress: true,
@@ -98,9 +99,7 @@ export class AppInstanceService {
   }
 
   executeInstance(instanceId): Observable<any> {
-    console.log('id de la instancia a ejecutar: ', instanceId);
     const url = `${this.instancesUrl}${instanceId}` + '/execute/';
-    console.log(url);
     return this.http.post(url, null, httpOptions).pipe(
       tap(_ => this.log(`Executed instance w/ id=${instanceId}`)),
       catchError(this.handleError<AppInstance>('executeInstance'))

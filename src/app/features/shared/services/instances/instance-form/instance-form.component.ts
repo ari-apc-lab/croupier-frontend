@@ -57,7 +57,6 @@ export class InstanceFormComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.manageStatus('0');
-    
   }
 
   ngOnChanges() {
@@ -73,6 +72,7 @@ export class InstanceFormComponent implements OnInit, OnChanges {
     }
     this.addForm.value['app'] = this._app.name;
     this.messageService.add({key: 'bc', severity:'info', summary: 'Info', detail: 'The data was sended to the server'});
+    console.log('********************', this.addForm.value)
     this.instanceService
       .addAppInstance(this.addForm.value)
       .pipe(
@@ -89,6 +89,7 @@ export class InstanceFormComponent implements OnInit, OnChanges {
       (err) => {
         this.messageService.add({key: 'bc', severity: 'error', summary: 'Error', detail: 'Error saving the instance'});
       });
+      
   }
 
   hasError(field: string, error: string) {
@@ -97,7 +98,6 @@ export class InstanceFormComponent implements OnInit, OnChanges {
   }
 
   getApp() {
-    console.log('app', this._app);
   }
 
   getInputsFromYaml() {
@@ -117,7 +117,6 @@ export class InstanceFormComponent implements OnInit, OnChanges {
         this.fileInputsJSON.emit(doc);
         setTimeout(() => { this.manageStatus('1'); }, 500);
       } catch (e) {
-        console.log(e);
       }
     };
   }

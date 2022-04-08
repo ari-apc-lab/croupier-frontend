@@ -116,3 +116,9 @@ label {
   height: auto !important;
   min-height: 30px;
 }
+
+::ng-deep .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+  background: #ffffff;
+  border-color: #00679a;
+  color: #00679a;
+}

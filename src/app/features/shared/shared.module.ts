@@ -29,6 +29,7 @@ import { PieComponent } from './widgets/pie/pie.component';
 
 import { MessageService } from './utils/message.service';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 // import { AuthService } from './keycloak-auth/auth.service';
 // import { AppAuthGuard } from './keycloak-auth/app.authguard';
@@ -58,7 +59,8 @@ import {BreadcrumbModule} from 'primeng/breadcrumb';
     AreaComponent,
     CardComponent,
     PieComponent,
-    BreadcrumbNavComponent,
+    BreadcrumbNavComponent
+    
     // MessagesComponent,
     // FileUploadComponent,
     // ProgressComponent
@@ -75,7 +77,8 @@ import {BreadcrumbModule} from 'primeng/breadcrumb';
     // ProgressComponent
     UtilsModule,
     KeycloakAuthModule,
-    BreadcrumbNavComponent
+    BreadcrumbNavComponent,
+
   ]
 })
 export class SharedModule {

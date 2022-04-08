@@ -12,11 +12,17 @@
     <h2 matSubheader>Applications</h2>
 
     <a mat-list-item [routerLinkActive]="['active']" [routerLink]="['/dashboard']" id="dashboard">
-        <mat-icon class="material-icons-outlined">dashboard</mat-icon>
-        Dashboard</a>
+      <mat-icon class="material-icons-outlined">dashboard</mat-icon>
+      Dashboard
+    </a>
     <a mat-list-item [routerLinkActive]="['active']" [routerLink]="['/apps']" id="apps">
-        <mat-icon >apps</mat-icon>
-        Applications</a>
+      <mat-icon >apps</mat-icon>
+      Applications
+    </a>
+    <a mat-list-item [routerLinkActive]="['active']" [routerLink]="['/executions']" id="apps">
+      <mat-icon >rocket_launch</mat-icon>
+      Executions
+    </a>
   <!--  <a mat-list-item routerLinkActive="list-item-active" routerLink="/module/croupier">
         <mat-icon>architecture</mat-icon>
         Orchestrator

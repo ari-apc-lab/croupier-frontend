@@ -44,7 +44,6 @@ export class InstancedetailComponent implements OnInit {
       .subscribe(instance => {
         this.instance = instance;
         this.inputs = JSON.parse(instance['inputs'])[0];
-        console.log('instance inputs: ', this.inputs);
       });
   }
 
@@ -59,11 +58,9 @@ export class InstancedetailComponent implements OnInit {
   }
 
   execute() {
-    console.log('id ins:', this.instance.id);
     this.messageService.add({severity: 'info', summary: 'Executing:', detail: 'The instance is executing, please wait!'});
     this.instanceService.executeInstance(this.instance.id).subscribe(
       (data) => {
-        console.log('resultado de la ejecución: ', data);
         this.messageService.clear();
         this.messageService.add({severity: 'success', summary: 'Success:', detail: 'Instance executed successfully!'});
         setTimeout(() => {

@@ -1,0 +1,46 @@
+.icon-check {
+  color: #27ae60;
+}
+
+.icon-cancel {
+  color: #e74c3c;
+}
+
+::ng-deep .p-button-open {
+  background-color: white;
+  float: initial;
+  margin: 0em;
+  padding: 0.2em !important;
+  color: #00679a;
+  border: none;
+
+}
+
+::ng-deep .p-button-open:hover {
+  background-color: #00679a !important;
+  color: white;
+  border: none;
+}
+
+.data-cont {
+}
+.val-cont {
+  display: ruby;
+  font-size: large;
+}
+.tag-name {
+  width: 30%;
+  color: #00679a;
+  font-weight: bold;
+  padding: 0.2em;
+}
+.value {
+  width: 70%;
+  padding: 0.2em;
+}
+
+::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+
+  padding: 0.3rem 1rem !important;
+}
+

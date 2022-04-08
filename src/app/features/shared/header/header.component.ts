@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../keycloak-auth/auth.service';
@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit {
   token: string;
 
   @Output() toggleSideBarForMe: EventEmitter<any> = new EventEmitter();
+  @Input() displaySBButton = true;
 
   constructor(
     public authService: AuthService,

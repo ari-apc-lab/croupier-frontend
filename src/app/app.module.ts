@@ -33,6 +33,8 @@ import {ButtonModule} from 'primeng/button';
 import { CookiesBannerComponent } from './features/landing-page/cookies-banner/cookies-banner.component';
 import { GettingStartedModule } from './features/getting-started/getting-started.module';
 import { CoviseVisualizeComponent } from './features/modules/covise-visualize/covise-visualize.component';
+import { ExecutionsComponent } from './features/shared/services/executions/executions.component';
+// import { UserProfileComponent } from './features/shared/user-profile/user-profile.component';
 // Import utils components
 
 @NgModule({
@@ -64,6 +66,8 @@ import { CoviseVisualizeComponent } from './features/modules/covise-visualize/co
     CookiesPolicyComponent,
     CookiesBannerComponent,
     CoviseVisualizeComponent,
+ //   UserProfileComponent,
+   // HeaderComponent
     
   ],
   providers: [

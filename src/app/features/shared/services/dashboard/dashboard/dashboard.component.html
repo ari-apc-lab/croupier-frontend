@@ -6,8 +6,35 @@
 
 <app-appsearch></app-appsearch>
 
-<h2>Latest Applications</h2>
+<!--
+  HIGHLIGHTED APPLICATIONS CONTAINER
+-->
 
+<h2>Highlighted Applications</h2>
+
+<mat-grid-list cols="3" rowHeight="3:1">
+  <div *ngIf="!advertisedApps">
+    No Highlighted Applications yet.
+  </div>
+  <mat-grid-tile *ngFor="let app of advertisedApps">
+    <div class="obj-card hl-obj-card">
+      
+      <div class="module app">
+        <div class="app-data">
+          <p>{{ app.name }}</p>
+          <p>Owner: {{app.owner}}</p>
+          <p>{{app.created |  date:'MM/dd/yy HH:mm:ss'}}</p>
+        </div>
+      </div>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
+
+
+<!--
+  LATEST APPLICATIONS CONTAINER
+-->
+<h2>Latest Applications</h2>
 
 <mat-grid-list cols="3" rowHeight="3:1">
   <mat-grid-tile *ngIf="!applications">
@@ -17,7 +44,7 @@
     </div>
   </mat-grid-tile>
   <mat-grid-tile *ngFor="let app of applications">
-    <div class="instance-card" routerLink="/apps/detail/{{ app.id }}">
+    <div class="obj-card app-obj-card" routerLink="/apps/detail/{{ app.id }}">
       
       <div class="module app">
         <div class="app-data">
@@ -40,6 +67,10 @@
   </mat-grid-tile>
 </mat-grid-list>
 
+<!--
+  LATESTS INSTANCES CONTAINER
+-->
+
 <h2>Latests instances</h2>
 
 <mat-grid-list cols="3" rowHeight="3:1">
@@ -50,9 +81,32 @@
     </div>
   </mat-grid-tile>
   <mat-grid-tile *ngFor="let instance of instances">
-    <div class="instance-card" routerLink="/instances/detail/{{ instance.id }}">
+    <div class="obj-card ins-obj-card" routerLink="/instances/detail/{{ instance.id }}">
       <h2><b>Name:</b> {{instance.name}}</h2>
       <h3><b>App:</b> {{instance.app_name}}</h3>
     </div>
   </mat-grid-tile>
 </mat-grid-list>
+
+<!--
+  LATESTS EXECUTIONS CONTAINER
+-->
+
+<h2>Latests Executions</h2>
+
+<mat-grid-list cols="3" rowHeight="3:1">
+  <mat-grid-tile *ngIf="!executions">
+    <div class="spinner-div" >
+      <p-progressSpinner class="custom-spinner" [style]="{width: '70px', height: '70px'}" animationDuration=".5s"></p-progressSpinner>
+      <p>Loading...</p>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile *ngFor="let execution of executions">
+    <div class="obj-card" routerLink="/instances/detail/{{ execution.instance }}">
+      <h2><b>ID:</b> {{execution.id}}</h2>
+      <h3><b>Instance:</b> {{execution.instance}}</h3>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
+
+

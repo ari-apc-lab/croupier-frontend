@@ -1,0 +1,39 @@
+.data-label {
+  width: 15%;
+  color: #607D8B;
+  margin: 0.5em;
+}
+
+.profile-data {
+  margin: 2em;
+  font-size: medium;
+}
+
+.attr-cont {
+  display: block ruby;
+}
+
+.data-val {
+
+}
+
+.tag {
+  border-radius: 3px;
+  padding: 0.4em;
+} 
+.green-tag {
+  background-color: limegreen;
+}
+
+.red-tag {
+  background-color: firebrick;
+  color:white;
+}
+
+.profile-board {
+  margin: 2em;
+}
+
+.title {
+  color: #00679a;
+}
