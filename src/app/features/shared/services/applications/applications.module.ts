@@ -34,7 +34,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { DialogModule } from 'primeng/dialog';
 import {ToastModule} from 'primeng/toast';
 import {MatDividerModule} from '@angular/material/divider'; 
-
+import {MatPaginatorModule} from '@angular/material/paginator'; 
+import { ValueSetBrowserComponent } from './value-set-browser/value-set-browser.component';
 
 
 @NgModule({
@@ -65,15 +66,19 @@ import {MatDividerModule} from '@angular/material/divider';
     ProgressSpinnerModule,
     DialogModule,
     ToastModule,
-    MatDividerModule
+    MatDividerModule,
+    MatPaginatorModule
+    
   ],
   declarations: [
     AppdetailComponent,
     ApplistComponent,
     AppsearchComponent,
+    ValueSetBrowserComponent
+    
    // TextEditorComponent
   ],
-  exports: [AppsearchComponent, //TextEditorComponent
+  exports: [AppsearchComponent, ValueSetBrowserComponent //TextEditorComponent
   ]
 })
 export class ApplicationsModule {

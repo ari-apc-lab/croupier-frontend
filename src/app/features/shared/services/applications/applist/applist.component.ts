@@ -36,6 +36,11 @@ export class ApplistComponent implements OnInit {
     blueprint_file: new FormControl(null, [Validators.required, requiredFileType('zip')])
   });
   success = false;
+  advertisedApps: any[];
+  newApps: any[];
+  pagedApplications: any[];
+  pageSizeOptions: number[] = [5, 10, 20, 30];
+  pageSize: number = 10;
 
   constructor(
     private appService: ApplicationService,
@@ -47,6 +52,10 @@ export class ApplistComponent implements OnInit {
   ngOnInit() {
     this.primengConfig.ripple = true;
     this.getApplications();
+    const t = this;
+    setTimeout(function(){
+      t.getAdvertisedApps();
+    }, 1000);
   }
 
   getBPFileName() {
@@ -64,8 +73,12 @@ export class ApplistComponent implements OnInit {
   }
 
   getApplications(): void {
-    this.appService.getApplications().subscribe(apps => (this.applications = apps));
+    this.appService.getApplications().subscribe(apps => {
+      this.applications = apps;
+      this.pagedApplications = apps.slice(0, 10);
+    });
   }
+
 
   add() {
     this.messageService.add({severity: 'info', summary: 'Saving', detail: 'The application is being saved in the server, please wait!'});
@@ -128,6 +141,24 @@ export class ApplistComponent implements OnInit {
 
   hideFormNew() {
     this.displayFormNew = false;
+  }
+
+  getAdvertisedApps() {
+    this.applications.forEach(element => {
+      if (element['is_advertised']) {
+        this.advertisedApps.push(element);
+      }
+    });
+
+  }
+
+  OnPageChange(event){
+    let startIndex = event.pageIndex * event.pageSize;
+    let endIndex = startIndex + event.pageSize;
+    if (endIndex > this.applications.length){
+      endIndex = this.applications.length;
+    }
+    this.pagedApplications = this.applications.slice(startIndex, endIndex);
   }
 
 }

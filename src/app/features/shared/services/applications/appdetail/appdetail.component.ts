@@ -9,6 +9,7 @@ import { MessageService, PrimeNGConfig } from 'primeng/api';
 import { AppInstanceService } from '../../instances/app-instance.service';
 import { requiredFileType } from '../../../utils/file-upload/update-file-validators';
 import { AppInstance } from '../../instances/app-instance';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-appdetail',
@@ -19,13 +20,16 @@ import { AppInstance } from '../../instances/app-instance';
 export class AppdetailComponent implements OnInit {
 
   application: Application;
-  inputs: any;
+  inputs: any[] = [];
+  simpleInputs: any[] = [];
   displayForm: boolean;
   appParamsForm: FormGroup;
   formBuilder: FormBuilder;
   items: MenuItem[];
   activeItem: MenuItem;
   instances: any;
+  displayVSB: boolean;
+
   boolOpts = [
     {label: 'False', value: false},
     {label: 'True', value: true}
@@ -44,6 +48,8 @@ export class AppdetailComponent implements OnInit {
   jsonParsedToYaml: string;
   reloadInsList: boolean;
   inputsFromFile;
+
+
 
   // helpers
   isString(val): boolean {return typeof val === 'string'; }
@@ -80,6 +86,16 @@ export class AppdetailComponent implements OnInit {
         this.application = app;
         // input from string to json
         this.inputs = JSON.parse(this.application['inputs'])[0];
+        if (this.inputs) {
+          setTimeout(() => {
+            this.inputs.forEach(element => {
+              if (element.default === '') {
+                this.simpleInputs.push(element);
+              }
+            });
+          }, 1000);
+        }
+
       }
     );
   }
@@ -95,7 +111,8 @@ export class AppdetailComponent implements OnInit {
 
     // import yaml converter
     const yaml = require('yaml');
-    Object.keys(this.inputsFromFile).forEach(key => {
+
+    Object.keys(this.inputs).forEach(key => {
       this.inputs.forEach(element => {
         if (key === element['name']) {
           this.inputsFromFile[key] = element.default;
@@ -114,7 +131,6 @@ export class AppdetailComponent implements OnInit {
     // set app name to the form of instance.
     this.instanceForm.get('app').setValue(this.application.name);
     this.instanceForm.get('inputs_file').setValue(file);
-
     // send form to the instance service to store it in DB.
     this.instaceService.addAppInstance(this.instanceForm.value)
     .pipe(
@@ -183,6 +199,10 @@ export class AppdetailComponent implements OnInit {
     const parsedJSON = yaml.load(input);
     this.messageService.add({key: 'bc', severity: 'success', summary: 'Success', detail: 'Input data modified correctly'});
     return parsedJSON;
+  }
+
+  openVSBrowser() {
+    this.displayVSB = true
   }
 
 }

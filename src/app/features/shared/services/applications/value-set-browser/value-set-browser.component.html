@@ -1,0 +1,18 @@
+<input 
+  #searchBox 
+  id="search-box" 
+  (input)="search(searchBox.value)" 
+  class="search-input" 
+  placeholder="Enter keyword to search" />
+
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+  </tr>
+  <tr *ngFor="let vs of valueSet$ | async">
+    <td>{{ vs.dataset_id }}</td>
+    <td>{{ vs.name }}</td>
+  </tr>
+</table>

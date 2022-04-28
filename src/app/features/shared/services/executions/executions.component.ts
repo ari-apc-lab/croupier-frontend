@@ -75,20 +75,26 @@ export class ExecutionsComponent implements OnInit {
   /**
    * Get single execution
    */
-  getExecution() {
-
+  getExecution(execution) {
+    this.execService.getExecution(execution.id).subscribe(
+      (data) => {
+        console.log('???????', data)
+        this.selectedExecution = data;
+      }
+    );
   }
 
   /**
    * Open modal to display the data of a single execution.
    */
   openExecutionModal(exec) {
-    this.selectedExecution = exec;
+  //  this.selectedExecution = exec;
+    this.getExecution(exec);
     this.displayModal = true;
   }
 
   navigate(url) {
-    this.router.navigate([url])
+    this.router.navigate([url]);
   }
 
 }

@@ -20,6 +20,10 @@ export class DashboardComponent implements OnInit {
   instances: any[];
   executions: any[];
   advertisedApps: any[];
+  latestsInstances: any[];
+  pagedInstances: any[];
+  pageSizeOptions: number[] = [5, 10, 20, 30];
+  pageSize: number = 10;
 
   constructor(
     private applicationService: ApplicationService,
@@ -32,14 +36,18 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.primengConfig.ripple = true;
     const t = this;
+
+
     this.getApplications();
     setTimeout(function(){
+      t.getInstances();
+      t.getLatestsExecutions();
+    }, 1000);
+  /*  setTimeout(function(){
       t.getLatestsInstances();
       t.getLatestsExecutions()
       t.getAdvertisedApps()
-    }, 1000);
-
-    
+    }, 1000);*/
   }
 
   getApplications(): void {
@@ -70,7 +78,7 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  getLatestsInstances() {
+  getInstances() {
     this.instanceService.getInstancesList().subscribe(
       (data) => {
         data.sort( (a, b) => {
@@ -83,12 +91,14 @@ export class DashboardComponent implements OnInit {
           // a must be equal to b
           return 0;
         });
-
+        console.log('received instances: ', data)
         data.forEach(element => {
           element['app_name'] = this.getInstnceAppName(element.app);
         });
+        this.instances = data;
 
-        this.instances = data.slice(0, 3);
+        // this.latestsInstances = data.slice(0, 3);
+        this.pagedInstances = data.slice(0, 10);
       },
       (err) => {
         console.error(err);
@@ -119,6 +129,7 @@ export class DashboardComponent implements OnInit {
     )
   }
 
+  /*
   getAdvertisedApps() {
     this.appList.forEach(element => {
       if (element['is_advertised']) {
@@ -127,7 +138,7 @@ export class DashboardComponent implements OnInit {
     });
 
   }
-
+*/
   getInstnceAppName(appId) {
     let appName = '';
     const name =  this.appList.find(element => element.id === appId);
@@ -138,6 +149,16 @@ export class DashboardComponent implements OnInit {
     }
 
     return appName;
+  }
+
+
+  OnPageChange(event){
+    let startIndex = event.pageIndex * event.pageSize;
+    let endIndex = startIndex + event.pageSize;
+    if (endIndex > this.instances.length){
+      endIndex = this.instances.length;
+    }
+    this.pagedInstances = this.instances.slice(startIndex, endIndex);
   }
 
 }

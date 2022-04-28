@@ -104,6 +104,19 @@ export class ApplicationService {
       return of(result as T);
     };
   }
+
+  getDatasets(key) {
+
+    const url = environment.apiUrl + 'ckan?keywords=';
+    if (!key.trim()) {
+      // if not search term, return empty hero array.
+      return of([]);
+    }
+    return this.http.get<any[]>(`${url}${key}`,).pipe(
+      tap(_ => this.log(`found applications matching "${key}"`)),
+      catchError(this.handleError<Application[]>('searchApplications', []))
+    );
+  }
 }
 
 export function toFormData<T>(formValue: T): FormData {

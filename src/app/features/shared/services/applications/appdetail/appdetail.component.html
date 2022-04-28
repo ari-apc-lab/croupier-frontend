@@ -61,15 +61,14 @@
     <mat-divider></mat-divider>
     <br>
 
-    <div *ngFor="let input of inputs" >
-        <div *ngIf="input.default === ''" class="inputs-cont">
+    <div *ngFor="let input of simpleInputs" >
+        <div class="inputs-cont">
           <div class="label-input">
             <label>{{input.name}}</label>
           </div>
           
           <div class="input-input">
             <input  class="field-input" type="text" pInputText [(ngModel)]="input.default">
-            <p *ngIf="!isObject(input.default)">{{input.default}}</p>
           </div>
           <div >
             <mat-icon style="color: #7ca6ba; margin-left: 15px;" aria-hidden="false" [matTooltip]="input.description">info</mat-icon>
@@ -118,12 +117,15 @@
                     Open to display the fields of <b> {{input.name}}</b>.
                   </mat-panel-title>
                 </mat-expansion-panel-header>
+                <button (click)="openVSBrowser()">Search Value Sets</button>
                 <div *ngFor="let item of input.default | keyvalue">
+                  
                   <div class="object-input" style="width: 100%; background: #e1e1e1;
                   border-radius: 1%;
                   padding: 2%;">
                     <input type="text" [(ngModel)]="item.key">:
                     <div *ngIf="isObject(item.value)" >
+                      
                       <div *ngFor="let element of item.value | keyvalue">
                         <p><b>{{element.key}}: </b><input  type="text" [(ngModel)]="element.value"></p> 
                       </div>
@@ -194,3 +196,7 @@
     </app-instance-form>
   </mat-tab> 
 </mat-tab-group>
+
+<p-dialog header="Value Set Browser" [(visible)]="displayVSB">
+  <app-value-set-browser></app-value-set-browser>
+</p-dialog>

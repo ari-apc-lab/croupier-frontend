@@ -6,72 +6,56 @@
 
 <app-appsearch></app-appsearch>
 
-<!--
-  HIGHLIGHTED APPLICATIONS CONTAINER
--->
 
-<h2>Highlighted Applications</h2>
 
-<mat-grid-list cols="3" rowHeight="3:1">
-  <div *ngIf="!advertisedApps">
-    No Highlighted Applications yet.
-  </div>
-  <mat-grid-tile *ngFor="let app of advertisedApps">
-    <div class="obj-card hl-obj-card">
-      
-      <div class="module app">
-        <div class="app-data">
-          <p>{{ app.name }}</p>
-          <p>Owner: {{app.owner}}</p>
-          <p>{{app.created |  date:'MM/dd/yy HH:mm:ss'}}</p>
-        </div>
-      </div>
-    </div>
-  </mat-grid-tile>
-</mat-grid-list>
 
 
 <!--
   LATEST APPLICATIONS CONTAINER
 -->
-<h2>Latest Applications</h2>
 
-<mat-grid-list cols="3" rowHeight="3:1">
-  <mat-grid-tile *ngIf="!applications">
-    <div class="spinner-div" >
-      <p-progressSpinner class="custom-spinner" [style]="{width: '70px', height: '70px'}" animationDuration=".5s"></p-progressSpinner>
-      <p>Loading...</p>
-    </div>
-  </mat-grid-tile>
-  <mat-grid-tile *ngFor="let app of applications">
-    <div class="obj-card app-obj-card" routerLink="/apps/detail/{{ app.id }}">
-      
-      <div class="module app">
-        <div class="app-data">
-          <p>{{ app.name }}</p>
-          <p>Owner: {{app.owner}}</p>
-          <p>{{app.created |  date:'MM/dd/yy HH:mm:ss'}}</p>
-        </div>
-        <div  *ngIf="app.is_new" class="is-new-star">
-          <mat-icon 
-           
-            aria-hidden="false" 
-            style="color: #ffd401; font-size: xx-large;"
-            >
-            star
-          </mat-icon>
-          <p style="color: #ffd401; font-size: large;">NEW</p>
+<!--
+  <h2>Latest Applications</h2>
+
+  <mat-grid-list cols="3" rowHeight="3:1">
+    <mat-grid-tile *ngIf="!applications">
+      <div class="spinner-div" >
+        <p-progressSpinner class="custom-spinner" [style]="{width: '70px', height: '70px'}" animationDuration=".5s"></p-progressSpinner>
+        <p>Loading...</p>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile *ngFor="let app of applications">
+      <div class="obj-card app-obj-card" routerLink="/apps/detail/{{ app.id }}">
+        
+        <div class="module app">
+          <div class="app-data">
+            <p>{{ app.name }}</p>
+            <p>Owner: {{app.owner}}</p>
+            <p>{{app.created |  date:'MM/dd/yy HH:mm:ss'}}</p>
+          </div>
+          <div  *ngIf="app.is_new" class="is-new-star">
+            <mat-icon 
+            
+              aria-hidden="false" 
+              style="color: #ffd401; font-size: xx-large;"
+              >
+              star
+            </mat-icon>
+            <p style="color: #ffd401; font-size: large;">NEW</p>
+          </div>
         </div>
       </div>
-    </div>
-  </mat-grid-tile>
-</mat-grid-list>
+    </mat-grid-tile>
+  </mat-grid-list>
+-->
 
 <!--
   LATESTS INSTANCES CONTAINER
 -->
 
-<h2>Latests instances</h2>
+<h2>Instances list</h2>
+
+
 
 <mat-grid-list cols="3" rowHeight="3:1">
   <mat-grid-tile *ngIf="!instances">
@@ -80,13 +64,28 @@
       <p>Loading...</p>
     </div>
   </mat-grid-tile>
-  <mat-grid-tile *ngFor="let instance of instances">
+  <mat-grid-tile *ngIf="instances.length === 0">
+    <div style="color: #00679a;
+    font-size: large;" >
+      <p>No instances found</p>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile *ngFor="let instance of pagedInstances">
     <div class="obj-card ins-obj-card" routerLink="/instances/detail/{{ instance.id }}">
       <h2><b>Name:</b> {{instance.name}}</h2>
       <h3><b>App:</b> {{instance.app_name}}</h3>
     </div>
   </mat-grid-tile>
+<br/><br/>
 </mat-grid-list>
+
+<mat-paginator 
+  *ngIf="instances"
+  [length]="instances.length"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="pageSizeOptions"
+  (page)="OnPageChange($event)">
+</mat-paginator>
 
 <!--
   LATESTS EXECUTIONS CONTAINER
@@ -99,6 +98,12 @@
     <div class="spinner-div" >
       <p-progressSpinner class="custom-spinner" [style]="{width: '70px', height: '70px'}" animationDuration=".5s"></p-progressSpinner>
       <p>Loading...</p>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile *ngIf="executions.length === 0">
+    <div style="color: #00679a;
+    font-size: large;" >
+      <p>No executions found</p>
     </div>
   </mat-grid-tile>
   <mat-grid-tile *ngFor="let execution of executions">

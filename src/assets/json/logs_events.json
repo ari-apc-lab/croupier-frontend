@@ -1,4 +1,9 @@
 [
+  {
+		"code": "all",
+		"title": "All",
+    "type": "log"
+	},
 	{
 		"code": "debug",
 		"title": "Debug",
@@ -28,6 +33,11 @@
 		"title": "Critical",
 		"icon": "new_releases",
     "type": "log"
+	},
+  {
+		"code": "all",
+		"title": "All",
+    "type": "event"
 	},
 	{
 		"code": "policy_success",

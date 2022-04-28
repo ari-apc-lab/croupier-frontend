@@ -174,19 +174,8 @@ button:hover {
   background-color: #345565;
 }
 
-.p-button.p-button-icon-only.p-button-rounded {
-  color:#00679a;
-  margin: 0.5em;
-}
 
-.p-button.p-button-icon-only.p-button-rounded.save-btn:hover {
-  background-color: #00679a;
-  color: white;
-}
 
-.title-cont {
-  display: flex;
-}
 
 .data-cont {
   width: 100%;

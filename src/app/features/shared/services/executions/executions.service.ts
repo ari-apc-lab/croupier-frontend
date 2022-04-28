@@ -28,6 +28,6 @@ export class ExecutionsService {
 
   getExecution(id): Observable<any> {
     const url = this.executionUrl  + id;
-    return
+    return this.http.get(url, httpOptions);
   }
 }

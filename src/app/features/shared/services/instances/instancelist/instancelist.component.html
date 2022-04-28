@@ -16,7 +16,7 @@
   No instances
 </div>
 <mat-grid-list cols="3" rowHeight="3:1">
-  <mat-grid-tile *ngFor="let instance of instances">
+  <mat-grid-tile *ngFor="let instance of pagedInstances">
     <div class="app-card" (click)="open(instance)">
       <div class="ins-name">
         <p class="ins-name">{{instance.id}} - {{instance.name}}</p>
@@ -29,3 +29,11 @@
     </div>
   </mat-grid-tile>
 </mat-grid-list>
+
+<mat-paginator 
+  *ngIf="instances"
+  [length]="instances.length"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="pageSizeOptions"
+  (page)="OnPageChange($event)">
+</mat-paginator>

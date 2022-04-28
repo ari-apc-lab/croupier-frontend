@@ -9,6 +9,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MessagesModule} from 'primeng/messages';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import {PaginatorModule} from 'primeng/paginator';
+import {MatPaginatorModule} from '@angular/material/paginator'; 
 
 @NgModule({
   declarations: [DashboardComponent],
@@ -19,7 +21,9 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     MatIconModule,
     MatGridListModule,
     MessagesModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    PaginatorModule,
+    MatPaginatorModule
   ]
 })
 export class DashboardModule { }

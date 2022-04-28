@@ -34,6 +34,7 @@ import { CookiesBannerComponent } from './features/landing-page/cookies-banner/c
 import { GettingStartedModule } from './features/getting-started/getting-started.module';
 import { CoviseVisualizeComponent } from './features/modules/covise-visualize/covise-visualize.component';
 import { ExecutionsComponent } from './features/shared/services/executions/executions.component';
+import { ValueSetBrowserComponent } from './features/shared/services/applications/value-set-browser/value-set-browser.component';
 // import { UserProfileComponent } from './features/shared/user-profile/user-profile.component';
 // Import utils components
 
@@ -66,6 +67,7 @@ import { ExecutionsComponent } from './features/shared/services/executions/execu
     CookiesPolicyComponent,
     CookiesBannerComponent,
     CoviseVisualizeComponent,
+  //  ValueSetBrowserComponent,
  //   UserProfileComponent,
    // HeaderComponent
     

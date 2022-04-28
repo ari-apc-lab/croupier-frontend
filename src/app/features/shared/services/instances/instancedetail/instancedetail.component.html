@@ -1,91 +1,98 @@
 <p-messages></p-messages>
-<h2 class="title">{{ instance.name | uppercase }} Details</h2>
-<p-tabView>
-  <p-tabPanel header="Details">
-    <div *ngIf="instance">
-      <div>
-        <p>
-          <label>
-            ID:
-          </label>
-          {{ instance.id }}
-        </p>
-        <p>
-          <label>
-            Name: 
-          </label>
-          {{instance.name}}
-        </p>
-        <p>
-          <label>
-            Description: 
-          </label>
-          {{instance.description}}
-        </p>
-    
-      </div>
-    
-      <!-- INSTANCE INPUTS -->
-      <h2 style="color: #00679a">Inputs</h2>
-      <div class="inputs-list">
-        <div class="input-card" *ngFor="let input of inputs">
-          <div class="input-name">
-            {{input.name}}
-          </div>
-          <div class="input-value">
-            
-             <!-- TYPE TEXT OR NUMBER-->
-            <div *ngIf="isString(input.value)">
-              {{input.value}}
+<div *ngIf="instance">
+  <div class="title-cont">
+    <button (click)="goBack()" pButton pRipple type="button" icon="pi pi-chevron-left" class="p-button-rounded p-button-outlined"></button>
+    <h2 class="title">{{ instance.name | uppercase }} Details</h2>
+  </div>
+  
+  <p-tabView>
+    <p-tabPanel header="Details">
+      <div *ngIf="instance">
+        <div>
+          <p>
+            <label>
+              ID:
+            </label>
+            {{ instance.id }}
+          </p>
+          <p>
+            <label>
+              Name: 
+            </label>
+            {{instance.name}}
+          </p>
+          <p>
+            <label>
+              Description: 
+            </label>
+            {{instance.description}}
+          </p>
+      
+        </div>
+      
+        <!-- INSTANCE INPUTS -->
+        <h2 style="color: #00679a">Inputs</h2>
+        <div class="inputs-list">
+          <div class="input-card" *ngFor="let input of inputs">
+            <div class="input-name">
+              {{input.name}}
             </div>
-             <!-- TYPE OBJECT-->
-            <div *ngIf="isObject(input.value)">
-              <div *ngFor="let item of input.value | keyvalue">
-                <!-- if the value is a simple value-->
-                <div *ngIf="isString(item.value)">
-                  <div *ngIf="passToYaml(item.value).length < 100">
-                    <p><b>{{item.key}}:</b> {{item.value}}</p>
+            <div class="input-value">
+              
+               <!-- TYPE TEXT OR NUMBER-->
+              <div *ngIf="isString(input.value)">
+                {{input.value}}
+              </div>
+               <!-- TYPE OBJECT-->
+              <div *ngIf="isObject(input.value)">
+                <div *ngFor="let item of input.value | keyvalue">
+                  <!-- if the value is a simple value-->
+                  <div *ngIf="isString(item.value)">
+                    <div *ngIf="passToYaml(item.value).length < 100">
+                      <p><b>{{item.key}}:</b> {{item.value}}</p>
+                    </div>
+                    <div *ngIf="passToYaml(item.value).length > 99">
+                      <p><b>{{item.key}}:</b> {{item.value | slice:0:100}}</p>
+                      <button type="button" (click)="displayLongText()" class="show-btn">Show complete value</button>
+                      <p-dialog [header]="input.name + ' > ' + item.key" [(visible)]="displayLT" class="long-text-dialog">
+                        <pre>{{passToYaml(item.value)}}</pre>
+                      </p-dialog>
+                    </div>
                   </div>
-                  <div *ngIf="passToYaml(item.value).length > 99">
-                    <p><b>{{item.key}}:</b> {{item.value | slice:0:100}}</p>
+                  <!-- if the value is a object and length is less or equal than 100-->
+                  <div *ngIf="isObject(item.value) && passToYaml(item.value).length < 101 ">
+                    <b>{{item.key}}:</b> 
+                    <pre style="margin-left: 2em; margin-bottom: 0;">{{passToYaml(item.value)}}</pre>
+                  </div>
+                  <!-- if the object is greater than 100 characters -->
+                  <div *ngIf="isObject(item.value) && passToYaml(item.value).length > 100 ">
+                    <b>{{item.key}}:</b> 
+                    <pre style="margin-left: 2em; margin-bottom: 0;">{{passToYaml(item.value) | slice:0:100}}</pre>
+                    <!-- Button to display the whole object -->
                     <button type="button" (click)="displayLongText()" class="show-btn">Show complete value</button>
+                    <!-- Dialog to display the whole -->
                     <p-dialog [header]="input.name + ' > ' + item.key" [(visible)]="displayLT" class="long-text-dialog">
-                      <pre>{{passToYaml(item.value)}}</pre>
+                        <pre>{{passToYaml(item.value)}}</pre>
                     </p-dialog>
                   </div>
-                </div>
-                <!-- if the value is a object and length is less or equal than 100-->
-                <div *ngIf="isObject(item.value) && passToYaml(item.value).length < 101 ">
-                  <b>{{item.key}}:</b> 
-                  <pre style="margin-left: 2em; margin-bottom: 0;">{{passToYaml(item.value)}}</pre>
-                </div>
-                <!-- if the object is greater than 100 characters -->
-                <div *ngIf="isObject(item.value) && passToYaml(item.value).length > 100 ">
-                  <b>{{item.key}}:</b> 
-                  <pre style="margin-left: 2em; margin-bottom: 0;">{{passToYaml(item.value) | slice:0:100}}</pre>
-                  <!-- Button to display the whole object -->
-                  <button type="button" (click)="displayLongText()" class="show-btn">Show complete value</button>
-                  <!-- Dialog to display the whole -->
-                  <p-dialog [header]="input.name + ' > ' + item.key" [(visible)]="displayLT" class="long-text-dialog">
-                      <pre>{{passToYaml(item.value)}}</pre>
-                  </p-dialog>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      
       </div>
-    
-    </div>
-    
-    <button (click)="goBack()" class="gb-btn">Go back</button>
-    <button (click)="execute()" class="ex-btn">Execute</button>
-  </p-tabPanel>
-  <p-tabPanel header="Logs">
-    <app-instancetextlog [instance]="instance"></app-instancetextlog>
-    
-  </p-tabPanel>
-  <p-tabPanel header="Executions">
-    <app-executions [instance]="instance.name"></app-executions>
-  </p-tabPanel>
-</p-tabView>
+      
+      <button (click)="goBack()" class="gb-btn">Go back</button>
+      <button (click)="execute()" class="ex-btn">Execute</button>
+    </p-tabPanel>
+    <p-tabPanel header="Logs">
+      <app-instancetextlog [instance]="instance"></app-instancetextlog>
+      
+    </p-tabPanel>
+    <p-tabPanel header="Executions">
+      <app-executions [instance]="instance.name"></app-executions>
+    </p-tabPanel>
+  </p-tabView>
+</div>
+

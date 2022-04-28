@@ -4,6 +4,7 @@ import { AppInstance } from '../app-instance';
 import { AppInstanceService } from '../app-instance.service';
 import * as LogsEventsStatus from '../../../../../../assets/json/logs_events.json';
 import { Dropdown } from 'primeng/dropdown';
+import { MessageService, PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: 'app-instancetextlog',
@@ -42,9 +43,14 @@ export class InstancetextlogComponent implements OnInit, OnChanges {
 
   @Input() instance;
 
-  constructor(private instanceService: AppInstanceService) {}
+  constructor(
+    private instanceService: AppInstanceService,
+    private messageService: MessageService,
+    private primengConfig: PrimeNGConfig
+    ) {}
 
   ngOnInit() {
+    this.primengConfig.ripple = true;
     this.logsEventsStatus = LogsEventsStatus['default'];
     this.logsEventsStatus.forEach(element => {
       if (element.type === 'log') {
@@ -71,6 +77,10 @@ export class InstancetextlogComponent implements OnInit, OnChanges {
         } else {
           this.last = 0;
           this.logs = '';
+          this.messageService.add({severity: 'error', summary: 'Error:', detail: 'Error getting execution logs for this instance.'});
+          setTimeout(() => {
+            this.messageService.clear();
+          }, 5000);
           // TODO reset status
         }
       },
@@ -118,8 +128,11 @@ export class InstancetextlogComponent implements OnInit, OnChanges {
     this.permanentLogs.forEach(element => {
       if (element[attribute] === key) {
         this.logs.push(element);
+      } else if (key === 'all') {
+        this.logs = this.permanentLogs;
       }
     });
+
   }
 
   restartFilters(level: Dropdown, eType: Dropdown) {

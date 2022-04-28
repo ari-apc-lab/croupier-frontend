@@ -25,7 +25,7 @@
     <!-- Fisished -->
     <div class="val-cont">
       <div class="tag-name">
-        Created on:
+        Finished on:
       </div>
       <div class="value">
         {{selectedExecution.finished | date:'short'}}
@@ -39,6 +39,16 @@
       </div>
       <div class="value">
         {{selectedExecution.execution_time}}
+      </div>
+    </div>
+
+        <!-- Current task -->
+    <div class="val-cont">
+      <div class="tag-name">
+         Current task:
+      </div>
+      <div class="value">
+        {{selectedExecution.current_task}}
       </div>
     </div>
 
@@ -105,6 +115,22 @@
       </div>
     </div>    
 
+
+    <!-- Errors messages -->
+    <div class="val-cont">
+      <div class="tag-name">
+        Errors:
+      </div>
+      <div class="value">
+        <code *ngIf="selectedExecution.error_message">
+          {{selectedExecution.error_message}}
+        </code>
+        <p *ngIf="!selectedExecution.error_message">
+          No errors <mat-icon class="icon-check" aria-hidden="false">check_circle</mat-icon>
+        </p>
+      </div>
+    </div>  
+
   </div>
 </p-dialog>
 <div>
@@ -128,7 +154,7 @@
     <ng-template pTemplate="body" let-exec>
         <tr>
             <td>{{exec.created | date:'short'}}</td>
-            <td>{{exec.finished}}</td>
+            <td>{{exec.finished | date:'short'}}</td>
             <td>{{exec.status}}</td>
             <td>
               <mat-icon class="icon-check" aria-hidden="false" *ngIf="!exec.has_errors">check_circle</mat-icon>

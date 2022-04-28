@@ -18,6 +18,9 @@ export class InstancelistComponent implements OnInit {
   private _app: Application;
 
   instances: AppInstance[];
+  pagedInstances: AppInstance[];
+  pageSize: number = 10;  //displaying three cards each row
+  pageSizeOptions: number[] = [5, 10, 20, 30];
   @Input() reloadInstList: boolean;
   @Input()
   set application(app: Application) {
@@ -49,7 +52,10 @@ export class InstancelistComponent implements OnInit {
   getAppInstances(): void {
     this.instanceService
       .getAppInstances(this.application)
-      .subscribe(instances => (this.instances = instances));
+      .subscribe(instances => {
+        this.instances = instances;
+        this.pagedInstances = instances.slice(0, 10);
+      });
   }
 
   /** todo */
@@ -60,6 +66,15 @@ export class InstancelistComponent implements OnInit {
   open(inst: AppInstance) {
     const url = '/instances/detail/' + inst.id;
     this.router.navigate([url]);
+  }
+
+  OnPageChange(event){
+    let startIndex = event.pageIndex * event.pageSize;
+    let endIndex = startIndex + event.pageSize;
+    if (endIndex > this.instances.length){
+      endIndex = this.instances.length;
+    }
+    this.pagedInstances = this.instances.slice(startIndex, endIndex);
   }
 
 }

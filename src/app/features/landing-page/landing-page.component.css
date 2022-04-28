@@ -121,3 +121,24 @@ main color = #00679a
 .p-sidebar-bottom {
   height: 15rem !important;
 }
+
+.enter-btn {
+  color: white;
+  text-align: center;
+  font-size: xx-large;
+  border-radius: 10px;
+  background-color: #00679a;
+  padding: 0.5em;
+  
+  border: 2px white solid;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  margin-bottom: 0.5em;
+}
+
+.enter-btn:hover {
+  color: #00679a;
+  background-color: white;
+  border: 2px #00679a solid;
+}

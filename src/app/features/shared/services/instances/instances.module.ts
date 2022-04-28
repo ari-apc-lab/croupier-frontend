@@ -31,6 +31,7 @@ import { ButtonModule } from 'primeng/button';
 import {ToastModule} from 'primeng/toast';
 import { ExecutionModule } from '../executions/executions.module';
 import {TabViewModule} from 'primeng/tabview';
+import {MatPaginatorModule} from '@angular/material/paginator'; 
 
 
 @NgModule({
@@ -67,7 +68,8 @@ import {TabViewModule} from 'primeng/tabview';
     ButtonModule,
     ToastModule,
     ExecutionModule,
-    TabViewModule
+    TabViewModule,
+    MatPaginatorModule
   ],
   exports: [
     InstancelistComponent,

@@ -148,7 +148,7 @@ const routes: Routes = [
       {
         path: 'covise',
         component: CoviseVisualizeComponent
-      }
+      },
     ],
     canActivate:  [AppAuthGuard]
   },
