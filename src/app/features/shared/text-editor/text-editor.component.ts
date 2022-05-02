@@ -1,12 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import {
-  MonacoEditorComponent,
-  MonacoEditorConstructionOptions,
-  MonacoEditorLoaderService,
-  MonacoStandaloneCodeEditor
-} from '@materia-ui/ngx-monaco-editor';
-
-
 
 @Component({
   selector: 'app-text-editor',
@@ -15,7 +7,6 @@ import {
 })
 export class TextEditorComponent implements OnInit {
 
-  @ViewChild(MonacoEditorComponent, { static: false }) monacoComponent: MonacoEditorComponent;
   @Input() fileContent;
   @Input() fileTitle;
   @Input() editorLanguage = 'yaml';
@@ -24,32 +15,35 @@ export class TextEditorComponent implements OnInit {
 
   userLanguage: string = "yaml";
   userTheme: string = "vs-light";
-  editorOptions: MonacoEditorConstructionOptions = {
-      theme: this.userTheme,
-      language: this.editorLanguage,
-      roundedSelection: true
-    };
-  editor: MonacoStandaloneCodeEditor;
+  codeMirrorOptions: any = {
+    mode: "text/x-yaml",
+    indentWithTabs: true,
+    smartIndent: true,
+    lineNumbers: true,
+    lineWrapping: false,
+    extraKeys: { "Ctrl-Space": "autocomplete" },
+    gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+    autoCloseBrackets: true,
+    matchBrackets: true,
+    lint: true,
+    theme: 'eclipse'
+  };
+
   disabled = true;
 
-  constructor(private monacoLoaderService: MonacoEditorLoaderService) {
+  constructor() {
   }
 
   ngOnInit(): void {
-  }
 
-  editorInit(editor: MonacoStandaloneCodeEditor) {
-    this.editor = editor;
-    this.emitStatus('1')
   }
 
   changeTheme(event) {
+    console.log('---->', event.checked)
     if (event.checked) {
-     // this.editorOptions.theme = 'vs-dark';
-     this.editorOptions = { ...this.editorOptions, theme: 'vs-dark' };
+      this.codeMirrorOptions.theme = 'ayu-dark';
     } else if (!event.checked) {
-    //  this.editorOptions.theme = 'vs-light';
-    this.editorOptions = { ...this.editorOptions, theme: 'vs-light' };
+      this.codeMirrorOptions.theme = 'eclipse';
     }
   }
 
@@ -59,7 +53,7 @@ export class TextEditorComponent implements OnInit {
   }
 
   emitStatus(status) {
-    this.disabled = false
+    this.disabled = false;
     this.contentStatus.emit(status);
   }
 
@@ -68,15 +62,12 @@ export class TextEditorComponent implements OnInit {
 
     const fileContent = this.fileContent;
     const file = new File([fileContent], 'inputs.yaml', {type: 'text/plain'});
-
     const link = document.createElement('a');
     const url = URL.createObjectURL(file);
-
     link.href = url;
     link.download = file.name;
     document.body.appendChild(link);
     link.click();
-
     document.body.removeChild(link);
     window.URL.revokeObjectURL(url);
   }

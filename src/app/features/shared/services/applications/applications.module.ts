@@ -28,18 +28,20 @@ import {MessagesModule} from 'primeng/messages';
 import {TabViewModule} from 'primeng/tabview';
 import {DropdownModule} from 'primeng/dropdown';
 import { TextEditorComponent } from '../../text-editor/text-editor.component';
-import { MonacoEditorModule, MONACO_PATH } from '@materia-ui/ngx-monaco-editor';
 import {ToggleButtonModule} from 'primeng/togglebutton';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { DialogModule } from 'primeng/dialog';
 import {ToastModule} from 'primeng/toast';
-import {MatDividerModule} from '@angular/material/divider'; 
-import {MatPaginatorModule} from '@angular/material/paginator'; 
+import {MatDividerModule} from '@angular/material/divider';
+import {MatPaginatorModule} from '@angular/material/paginator';
 import { ValueSetBrowserComponent } from './value-set-browser/value-set-browser.component';
+import { CodemirrorModule } from '@ctrl/ngx-codemirror';
+
 
 
 @NgModule({
   imports: [
+    CodemirrorModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
@@ -62,33 +64,27 @@ import { ValueSetBrowserComponent } from './value-set-browser/value-set-browser.
     MessagesModule,
     TabViewModule,
     DropdownModule,
-    MonacoEditorModule,
     ProgressSpinnerModule,
     DialogModule,
     ToastModule,
     MatDividerModule,
     MatPaginatorModule
-    
   ],
   declarations: [
     AppdetailComponent,
     ApplistComponent,
     AppsearchComponent,
     ValueSetBrowserComponent
-    
    // TextEditorComponent
   ],
-  exports: [AppsearchComponent, ValueSetBrowserComponent //TextEditorComponent
+  exports: [AppsearchComponent, ValueSetBrowserComponent // TextEditorComponent
   ]
 })
 export class ApplicationsModule {
   static forRoot() {
     return {
       ngModule: ApplicationModule,
-      providers: [ApplicationService, {
-        provide: MONACO_PATH,
-        useValue: 'https://unpkg.com/monaco-editor@0.18.0/min/vs'
-      }]
+      providers: [ ApplicationService ]
     };
   }
 }

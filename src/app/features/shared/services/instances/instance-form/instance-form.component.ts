@@ -142,7 +142,6 @@ export class InstanceFormComponent implements OnInit, OnChanges {
   }
 
   convertYaml(event) {
-
     const fileContent = event;
     const currentFile = this.addForm.get('inputs_file').value;
     const currentFileName = currentFile.name;

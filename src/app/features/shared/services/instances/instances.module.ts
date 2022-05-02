@@ -25,13 +25,13 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { TabMenuModule } from 'primeng/tabmenu';
 import {MatTabsModule} from '@angular/material/tabs'; 
 import { TextEditorComponent } from '../../text-editor/text-editor.component';
-import { MonacoEditorModule } from '@materia-ui/ngx-monaco-editor';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { ButtonModule } from 'primeng/button';
 import {ToastModule} from 'primeng/toast';
 import { ExecutionModule } from '../executions/executions.module';
 import {TabViewModule} from 'primeng/tabview';
 import {MatPaginatorModule} from '@angular/material/paginator'; 
+import { CodemirrorModule } from '@ctrl/ngx-codemirror';
 
 
 @NgModule({
@@ -46,6 +46,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
   ],
   imports: [
     CommonModule,
+    CodemirrorModule,
     FormsModule,
     ReactiveFormsModule,
     InstancesRoutingModule,
@@ -63,7 +64,6 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatBadgeModule,
     TabMenuModule,
     MatTabsModule,
-    MonacoEditorModule,
     ToggleButtonModule,
     ButtonModule,
     ToastModule,

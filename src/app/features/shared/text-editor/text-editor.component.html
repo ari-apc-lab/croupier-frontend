@@ -15,7 +15,7 @@
 </h3>
 
 <div class="editor-container">
-
+<!--
   <ngx-monaco-editor 
     class="textEditorContainer" 
     [options]="editorOptions" 
@@ -23,6 +23,13 @@
     (init)="editorInit($event)"
     (ngModelChange)="emitStatus('2'); disabled=false">
   </ngx-monaco-editor>
+-->
+  <ngx-codemirror 
+    #editor
+    [options]="codeMirrorOptions"
+    [(ngModel)]="fileContent"
+    (ngModelChange)="emitStatus('2'); disabled=false">
+  </ngx-codemirror>
 </div>
 
 <p-button icon="pi pi-download" (click)="onDownload()"  label="Download"></p-button>
