@@ -7,14 +7,22 @@ import { KeycloakOptions } from 'keycloak-angular';
 // Keycloak config
 export const keycloakSetUp: KeycloakOptions = {
   config: {
-    url: 'https://hidalgo-idm.hlrs.de/auth',
-    // url: 'https://prunus-212.man.poznan.pl/auth/',
+    //url: 'https://keycloaktest.grapevine-project.eu/auth',
+    //url: 'http://keycloak.croupier.permedcoe.eu/auth/',
+    //url: 'https://hidalgo-idm.hlrs.de/auth/',
+    url: 'https://prunus-212.man.poznan.pl/auth',
+    //realm: 'grapevine',
+    //realm: 'permedcoe',
     realm: 'Hidalgo',
     clientId: 'frontend',
     credentials: {
-      secret: "d112469e-9386-4c00-b05d-7b6b5270bd3e"
-      //secret: "e940c4ec-5204-41f2-b65a-b289983d9fbb"
+      //secret: "NXhYjjQnW3yLniaNcIOOjQTORpJ8Nq5c",
+      //secret: "UDJGHZWGn2IXqJi2uKS6EORHaITpaqWq"
+      //secret: "d112469e-9386-4c00-b05d-7b6b5270bd3e",
+      //secret: "8kqYDyf2uTtUVbyoNxDIMKDi8eHpuZJ2"
+      secret: "e940c4ec-5204-41f2-b65a-b289983d9fbb"
     },
+    
   },
   initOptions: {
     responseMode: 'fragment',
@@ -30,10 +38,12 @@ export const keycloakSetUp: KeycloakOptions = {
   ]
 };
 
+
+// Backend config
 export const environment = {
   production: false,
   keycloak: keycloakSetUp,
-  apiUrl: 'https://sophora-105.man.poznan.pl/'
+  apiUrl: 'http://localhost:8000/'
   // apiUrl: 'http://62.3.171.105/'
 };
 
