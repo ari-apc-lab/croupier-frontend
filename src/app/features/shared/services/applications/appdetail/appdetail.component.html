@@ -104,10 +104,10 @@
       <mat-divider></mat-divider>
       <br>
       <div *ngFor="let input of inputs" class="inputs-cont">
-          <div class="label-input">
+          <div *ngIf="isNotIAMInput(input.name)" class="label-input">
             <label>{{input.name}}</label>
           </div>
-          <div class="input-input">
+          <div *ngIf="isNotIAMInput(input.name)" class="input-input">
   
             <input *ngIf="isString(input.default)" class="field-input" type="text" pInputText [(ngModel)]="input.default">
           
@@ -159,7 +159,7 @@
             </p-inputNumber>
           </div>
 
-          <div>
+          <div *ngIf="isNotIAMInput(input.name)" >
             <button 
                 type="button" 
                 (click)="openParameterEditor(input.name, input.default)" 
@@ -176,7 +176,7 @@
             </p-dialog>
             
           </div>
-          <div>
+          <div *ngIf="isNotIAMInput(input.name)" >
             <mat-icon style="color: #7ca6ba; margin-left: 15px;" aria-hidden="false" [matTooltip]="input.description">info</mat-icon>
           </div>
         </div>

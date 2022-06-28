@@ -10,6 +10,7 @@ import { AppInstanceService } from '../../instances/app-instance.service';
 import { requiredFileType } from '../../../utils/file-upload/update-file-validators';
 import { AppInstance } from '../../instances/app-instance';
 import { Observable, Subject } from 'rxjs';
+import { AuthService } from '../../../keycloak-auth/auth.service';
 
 @Component({
   selector: 'app-appdetail',
@@ -56,6 +57,10 @@ export class AppdetailComponent implements OnInit {
   isNumber(val): boolean {return typeof val === 'number'; }
   isObject(val): boolean {return typeof val === 'object'; }
   isBoolean(val): boolean {return typeof val === 'boolean'; }
+  IAMLabels: Array<string> = ['iam_jwt', 'iam_user'];
+  isNotIAMInput(input_name): boolean{
+    return !this.IAMLabels.includes(input_name);
+  }
 
   constructor(
     private route: ActivatedRoute,
@@ -63,7 +68,8 @@ export class AppdetailComponent implements OnInit {
     private location: Location,
     private messageService: MessageService,
     private primengConfig: PrimeNGConfig,
-    private instaceService: AppInstanceService
+    private instaceService: AppInstanceService,
+    private authService: AuthService
 
   ) { }
 
@@ -119,6 +125,13 @@ export class AppdetailComponent implements OnInit {
         }
       });
     });
+
+    // Inject IAM (jwt, user) if IAM (iam_jwt, iam_user) inputs are detected
+    var jwt = this.authService.token
+    var user = this.authService.getUsername()
+
+    this.inputsFromFile['iam_jwt'] = jwt
+    this.inputsFromFile['iam_user'] = user
 
     // create yaml instance
     const content = new yaml.Document();
