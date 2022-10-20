@@ -7,11 +7,13 @@ import { KeycloakOptions } from 'keycloak-angular';
 // Keycloak config
 const keycloakSetUp: KeycloakOptions = {
   config: {
-    url: 'https://hidalgo-idm.hlrs.de/auth',
+    //url: 'https://hidalgo-idm.hlrs.de/auth',
+    url: 'https://prunus-212.man.poznan.pl/auth',
     realm: 'Hidalgo',
     clientId: 'frontend',
     credentials: {
-      secret: "d112469e-9386-4c00-b05d-7b6b5270bd3e"
+      //secret: "d112469e-9386-4c00-b05d-7b6b5270bd3e",
+      secret: "e940c4ec-5204-41f2-b65a-b289983d9fbb"
     },
   },
   initOptions: {
@@ -34,5 +36,5 @@ const keycloakSetUp: KeycloakOptions = {
 export const environment = {
   production: false,
   keycloak: keycloakSetUp,
-  apiUrl: 'http://localhost:8000/'
+  apiUrl: 'https://backend.croupier.ari-aidata.eu/'
 };
