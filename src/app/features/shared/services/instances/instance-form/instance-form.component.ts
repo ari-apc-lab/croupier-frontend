@@ -8,6 +8,7 @@ import { requiredFileType } from '../../../utils/file-upload/update-file-validat
 import { Application } from '../../applications/application';
 import { AppInstance } from '../app-instance';
 import { AppInstanceService } from '../app-instance.service';
+import { AuthService } from '../../../keycloak-auth/auth.service';
 
 
 @Component({
@@ -21,7 +22,8 @@ export class InstanceFormComponent implements OnInit, OnChanges {
   constructor(
     private instanceService: AppInstanceService,
     private http: HttpClient,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private authService: AuthService
     ) { }
 
 
@@ -100,6 +102,40 @@ export class InstanceFormComponent implements OnInit, OnChanges {
   getApp() {
   }
 
+
+  injectIAMCredentials(fileReader: FileReader){
+    var result: string
+
+    //Inject IAM credentials
+    var yamlContent = fileReader.result as string
+    let iam_jwtRegEx = /iam_jwt:.s*'.*'/;
+    let iam_userRegEx = /iam_user:.s*'.*'/;
+
+    var jwt = this.authService.token
+    var user = this.authService.getUsername()
+
+
+    if (iam_jwtRegEx.test(yamlContent)){
+      console.log("jwt found")
+      yamlContent = yamlContent.replace(iam_jwtRegEx, "iam_jwt: '" + jwt + "'")
+    } else {
+      yamlContent += "\niam_jwt: '" + jwt + "'"
+    }
+
+    if (iam_userRegEx.test(yamlContent)){
+      console.log("user found")
+      yamlContent = yamlContent.replace(iam_userRegEx, "iam_user: '" + user + "'")
+    } else {
+      yamlContent += "\niam_user: '" + user + "'"
+    }
+
+    //Save File content
+    const file = new File([yamlContent], 'inputs.yaml', {type: ''});
+    this.addForm.get('inputs_file').setValue(file)
+
+    return yamlContent
+  }
+
   getInputsFromYaml() {
     this.messageService.add({key: 'bc', severity:'success', summary: 'Success', detail: 'The file was uploaded successfully'});
     const file = this.addForm.get('inputs_file').value;
@@ -108,7 +144,8 @@ export class InstanceFormComponent implements OnInit, OnChanges {
     let yamlContent;
     fileReader.readAsText(file);
     fileReader.onload = (e) => {
-      yamlContent = fileReader.result;
+      //Inject IAM credentials
+      yamlContent = this.injectIAMCredentials(fileReader);
       this.fileInputsText.emit(yamlContent);
       this.yamlContentText = yamlContent;
       this.yamlContentBackUp = yamlContent;
