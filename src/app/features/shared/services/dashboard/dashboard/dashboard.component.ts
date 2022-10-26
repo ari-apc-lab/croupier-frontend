@@ -93,7 +93,7 @@ export class DashboardComponent implements OnInit {
         });
         console.log('received instances: ', data)
         data.forEach(element => {
-          element['app_name'] = this.getInstnceAppName(element.app);
+          element['app_name'] = this.getInstanceAppName(element.app);
         });
         this.instances = data;
 
@@ -123,6 +123,10 @@ export class DashboardComponent implements OnInit {
           // a must be equal to b
           return 0;
         });
+        data.forEach(element => {
+          element['instance_name'] = this.getExecutionInstanceName(element.instance);
+        });
+
 
         this.executions = data.slice(0, 3);
       }
@@ -139,7 +143,20 @@ export class DashboardComponent implements OnInit {
 
   }
 */
-  getInstnceAppName(appId) {
+  getExecutionInstanceName(instanceId){
+    let instanceName = '';
+    const name =  this.instances.find(element => element.id === instanceId);
+    if (name) {
+      instanceName = name.name;
+    } else {
+      instanceName = '';
+    }
+
+    return instanceName;
+  }
+
+
+  getInstanceAppName(appId) {
     let appName = '';
     const name =  this.appList.find(element => element.id === appId);
     if (name) {

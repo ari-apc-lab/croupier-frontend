@@ -72,8 +72,18 @@ export class InstancetextlogComponent implements OnInit, OnChanges {
         console.log('response', response)
         if (response) {
           this.logs = response['logs'];
-          this.permanentLogs = response['logs'];
           // TODO parse: logs <- data.body.logs
+          // Sort logs by timestamp (recentest before)
+          this.logs = this.logs.sort((log1, log2) => {
+            if (log1.timestamp > log2.timestamp) {
+                return -1;
+            }
+            if (log1.timestamp < log2.timestamp) {
+                return 1;
+            }
+            return 0;
+          });
+          this.permanentLogs = this.logs;
         } else {
           this.last = 0;
           this.logs = '';
@@ -139,7 +149,8 @@ export class InstancetextlogComponent implements OnInit, OnChanges {
     level.clear(null);
     eType.clear(null);
     this.currentType = 'all';
-    this.logs = this.permanentLogs;
+    this.getAppInstanceEvents()
+    //this.logs = this.permanentLogs;
   }
 
   printIcon(code) {

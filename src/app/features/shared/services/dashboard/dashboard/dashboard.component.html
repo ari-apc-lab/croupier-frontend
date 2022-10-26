@@ -109,7 +109,7 @@
   <mat-grid-tile *ngFor="let execution of executions">
     <div class="obj-card" routerLink="/instances/detail/{{ execution.instance }}">
       <h2><b>ID:</b> {{execution.id}}</h2>
-      <h3><b>Instance:</b> {{execution.instance}}</h3>
+      <h3><b>Instance:</b> {{execution.instance_name}}</h3>
     </div>
   </mat-grid-tile>
 </mat-grid-list>

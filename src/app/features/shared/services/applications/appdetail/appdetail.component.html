@@ -90,6 +90,11 @@
           <div class="input-input">
             <input class="field-input" type="text" pInputText formControlName="name">
           </div>
+          <div class="invalid-feedback" style="display: block">
+            <ng-container *ngIf="hasError('name', 'required')">
+              This field is required
+            </ng-container>
+          </div>
         </div>
         <div class="inputs-cont">
           <div class="label-input">
@@ -97,6 +102,11 @@
           </div>
           <div class="input-input">
             <input class="field-input" type="text" pInputText formControlName="description">
+          </div>
+          <div class="invalid-feedback" style="display: block">
+            <ng-container *ngIf="hasError('description', 'required')">
+              This field is required
+            </ng-container>
           </div>
         </div>
       </form>

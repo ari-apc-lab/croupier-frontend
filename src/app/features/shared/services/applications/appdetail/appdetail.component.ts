@@ -39,7 +39,7 @@ export class AppdetailComponent implements OnInit {
   instanceForm = new FormGroup({
     name: new FormControl(null, Validators.required),
     description: new FormControl(null, Validators.required),
-    inputs_file: new FormControl(null, [Validators.required, requiredFileType('yaml')]),
+    inputs_file: new FormControl(null),
     app: new FormControl(null)
   });
 
@@ -110,11 +110,15 @@ export class AppdetailComponent implements OnInit {
     this.location.back();
   }
 
+
   /**
    * It can't update because method PUT is disabled, So is needed to create a yaml file and send it.
    */
   save(event): void {
-
+    if (!this.instanceForm.valid) {
+      markAllAsDirty(this.instanceForm);
+      return;
+    }
     // import yaml converter
     const yaml = require('yaml');
 
@@ -163,6 +167,11 @@ export class AppdetailComponent implements OnInit {
       }
     );
     // this.appService.updateApplication(this.application).subscribe(() => this.goBack());
+  }
+
+  hasError(field: string, error: string) {
+    const control = this.instanceForm.get(field);
+    return control.dirty && control.hasError(error);
   }
 
   addField(event, key, value) {
@@ -218,4 +227,10 @@ export class AppdetailComponent implements OnInit {
     this.displayVSB = true
   }
 
+}
+
+export function markAllAsDirty(form: FormGroup) {
+  for (const control of Object.keys(form.controls)) {
+    form.controls[control].markAsDirty();
+  }
 }
