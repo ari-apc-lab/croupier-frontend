@@ -9,6 +9,7 @@ import { Application } from '../../applications/application';
 import { AppInstance } from '../app-instance';
 import { AppInstanceService } from '../app-instance.service';
 import { AuthService } from '../../../keycloak-auth/auth.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class InstanceFormComponent implements OnInit, OnChanges {
     private instanceService: AppInstanceService,
     private http: HttpClient,
     private messageService: MessageService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
     ) { }
 
 
@@ -73,7 +75,7 @@ export class InstanceFormComponent implements OnInit, OnChanges {
       return;
     }
     this.addForm.value['app'] = this._app.name;
-    this.messageService.add({key: 'bc', severity:'info', summary: 'Info', detail: 'The data was sended to the server'});
+    this.messageService.add({key: 'bc', severity:'info', summary: 'Info', detail: 'The instance creation request was sended to the server'});
     console.log('********************', this.addForm.value)
     this.instanceService
       .addAppInstance(this.addForm.value)
@@ -82,16 +84,23 @@ export class InstanceFormComponent implements OnInit, OnChanges {
         toResponseBody()
       )
       .subscribe((instance: AppInstance) => {
-        this.instances.push(instance);
+        //this.instances.push(instance);
         this.progress = 0;
         this.success = true;
         this.addForm.reset();
-        this.messageService.add({key: 'bc', severity: 'success', summary: 'Success', detail: 'The instance was saved correctlly'});
+        this.messageService.add({key: 'bc', severity: 'success', summary: 'Success', detail: 'The instance was created correctlly'});
+        // Go to created instance
+        this.gotToAppInstance(instance.id)
       },
       (err) => {
-        this.messageService.add({key: 'bc', severity: 'error', summary: 'Error', detail: 'Error saving the instance'});
+        this.messageService.add({key: 'bc', severity: 'error', summary: 'Error', detail: 'Error creating the instance'});
       });
       
+  }
+
+  gotToAppInstance(id) {
+    const url = '/instances/detail/' + id;
+    this.router.navigate([url]);
   }
 
   hasError(field: string, error: string) {

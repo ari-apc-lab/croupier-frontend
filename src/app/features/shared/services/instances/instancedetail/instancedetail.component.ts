@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { AppInstance } from '../app-instance';
 import { AppInstanceService } from '../app-instance.service';
 import { MessageService, PrimeNGConfig } from 'primeng/api';
+import { newArray } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-instancedetail',
@@ -44,7 +45,32 @@ export class InstancedetailComponent implements OnInit {
       .subscribe(instance => {
         this.instance = instance;
         this.inputs = JSON.parse(instance['inputs'])[0];
+        //TODO Check inputs for null values
+        this.filterNullValues(this.inputs)
       });
+  }
+
+  filterNullValues(inputs){
+    for (let i = 0; i < inputs.length; i++) {
+      var input = inputs[i];
+      var value = input.value;
+      if (this.isNullOrUndefined(value)) {
+        value = "";
+      } else if (Array.isArray(value)) {
+        // Remove null entries in array
+        var newValue = [];
+        for (let j = 0; j < value.length; j++) {
+          if (!this.isNullOrUndefined(value[j])){
+            newValue.push(value[j])
+          }
+        }
+        input.value = newValue;
+      }
+    }
+  }
+
+  isNullOrUndefined = (value): value is null | undefined => {
+    return value === null || value === undefined;
   }
 
   goBack(): void {

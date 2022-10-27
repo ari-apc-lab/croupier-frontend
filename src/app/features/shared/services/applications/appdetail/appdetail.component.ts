@@ -1,5 +1,6 @@
 import { Component, OnChanges, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Application } from '../application';
 import { ApplicationService } from '../application.service';
@@ -64,6 +65,7 @@ export class AppdetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private appService: ApplicationService,
     private location: Location,
     private messageService: MessageService,
@@ -155,18 +157,37 @@ export class AppdetailComponent implements OnInit {
     )
     .subscribe(
       (data) => {
+        //FIXME reloadInsList is not used, remove it
         if (this.reloadInsList) {
           this.reloadInsList = false;
         } else {
           this.reloadInsList = true;
         }
-        this.messageService.add({key: 'bc', severity: 'success', summary: 'Success', detail: 'The instance was saved correctlly'});
+
+        // Show success message9
+        this.messageService.add({key: 'bc', severity: 'success', summary: 'Success', detail: 'The instance was created correctlly'});
+        
+        // Go to created instance
+        if (data.hasOwnProperty('body')){
+          var instance_id = data.body.id
+          this.gotToAppInstance(instance_id)
+        }
       },
       (err) => {
-        this.messageService.add({key: 'bc', severity: 'error', summary: 'Error', detail: 'Error saving the instance'});
+        this.messageService.add({key: 'bc', severity: 'error', summary: 'Error', detail: 'Error creating the instance'});
       }
     );
     // this.appService.updateApplication(this.application).subscribe(() => this.goBack());
+  }
+
+  gotToDashboard() {
+    const url = '/dashboard';
+    this.router.navigate([url]);
+  }
+
+  gotToAppInstance(id) {
+    const url = '/instances/detail/' + id;
+    this.router.navigate([url]);
   }
 
   hasError(field: string, error: string) {

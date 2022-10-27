@@ -109,6 +109,7 @@ export class ApplistComponent implements OnInit {
           setTimeout(() => {
             this.messageService.clear();
           }, 5000);
+          this.refreshApplicationList();
         },
         (err) => {
           console.error(err);
@@ -133,6 +134,11 @@ export class ApplistComponent implements OnInit {
   openApp(application: Application) {
     const url = '/apps/detail/' + application.id;
     this.router.navigate([url]);
+  }
+
+  refreshApplicationList() {
+    this.hideFormNew()
+    this.getApplications()
   }
 
   displayFormNewApp() {
