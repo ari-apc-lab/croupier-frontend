@@ -105,7 +105,26 @@ export class InstanceFormComponent implements OnInit, OnChanges {
 
   hasError(field: string, error: string) {
     const control = this.addForm.get(field);
-    return control.dirty && control.hasError(error);
+    if (error == "format"){
+      return control.dirty && (this.isIdentifierFormatIncorrect(control) || control.hasError(error));
+    } else {
+      return control.dirty && control.hasError(error);
+    }
+  }
+
+  isNullOrUndefined = (value): value is null | undefined => {
+    return value === null || value === undefined;
+  }
+
+  isIdentifierFormatIncorrect(control){
+    let regEx = /[^a-zA-Z0-9_\-]/;
+    if (this.isNullOrUndefined(control.value)){
+      return true
+    }
+    if (regEx.test(control.value)){
+      return true
+    }
+    return false
   }
 
   getApp() {

@@ -12,6 +12,9 @@
             <ng-container *ngIf="hasError('name', 'required')">
               This field is required
             </ng-container>
+            <ng-container *ngIf="hasError('name', 'format')">
+              Invalid format, only "_", "-", [0-9], [a-z], [A-Z] characters are allowed
+            </ng-container>
           </div>
         </div>
     
