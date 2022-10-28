@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ExecutionsService } from './executions.service';
 
@@ -14,7 +14,7 @@ import { ExecutionsService } from './executions.service';
  *  abrir modal con los detalles de la ejecucion
  *  navegar hacia instancia de la ejecucion (salvo que ya se pida ej de ins)
  */
-export class ExecutionsComponent implements OnInit {
+export class ExecutionsComponent implements OnInit, OnChanges {
 
   constructor(
               private execService: ExecutionsService,
@@ -22,6 +22,7 @@ export class ExecutionsComponent implements OnInit {
               ) { }
 
   @Input() instance;
+  @Input() hasNewExecution: boolean;
   executions = [];
   displayModal: boolean;
   selectedExecution: any;
@@ -42,7 +43,16 @@ export class ExecutionsComponent implements OnInit {
   ];
 
   ngOnInit(): void {
+    this.getExecutions()
+  }
 
+
+  ngOnChanges(): void {
+    this.getExecutions()
+  }
+
+
+  getExecutions(){
     if (this.instance) {
       this.getExecutionsByIns();
     } else {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, DoCheck } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -13,11 +13,12 @@ import { newArray } from '@angular/compiler/src/util';
   styleUrls: ['./instancedetail.component.css'],
   providers: [MessageService, PrimeNGConfig]
 })
-export class InstancedetailComponent implements OnInit {
+export class InstancedetailComponent implements OnInit, DoCheck {
 
   instance: AppInstance;
   inputs: any;
   displayLT = false;
+  hasNewExecution = false
 
   // hepers
   isString(val): boolean {return typeof val === 'string'; }
@@ -30,12 +31,20 @@ export class InstancedetailComponent implements OnInit {
     private instanceService: AppInstanceService,
     private location: Location,
     private messageService: MessageService,
-    private primengConfig: PrimeNGConfig
+    private primengConfig: PrimeNGConfig,
+    private changeDetector: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
     this.primengConfig.ripple = true;
     this.getApp();
+  }
+
+  ngDoCheck(): void {
+    if (this.hasNewExecution){
+      this.changeDetector.detectChanges()
+      this.hasNewExecution = !this.hasNewExecution
+    }
   }
 
   getApp(): void {
@@ -92,6 +101,7 @@ export class InstancedetailComponent implements OnInit {
         setTimeout(() => {
           this.messageService.clear();
         }, 5000);
+        this.hasNewExecution = true
       },
       (err) => {
         console.error(err);

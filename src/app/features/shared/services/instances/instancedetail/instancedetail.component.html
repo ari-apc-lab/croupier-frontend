@@ -1,4 +1,3 @@
-<p-messages></p-messages>
 <div *ngIf="instance">
   <div class="title-cont">
     <button (click)="goBack()" pButton pRipple type="button" icon="pi pi-chevron-left" class="p-button-rounded p-button-outlined"></button>
@@ -85,14 +84,16 @@
       
       <button (click)="goBack()" class="gb-btn">Go back</button>
       <button (click)="execute()" class="ex-btn">Execute</button>
+      <p-messages></p-messages>
     </p-tabPanel>
     <p-tabPanel header="Logs">
       <app-instancetextlog [instance]="instance"></app-instancetextlog>
       
     </p-tabPanel>
     <p-tabPanel header="Executions">
-      <app-executions [instance]="instance.name"></app-executions>
+      <app-executions [instance]="instance.name" [hasNewExecution]="hasNewExecution"></app-executions>
     </p-tabPanel>
   </p-tabView>
 </div>
+
 
