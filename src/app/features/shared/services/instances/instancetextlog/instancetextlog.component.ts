@@ -38,6 +38,8 @@ export class InstancetextlogComponent implements OnInit, OnChanges {
     {name: 'Events', code: 'events'}
   ];
   currentType = 'all';
+  currentEventType = 'all';
+  currentLogLevel = 'all';
   eventTypes = [];
   LogLevels = [];
 
@@ -63,10 +65,10 @@ export class InstancetextlogComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this._instance = this.instance;
-    this.getAppInstanceEvents();
+    this.getAppInstanceEvents(null, null);
   }
 
-  getAppInstanceEvents(): void {
+  getAppInstanceEvents(event_type, log_level): void {
     if (this._instance) {
       this.instanceService.getAppInstanceEvents(this._instance.id).subscribe(response => {
         console.log('response', response)
@@ -84,6 +86,7 @@ export class InstancetextlogComponent implements OnInit, OnChanges {
             return 0;
           });
           this.permanentLogs = this.logs;
+          this.filterLogs();
         } else {
           this.last = 0;
           this.logs = '';
@@ -108,49 +111,53 @@ export class InstancetextlogComponent implements OnInit, OnChanges {
     return;
   }
 
-  changeType() {
-    this.logs = [];
-    const typeCode = this.currentType['code'];
+  filterLogs() {
+    var typeCode = this.currentType['code'];
+    var eventTypeCode = this.currentEventType['code'];
+    var logLevelCode = this.currentLogLevel['code'];
+
+    if (this.isNullOrUndefined(typeCode)){
+      typeCode = "all"
+    }
+    if (this.isNullOrUndefined(eventTypeCode)){
+      eventTypeCode = "all"
+    }
+    if (this.isNullOrUndefined(logLevelCode)){
+      logLevelCode = "all"
+    }
 
     switch (typeCode) {
       case 'logs':
-        this.loopForEach('cloudify_log', 'type');
+        this._filterLogs('cloudify_log', eventTypeCode, logLevelCode);
         break;
       case 'events':
-        this.loopForEach('cloudify_event', 'type');
+        this._filterLogs('cloudify_event', eventTypeCode, logLevelCode);
         break;
       case 'all':
-        this.logs = this.permanentLogs;
+        this._filterLogs('all', eventTypeCode, logLevelCode);
         break;
     }
   }
 
-  changeEventType(type) {
-    this.loopForEach(type.code, 'event_type');
+  isNullOrUndefined = (value): value is null | undefined => {
+    return value === null || value === undefined;
   }
 
-  changeLogLevel(level) {
-    this.loopForEach(level.code, 'level');
-  }
-
-  loopForEach(key, attribute) {
+  _filterLogs(type, event_type, log_level) {
     this.logs = [];
+
     this.permanentLogs.forEach(element => {
-      if (element[attribute] === key) {
+      if (('all' === type || element['type'] === type) &&
+          ('all' === event_type || element['event_type'] === event_type) &&
+          ('all' === log_level || element['level'] === log_level)) {
         this.logs.push(element);
-      } else if (key === 'all') {
-        this.logs = this.permanentLogs;
-      }
+      } 
     });
 
   }
 
-  restartFilters(level: Dropdown, eType: Dropdown) {
-    level.clear(null);
-    eType.clear(null);
-    this.currentType = 'all';
-    this.getAppInstanceEvents()
-    //this.logs = this.permanentLogs;
+  refreshLogs(level: Dropdown, eType: Dropdown) {
+    this.getAppInstanceEvents(eType.value, level.value);
   }
 
   printIcon(code) {

@@ -33,13 +33,13 @@
         <h2 style="color: #00679a">Inputs</h2>
         <div class="inputs-list">
           <div class="input-card" *ngFor="let input of inputs">
-            <div class="input-name">
+            <div *ngIf="isNotIAMInput(input.name)" class="input-name">
               {{input.name}}
             </div>
-            <div class="input-value">
+            <div *ngIf="isNotIAMInput(input.name)" class="input-value">
               
                <!-- TYPE TEXT OR NUMBER-->
-              <div *ngIf="isString(input.value)">
+              <div *ngIf="isString(input.value) || isNumber(input.value)">
                 {{input.value}}
               </div>
                <!-- TYPE OBJECT-->

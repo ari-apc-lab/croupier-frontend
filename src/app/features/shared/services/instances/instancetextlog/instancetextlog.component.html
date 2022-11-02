@@ -11,11 +11,12 @@
           <label>Type: </label>
         </div>
         <div class="filter-inp">
-          <p-dropdown 
+          <p-dropdown
+            placeholder="Select a type" 
             [options]="executionTypes" 
             [(ngModel)]="currentType" 
             optionLabel="name" 
-            (onChange)="changeType()" 
+            (onChange)="filterLogs()" 
             #typeD>
           </p-dropdown>
         </div>
@@ -30,8 +31,9 @@
           <p-dropdown 
             placeholder="Select a event type" 
             [options]="eventTypes" 
+            [(ngModel)]="currentEventType"
             optionLabel="title" 
-            (onChange)="changeEventType(eType.value)" 
+            (onChange)="filterLogs()" 
             #eType>
           </p-dropdown>
         </div>
@@ -44,10 +46,11 @@
         </div>
         <div class="filter-inp">
           <p-dropdown 
-            placeholder="Select a level" 
+            placeholder="Select a log level" 
             [options]="LogLevels" 
+            [(ngModel)]="currentLogLevel"
             optionLabel="title" 
-            (onChange)="changeLogLevel(level.value)" 
+            (onChange)="filterLogs()" 
             #level>
           </p-dropdown>
         </div>
@@ -55,7 +58,7 @@
 
       </div>
       <div style="width: 8%; padding-top: 1em;">
-        <button mat-mini-fab color="primary" (click)="restartFilters(level, eType)">
+        <button mat-mini-fab color="primary" (click)="refreshLogs(level, eType)">
           <mat-icon>refresh</mat-icon>
         </button>
       </div>

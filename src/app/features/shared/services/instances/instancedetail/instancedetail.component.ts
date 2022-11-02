@@ -25,6 +25,10 @@ export class InstancedetailComponent implements OnInit, DoCheck {
   isNumber(val): boolean {return typeof val === 'number'; }
   isObject(val): boolean {return typeof val === 'object'; }
   isBoolean(val): boolean {return typeof val === 'boolean'; }
+  IAMLabels: Array<string> = ['iam_jwt', 'iam_user'];
+  isNotIAMInput(input_name): boolean{
+    return !this.IAMLabels.includes(input_name);
+  }
 
   constructor(
     private route: ActivatedRoute,
