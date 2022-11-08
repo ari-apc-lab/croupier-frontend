@@ -38,8 +38,8 @@
             </div>
             <div *ngIf="isNotIAMInput(input.name)" class="input-value">
               
-               <!-- TYPE TEXT OR NUMBER-->
-              <div *ngIf="isString(input.value) || isNumber(input.value)">
+               <!-- TYPE TEXT, NUMBER OR BOOLEAN -->
+              <div *ngIf="isString(input.value) || isNumber(input.value) || isBoolean(input.value)">
                 {{input.value}}
               </div>
                <!-- TYPE OBJECT-->
