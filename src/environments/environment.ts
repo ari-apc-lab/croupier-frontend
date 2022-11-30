@@ -7,20 +7,15 @@ import { KeycloakOptions } from 'keycloak-angular';
 // Keycloak config
 export const keycloakSetUp: KeycloakOptions = {
   config: {
-    //url: 'https://keycloaktest.grapevine-project.eu/auth',
-    //url: 'http://keycloak.croupier.permedcoe.eu/auth/',
-    //url: 'https://hidalgo-idm.hlrs.de/auth/',
-    url: 'https://prunus-212.man.poznan.pl/auth',
-    //realm: 'grapevine',
-    //realm: 'permedcoe',
-    realm: 'Hidalgo',
-    clientId: 'frontend',
+    url: 'https://keycloak.croupier.ari-aidata.eu/auth/',
+    //url: 'https://prunus-212.man.poznan.pl/auth',
+    realm: 'permedcoe',
+    //realm: 'Hidalgo',
+    clientId: 'croupier',
+    //clientId: 'frontend',
     credentials: {
-      //secret: "NXhYjjQnW3yLniaNcIOOjQTORpJ8Nq5c",
-      //secret: "UDJGHZWGn2IXqJi2uKS6EORHaITpaqWq"
-      //secret: "d112469e-9386-4c00-b05d-7b6b5270bd3e",
-      //secret: "8kqYDyf2uTtUVbyoNxDIMKDi8eHpuZJ2"
-      secret: "e940c4ec-5204-41f2-b65a-b289983d9fbb"
+    	secret: "MNyVuESO4DPHL8TzrbLsESSUCxiFgC4Q"
+      //secret: "e940c4ec-5204-41f2-b65a-b289983d9fbb"
     },
     
   },
@@ -43,8 +38,8 @@ export const keycloakSetUp: KeycloakOptions = {
 export const environment = {
   production: false,
   keycloak: keycloakSetUp,
-  apiUrl: 'http://localhost:8000/'
-  // apiUrl: 'http://62.3.171.105/'
+  //apiUrl: 'http://localhost:8000/'
+  apiUrl: 'https://backend.croupier.ari-aidata.eu/'
 };
 
 /*

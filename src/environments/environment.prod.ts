@@ -7,7 +7,7 @@ import { KeycloakOptions } from 'keycloak-angular';
 // Keycloak config
 const keycloakSetUp: KeycloakOptions = {
   config: {
-    url: 'https://keycloak.croupier.ari-aidata/auth',
+    url: 'https://keycloak.croupier.ari-aidata.eu/auth',
     realm: 'permedcoe',
     clientId: 'croupier',
     credentials: {
