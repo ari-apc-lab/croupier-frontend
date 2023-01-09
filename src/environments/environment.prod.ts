@@ -11,7 +11,7 @@ const keycloakSetUp: KeycloakOptions = {
     realm: 'permedcoe',
     clientId: 'croupier',
     credentials: {
-      secret: "MNyVuESO4DPHL8TzrbLsESSUCxiFgC4Q"
+      secret: "R79h2Bs2z1RSHozOXXb36ewlqZT0CRTp"
     },
   },
   initOptions: {

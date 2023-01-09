@@ -14,7 +14,7 @@ export const keycloakSetUp: KeycloakOptions = {
     clientId: 'croupier',
     //clientId: 'frontend',
     credentials: {
-    	secret: "MNyVuESO4DPHL8TzrbLsESSUCxiFgC4Q"
+    	secret: "R79h2Bs2z1RSHozOXXb36ewlqZT0CRTp"
       //secret: "e940c4ec-5204-41f2-b65a-b289983d9fbb"
     },
     
